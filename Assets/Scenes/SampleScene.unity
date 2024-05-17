@@ -4312,6 +4312,10 @@ PrefabInstance:
       propertyPath: m_GravityScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2437929719134370229, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6f16cc0558d140c419ce84a81976034e, type: 2}
     - target: {fileID: 4044608225088862476, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
       propertyPath: jumpForce
       value: 7
