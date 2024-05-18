@@ -4318,7 +4318,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 6f16cc0558d140c419ce84a81976034e, type: 2}
     - target: {fileID: 4044608225088862476, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
       propertyPath: jumpForce
-      value: 7
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4044608225088862476, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
+      propertyPath: fallGravityMultiplier
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4652640799575470342, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
       propertyPath: m_Name
