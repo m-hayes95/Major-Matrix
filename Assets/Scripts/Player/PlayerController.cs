@@ -5,19 +5,22 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed;
+    [SerializeField] private float moveSpeed, apexJumpSpeedBonusMultiplier, apexJumpBoostDuration, apexJumpThreshold;
     [SerializeField] private float jumpForce;
     [SerializeField, Tooltip("How fast the gravity scale reaches falling gravity scale stat.")] 
     private float fallGravityScaleMultiplier;
-    [SerializeField, Tooltip("The gravity stat applied to falling when the jump button has been let go.")] 
-    private float fallGravityScale;
+    [SerializeField, Tooltip("The max gravity stat applied to falling when the jump button has been let go.")] 
+    private float maxFallGravityScale;
+    [SerializeField] float apexJumpGravityScale;
     private Rigidbody2D rb;
     private Vector2 moveDir;
-    private float initialGravityScale;
+    private float initialGravityScale, initialMoveSpeed;
+    private float apexJumpTimer;
     // Jump
     [SerializeField] private bool jumpInputPressed, jumpInputHeld;
     [SerializeField] private bool endedJumpEarly;
     private bool canJump;
+    private bool applyApexJumpBoost = false;
     [SerializeField] private bool isGrounded;
 
     private void Start()
@@ -25,8 +28,8 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         // Set the gravity the player uses to reset fall when grounded
         initialGravityScale = rb.gravityScale;
-        // Set the gravity increase when player released jump button early
-        //fallGravityScale = rb.gravityScale * fallGravityMultiplier;
+        initialMoveSpeed = moveSpeed;
+        
     }
 
     
@@ -34,11 +37,13 @@ public class PlayerController : MonoBehaviour
     {
         GetInput();
         Debug.Log("Gravity scale = " + rb.gravityScale);
+        //Debug.Log("Y pos = " + transform.position.y);
     }
     private void FixedUpdate()
     {
         HandleMovement();
         HandleJump();
+        Debug.Log("Move speed " + moveSpeed);
     }
     private void GetInput()
     {
@@ -59,14 +64,23 @@ public class PlayerController : MonoBehaviour
 
     private void HandleJump()
     {
+        bool apexJumpThresholdAchieved =
+            Mathf.Abs(transform.position.y) >= apexJumpThreshold;
         // Variable jump height
-        HandleGravity(); 
+        HandleGravity();
+        // Check if jump ended early
         if (!isGrounded && !jumpInputHeld) 
             endedJumpEarly = true;
         // Jump input
         Vector2 jump = new Vector2 (0, jumpForce);
         if (jumpInputPressed || jumpInputHeld && canJump)
+        {
             rb.AddForce(jump, ForceMode2D.Impulse);
+        }
+        if (jumpInputHeld && apexJumpThresholdAchieved)
+        {
+            JumpApexModifiers();
+        }
     }
 
     private void HandleGravity()
@@ -74,17 +88,37 @@ public class PlayerController : MonoBehaviour
         // Increase player gravity when the jump button is released before landing
         if (!isGrounded && endedJumpEarly)
             rb.gravityScale = Mathf.MoveTowards(
-                rb.gravityScale, fallGravityScale, 
+                rb.gravityScale, maxFallGravityScale, 
                 fallGravityScaleMultiplier * Time.fixedDeltaTime
                 );
         if (isGrounded)
             rb.gravityScale = initialGravityScale;
     }
 
-    private void ApexModifiers()
+    private void JumpApexModifiers()
     {
         // Apply anti gravity and speed bost at the apex of the jump for greater control
-        
+        apexJumpTimer += Time.deltaTime;
+        Debug.Log($"Apply apex threshold modifiers. Elapsed Time: {apexJumpTimer}");
+        if (apexJumpTimer < apexJumpBoostDuration)
+        {
+            if (!applyApexJumpBoost)
+            {
+                applyApexJumpBoost = true;
+                moveSpeed *= apexJumpSpeedBonusMultiplier;
+                rb.gravityScale = apexJumpGravityScale;
+            }
+        }
+        StartCoroutine(ResetApexJumpTimer(apexJumpBoostDuration));
+    }
+
+    private IEnumerator ResetApexJumpTimer(float timer)
+    {
+        yield return new WaitForSeconds(timer);
+        Debug.Log("Reset apex threshold modifiers");
+        moveSpeed = initialMoveSpeed;
+        rb.gravityScale = initialGravityScale;
+        apexJumpTimer = 0;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -95,6 +129,7 @@ public class PlayerController : MonoBehaviour
             isGrounded = true;
             endedJumpEarly = false;
             canJump = true;
+            applyApexJumpBoost = false;
         }
     }
 
