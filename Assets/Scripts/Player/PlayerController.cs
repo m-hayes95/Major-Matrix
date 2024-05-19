@@ -5,12 +5,15 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float speed;
+    [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpForce;
-    [SerializeField] private float fallGravityMultiplier, maxGravityMultiplier;
+    [SerializeField, Tooltip("How fast the gravity scale reaches falling gravity scale stat.")] 
+    private float fallGravityScaleMultiplier;
+    [SerializeField, Tooltip("The gravity stat applied to falling when the jump button has been let go.")] 
+    private float fallGravityScale;
     private Rigidbody2D rb;
     private Vector2 moveDir;
-    private float initialGravityModifier;
+    private float initialGravityScale;
     // Jump
     [SerializeField] private bool jumpInputPressed, jumpInputHeld;
     [SerializeField] private bool endedJumpEarly;
@@ -21,16 +24,16 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         // Set the gravity the player uses to reset fall when grounded
-        initialGravityModifier = rb.gravityScale;
+        initialGravityScale = rb.gravityScale;
         // Set the gravity increase when player released jump button early
-        maxGravityMultiplier = rb.gravityScale * fallGravityMultiplier;
+        //fallGravityScale = rb.gravityScale * fallGravityMultiplier;
     }
 
     
     private void Update()
     {
         GetInput();
-        //Debug.Log("Gravity scale = " + rb.gravityScale);
+        Debug.Log("Gravity scale = " + rb.gravityScale);
     }
     private void FixedUpdate()
     {
@@ -51,7 +54,7 @@ public class PlayerController : MonoBehaviour
     private void HandleMovement()
     {
         // Apply movement using input
-        transform.Translate(moveDir * speed * Time.deltaTime);
+        transform.Translate(moveDir * moveSpeed * Time.fixedDeltaTime);
     }
 
     private void HandleJump()
@@ -70,9 +73,12 @@ public class PlayerController : MonoBehaviour
     {
         // Increase player gravity when the jump button is released before landing
         if (!isGrounded && endedJumpEarly)
-            rb.gravityScale = maxGravityMultiplier;
+            rb.gravityScale = Mathf.MoveTowards(
+                rb.gravityScale, fallGravityScale, 
+                fallGravityScaleMultiplier * Time.fixedDeltaTime
+                );
         if (isGrounded)
-            rb.gravityScale = initialGravityModifier;
+            rb.gravityScale = initialGravityScale;
     }
 
     private void ApexModifiers()
