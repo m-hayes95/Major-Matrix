@@ -53,8 +53,12 @@ MonoBehaviour:
   apexJumpBoostDuration: 0.1
   apexJumpThreshold: 2
   jumpForce: 4
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
   fallGravityScaleMultiplier: 10
   maxFallGravityScale: 5
+  apexJumpGravityScale: 0
   jumpInputPressed: 0
   jumpInputHeld: 0
   endedJumpEarly: 0

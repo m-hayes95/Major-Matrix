@@ -1,21 +1,26 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed, apexJumpSpeedBonusMultiplier, apexJumpBoostDuration, apexJumpThreshold;
     [SerializeField] private float jumpForce;
+    [SerializeField] private LayerMask groundLayerMask;
     [SerializeField, Tooltip("How fast the gravity scale reaches falling gravity scale stat.")] 
     private float fallGravityScaleMultiplier;
     [SerializeField, Tooltip("The max gravity stat applied to falling when the jump button has been let go.")] 
     private float maxFallGravityScale;
     [SerializeField] float apexJumpGravityScale;
     private Rigidbody2D rb;
+    private BoxCollider2D collider;
     private Vector2 moveDir;
     private float initialGravityScale, initialMoveSpeed;
     private float apexJumpTimer;
+    private RaycastHit2D groundHit;
     // Jump
     [SerializeField] private bool jumpInputPressed, jumpInputHeld;
     [SerializeField] private bool endedJumpEarly;
@@ -23,13 +28,13 @@ public class PlayerController : MonoBehaviour
     private bool applyApexJumpBoost = false;
     [SerializeField] private bool isGrounded;
 
-    private void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        collider = GetComponent<BoxCollider2D>();
         // Set the gravity the player uses to reset fall when grounded
         initialGravityScale = rb.gravityScale;
         initialMoveSpeed = moveSpeed;
-        
     }
 
     
@@ -43,6 +48,7 @@ public class PlayerController : MonoBehaviour
     {
         HandleMovement();
         HandleJump();
+        CollisionChecks();
         Debug.Log("Move speed " + moveSpeed);
     }
     private void GetInput()
@@ -121,6 +127,43 @@ public class PlayerController : MonoBehaviour
         apexJumpTimer = 0;
     }
 
+    private void RayCastChecks()
+    {
+        
+    }
+
+    private void CollisionChecks()
+    {
+        float angle = 0;
+        float distance = .2f;
+        groundHit = Physics2D.BoxCast(
+            collider.bounds.center, collider.size, angle, Vector2.down, distance, groundLayerMask
+            );
+        if (groundHit)
+            // isGrounded is true
+        Debug.Log($"Ground hit: { groundHit } with {groundHit.collider.gameObject.name}");
+        // check ceiling hit
+        
+    }
+    private void OnDrawGizmos()
+    {
+        if (groundHit)
+        {
+            Gizmos.color = UnityEngine.Color.cyan;
+            Gizmos.DrawWireCube(
+                collider.bounds.center + Vector3.down * .2f, collider.size
+                );
+        }
+        else
+        {
+            Gizmos.color = UnityEngine.Color.yellow;
+            Gizmos.DrawRay(transform.position, Vector3.down * 100f);
+            Gizmos.DrawWireCube(
+                collider.bounds.center + Vector3.down * .2f, collider.size
+                );
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // Using scripts to find game objects instead of tags
@@ -141,4 +184,7 @@ public class PlayerController : MonoBehaviour
             canJump = false;
         }
     }
+
+    
+
 }
