@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private float initialGravityScale, initialMoveSpeed;
     private float apexJumpTimer;
     private RaycastHit2D groundHit;
+    private RaycastHit2D ceilingHit;
     // Jump
     [SerializeField] private bool jumpInputPressed, jumpInputHeld;
     [SerializeField] private bool endedJumpEarly;
@@ -75,7 +76,7 @@ public class PlayerController : MonoBehaviour
         // Variable jump height
         HandleGravity();
         // Check if jump ended early
-        if (!isGrounded && !jumpInputHeld) 
+        if (!endedJumpEarly && !isGrounded && !jumpInputHeld && rb.velocity.y > 0) 
             endedJumpEarly = true;
         // Jump input
         Vector2 jump = new Vector2 (0, jumpForce);
@@ -134,17 +135,32 @@ public class PlayerController : MonoBehaviour
 
     private void CollisionChecks()
     {
+        Debug.Log($"Is player grounded: {isGrounded}");
         float angle = 0;
         float distance = .2f;
         groundHit = Physics2D.BoxCast(
             collider.bounds.center, collider.size, angle, Vector2.down, distance, groundLayerMask
             );
+        ceilingHit = Physics2D.BoxCast(
+            collider.bounds.center, collider.size, angle, Vector2.up, distance, groundLayerMask
+            );
         if (groundHit)
-            // isGrounded is true
-        Debug.Log($"Ground hit: { groundHit } with {groundHit.collider.gameObject.name}");
+        {
+            isGrounded = true;
+            Debug.Log($"Ground hit: {groundHit} with {groundHit.collider.gameObject.name}");
+        }
+        else
+        {
+            isGrounded = false;
+        }
+
         // check ceiling hit
-        
+        if (ceilingHit)
+        {
+            Debug.Log($"Ceiling hit: {ceilingHit} with {ceilingHit.collider.gameObject.name}");
+        }
     }
+    /*
     private void OnDrawGizmos()
     {
         if (groundHit)
@@ -163,13 +179,14 @@ public class PlayerController : MonoBehaviour
                 );
         }
     }
+    */
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // Using scripts to find game objects instead of tags
         if (collision.gameObject.GetComponent<GroundTag>())
         {
-            isGrounded = true;
+            //isGrounded = true;
             endedJumpEarly = false;
             canJump = true;
             applyApexJumpBoost = false;
@@ -180,7 +197,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<GroundTag>())
         {
-            isGrounded = false;
+            //isGrounded = false;
             canJump = false;
         }
     }
