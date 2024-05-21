@@ -1,15 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed, apexJumpSpeedBonusMultiplier, apexJumpBoostDuration, apexJumpThreshold;
     [SerializeField] private float jumpForce;
+    [SerializeField] private float wallColliderRadius;
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField, Tooltip("How fast the gravity scale reaches falling gravity scale stat.")] 
     private float fallGravityScaleMultiplier;
@@ -29,6 +27,8 @@ public class PlayerController : MonoBehaviour
     private bool canJump;
     private bool applyApexJumpBoost = false;
     [SerializeField] private bool isGrounded;
+    [SerializeField] private bool jumpReady;
+    
 
     private void Awake()
     {
@@ -81,20 +81,23 @@ public class PlayerController : MonoBehaviour
         if (!endedJumpEarly && !isGrounded && !jumpInputHeld && rb.velocity.y > 0) 
             endedJumpEarly = true;
         // Jump input
-        if (jumpInputPressed || jumpInputHeld && canJump)
+        if (jumpReady)
         {
-            ExecuteJump();
-        }
-        if (jumpInputHeld && apexJumpThresholdAchieved)
-        {
-            JumpApexModifiers();
+            if (jumpInputPressed || jumpInputHeld && canJump)
+            {
+                ExecuteJump();
+            }
+            if (jumpInputHeld && apexJumpThresholdAchieved)
+            {
+                JumpApexModifiers();
+            }
         }
     }
 
     private void ExecuteJump()
     {
         Vector2 jumpDirection = new Vector2(0, initialJumpForce);
-        rb.AddForce(jumpDirection, ForceMode2D.Impulse);
+        rb.velocity = Vector2.up * initialJumpForce;
     }
 
     private void HandleGravity()
@@ -159,10 +162,14 @@ public class PlayerController : MonoBehaviour
         ceilingHit = Physics2D.BoxCast(
             collider.bounds.center, collider.size, angle, Vector2.up, distance, groundLayerMask
             );
-        // if moving left or right change the vector position
-        RaycastHit2D wallHit = Physics2D.BoxCast(
-            collider.bounds.center, collider.size, angle, Vector2.left, distance, groundLayerMask
+        
+        RaycastHit2D wallHitLeft = Physics2D.Raycast(
+            collider.bounds.center, Vector2.left, wallColliderRadius, groundLayerMask
             );
+        RaycastHit2D wallHitRight = Physics2D.Raycast(
+            collider.bounds.center, Vector2.right, wallColliderRadius, groundLayerMask
+            );
+        Debug.DrawRay(collider.bounds.center, Vector3.left * wallColliderRadius, UnityEngine.Color.red);
         if (groundHit)
         {
             isGrounded = true;
@@ -178,6 +185,17 @@ public class PlayerController : MonoBehaviour
         {
             jumpForce = 0f;
             Debug.Log($"Ceiling hit: {ceilingHit} with {ceilingHit.collider.gameObject.name}");
+        }
+
+        if (wallHitLeft || wallHitRight)
+        {
+            // Do not allow jump when collision occurs
+            jumpReady = false;
+            //Debug.Log($"Wall hit: {wallHitLeft} with {wallHitLeft.collider.gameObject.name}");
+        }
+        else
+        {
+            jumpReady = true;
         }
     }
     /*
@@ -200,7 +218,7 @@ public class PlayerController : MonoBehaviour
         }
     }
     */
-    
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
