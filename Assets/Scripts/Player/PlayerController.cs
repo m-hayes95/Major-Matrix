@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -18,7 +19,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private BoxCollider2D collider;
     private Vector2 moveDir;
-    private float initialGravityScale, initialMoveSpeed;
+    private float initialGravityScale, initialMoveSpeed, initialJumpForce;
     private float apexJumpTimer;
     private RaycastHit2D groundHit;
     private RaycastHit2D ceilingHit;
@@ -36,6 +37,7 @@ public class PlayerController : MonoBehaviour
         // Set the gravity the player uses to reset fall when grounded
         initialGravityScale = rb.gravityScale;
         initialMoveSpeed = moveSpeed;
+        initialJumpForce = jumpForce;
     }
 
     
@@ -72,22 +74,27 @@ public class PlayerController : MonoBehaviour
     private void HandleJump()
     {
         bool apexJumpThresholdAchieved =
-            Mathf.Abs(transform.position.y) >= apexJumpThreshold;
+            Mathf.Abs(DistanceFromFloor()) >= apexJumpThreshold;
         // Variable jump height
         HandleGravity();
         // Check if jump ended early
         if (!endedJumpEarly && !isGrounded && !jumpInputHeld && rb.velocity.y > 0) 
             endedJumpEarly = true;
         // Jump input
-        Vector2 jump = new Vector2 (0, jumpForce);
         if (jumpInputPressed || jumpInputHeld && canJump)
         {
-            rb.AddForce(jump, ForceMode2D.Impulse);
+            ExecuteJump();
         }
         if (jumpInputHeld && apexJumpThresholdAchieved)
         {
             JumpApexModifiers();
         }
+    }
+
+    private void ExecuteJump()
+    {
+        Vector2 jumpDirection = new Vector2(0, initialJumpForce);
+        rb.AddForce(jumpDirection, ForceMode2D.Impulse);
     }
 
     private void HandleGravity()
@@ -128,9 +135,17 @@ public class PlayerController : MonoBehaviour
         apexJumpTimer = 0;
     }
 
-    private void RayCastChecks()
+    private float DistanceFromFloor()
     {
-        
+        float angle = 0f;
+        float maxDistance = 50f;
+        RaycastHit2D distanceChecker =
+        Physics2D.BoxCast(
+            collider.bounds.center, collider.size, angle, Vector2.down, maxDistance , groundLayerMask
+            );
+        float distance = distanceChecker.distance;
+        Debug.Log($"Players distance from floor: {distance}");
+        return distance;
     }
 
     private void CollisionChecks()
@@ -143,6 +158,10 @@ public class PlayerController : MonoBehaviour
             );
         ceilingHit = Physics2D.BoxCast(
             collider.bounds.center, collider.size, angle, Vector2.up, distance, groundLayerMask
+            );
+        // if moving left or right change the vector position
+        RaycastHit2D wallHit = Physics2D.BoxCast(
+            collider.bounds.center, collider.size, angle, Vector2.left, distance, groundLayerMask
             );
         if (groundHit)
         {
@@ -157,6 +176,7 @@ public class PlayerController : MonoBehaviour
         // check ceiling hit
         if (ceilingHit)
         {
+            jumpForce = 0f;
             Debug.Log($"Ceiling hit: {ceilingHit} with {ceilingHit.collider.gameObject.name}");
         }
     }
@@ -165,7 +185,7 @@ public class PlayerController : MonoBehaviour
     {
         if (groundHit)
         {
-            Gizmos.color = UnityEngine.Color.cyan;
+            Gizmos.color = UnityEngine.Color.green;
             Gizmos.DrawWireCube(
                 collider.bounds.center + Vector3.down * .2f, collider.size
                 );
@@ -180,6 +200,7 @@ public class PlayerController : MonoBehaviour
         }
     }
     */
+    
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

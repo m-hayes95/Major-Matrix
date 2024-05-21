@@ -15,12 +15,12 @@ GameObject:
   - component: {fileID: 4954348910711717545}
   - component: {fileID: 1105001226650350951}
   - component: {fileID: 1856455441436320772}
-  m_Layer: 4
+  m_Layer: 6
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6526853977825620122
 Transform:
@@ -261,7 +261,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 4722
+  m_VersionIndex: 4725
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
