@@ -441,7 +441,8 @@ GameObject:
   - component: {fileID: 659420200}
   - component: {fileID: 659420199}
   - component: {fileID: 659420198}
-  m_Layer: 0
+  - component: {fileID: 659420201}
+  m_Layer: 6
   m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -554,12 +555,31 @@ Transform:
   m_GameObject: {fileID: 659420197}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -22.13, y: 1.02, z: 0}
+  m_LocalPosition: {x: -11.66, y: 1.64, z: 0}
   m_LocalScale: {x: 4.165, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!251 &659420201
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 659420197}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1 &680761364
 GameObject:
   m_ObjectHideFlags: 0
@@ -1655,24 +1675,44 @@ PrefabInstance:
     m_TransformParent: {fileID: 680761365}
     m_Modifications:
     - target: {fileID: 2237995295786375966, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 5722c8303d4c5e848bce3b77631a79d4, type: 2}
+    - target: {fileID: 2237995295786375966, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
       propertyPath: m_Constraints
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2237995295786375966, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
       propertyPath: m_GravityScale
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4044608225088862476, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
       propertyPath: jumpForce
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 4044608225088862476, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4044608225088862476, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
+      propertyPath: maxJumpThreshold
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4044608225088862476, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
+      propertyPath: apexJumpThreshold
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4044608225088862476, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
       propertyPath: wallColliderRadius
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4044608225088862476, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
+      propertyPath: maxFallGravityScale
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4044608225088862476, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
+      propertyPath: fallGravityScaleMultiplier
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4652640799575470342, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
       propertyPath: m_Name
