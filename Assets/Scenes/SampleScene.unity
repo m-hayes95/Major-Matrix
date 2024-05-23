@@ -850,11 +850,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3886678663198351065, guid: 90cafc76bef6b084f8844f94c6bc6068, type: 3}
   m_PrefabInstance: {fileID: 1114322341}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1234314088 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4652640799575470342, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
-  m_PrefabInstance: {fileID: 58877964}
-  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1240323017
 Mesh:
   m_ObjectHideFlags: 0
@@ -1404,6 +1399,7 @@ GameObject:
   - component: {fileID: 1913649303}
   - component: {fileID: 1913649305}
   - component: {fileID: 1913649306}
+  - component: {fileID: 1913649307}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -1539,7 +1535,27 @@ MonoBehaviour:
   normalAttackDamage: 0
   specialAttackDamage: 0
   hP: 0
-  player: {fileID: 1234314088}
+  closeRangeAttackThreshold: 0
+  longRangeAttackThreshold: 0
+--- !u!114 &1913649307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913649301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f1fbf11b4296e6498de1f23a320fc6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 0
+  normalAttackDamage: 0
+  specialAttackDamage: 0
+  hP: 0
+  closeRangeAttackThreshold: 0
+  longRangeAttackThreshold: 0
+  sM: 0
 --- !u!850595691 &1983773006
 LightingSettings:
   m_ObjectHideFlags: 0

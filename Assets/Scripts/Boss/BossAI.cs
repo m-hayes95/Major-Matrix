@@ -9,6 +9,9 @@ public class BossAI : MonoBehaviour
     [SerializeField] private float normalAttackDamage;
     [SerializeField] private float specialAttackDamage;
     [SerializeField] private float hP;
+    // Thresholds
+    public float closeRangeAttackThreshold;
+    public float longRangeAttackThreshold;
     // Find gameobject
     private PlayerController playerController;
     private GameObject player;
@@ -24,37 +27,39 @@ public class BossAI : MonoBehaviour
     {
         DistanceFromPlayer();
     }
-    private void Move()
-    {
-       // Move the boss character
-    }
     private void FacePlayer()
     {
         // Look towards the player
     }
-    private float DistanceFromPlayer()
+    public float DistanceFromPlayer()
     {
         float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
-        Debug.Log($"player is { distanceToPlayer} away from the boss");
+        Debug.Log($"player is {distanceToPlayer} away from the boss");
         return distanceToPlayer;
     }
-    private void NormalCloseAttack()
+    public void Move()
     {
-        // Attack the player if they get too close
+       // Move the boss character
     }
-    private void NormalRangeAttack()
+    
+    public void NormalRangeAttack()
     {
         // Attack the player if they cross a certain distance
     }
-    private void SpecialLowAttack()
+    public void NormalCloseAttack()
+    {
+        // Attack the player if they get too close
+    }
+
+    public void SpecialLowAttack()
     {
         // Cross Screen attack from the ground
     }
-    private void SpecialHighAttack()
+    public void SpecialHighAttack()
     {
         // Cross screen attack from the ceiling
     }
-    private void Sheild()
+    public void Sheild()
     {
 
     }
