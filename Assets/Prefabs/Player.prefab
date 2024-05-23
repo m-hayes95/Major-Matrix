@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 4652640799575470342}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.8815036, y: 0.55059886, z: -4.714454}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -50,26 +50,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: 1bd368416c63f5e4a873982e7d65e6f0, type: 2}
-  moveSpeed: 6
-  apexJumpSpeedBonusMultiplier: 2
-  apexJumpBoostDuration: 0.1
-  apexJumpThreshold: 3.5
-  jumpForce: 12
-  maxJumpThreshold: 3.5
-  wallColliderRadius: 1
-  groundLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  fallGravityScaleMultiplier: 20
-  maxFallGravityScale: 15
-  apexJumpGravityScale: 0
-  jumpInputPressed: 0
-  jumpInputHeld: 0
-  endedJumpEarly: 0
-  isGrounded: 0
-  jumpReady: 0
-  coyoteTimeReady: 0
-  coyoteTimeThresehold: 0.17
 --- !u!114 &4772955547729562835
 MonoBehaviour:
   m_ObjectHideFlags: 0
