@@ -393,11 +393,6 @@ Transform:
   - {fileID: 1114322342}
   m_Father: {fileID: 486309915}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &396235956 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4652640799575470342, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
-  m_PrefabInstance: {fileID: 6230493031807272322}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &486309914
 GameObject:
   m_ObjectHideFlags: 0
@@ -1432,25 +1427,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7058368484342321748, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
   m_PrefabInstance: {fileID: 6230493031807272322}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2088669677
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 396235956}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0da7a4413bacfa41b5d509c50d739ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  initialJumpForce: 7
-  isGrounded: 0
-  canJump: 0
-  groundLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!1001 &4173712189464675119
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1524,50 +1500,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 680761365}
     m_Modifications:
-    - target: {fileID: 2237995295786375966, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 6200000, guid: 5722c8303d4c5e848bce3b77631a79d4, type: 2}
-    - target: {fileID: 2237995295786375966, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2237995295786375966, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
-      propertyPath: m_GravityScale
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4044608225088862476, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
-      propertyPath: jumpForce
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 4044608225088862476, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4044608225088862476, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
-      propertyPath: maxJumpThreshold
-      value: 3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4044608225088862476, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
-      propertyPath: apexJumpThreshold
-      value: 3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4044608225088862476, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
-      propertyPath: wallColliderRadius
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4044608225088862476, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
-      propertyPath: maxFallGravityScale
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4044608225088862476, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
-      propertyPath: coyoteTimeThresehold
-      value: 0.17
-      objectReference: {fileID: 0}
-    - target: {fileID: 4044608225088862476, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
-      propertyPath: fallGravityScaleMultiplier
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 4652640799575470342, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1615,10 +1547,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4652640799575470342, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
-      insertIndex: 2
-      addedObject: {fileID: 2088669677}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
 --- !u!1001 &6428087044637863710
 PrefabInstance:

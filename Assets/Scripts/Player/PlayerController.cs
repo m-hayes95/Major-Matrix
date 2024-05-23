@@ -5,52 +5,55 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed, apexJumpSpeedBonusMultiplier, apexJumpBoostDuration, apexJumpThreshold;
-    [SerializeField] private float jumpForce;
-    [SerializeField] private float maxJumpThreshold;
-    [SerializeField] private float wallColliderRadius;
-    [SerializeField] private LayerMask groundLayerMask;
-    [SerializeField, Tooltip("How fast the gravity scale reaches falling gravity scale stat.")] 
-    private float fallGravityScaleMultiplier;
-    [SerializeField, Tooltip("The max gravity stat applied to falling when the jump button has been let go.")] 
-    private float maxFallGravityScale;
-    [SerializeField] float apexJumpGravityScale;
+    // Stats
+    [SerializeField] private PlayerStatsScriptableObject stats;
+    // Game object components
     private Rigidbody2D rb;
     private BoxCollider2D collider;
+    // Movemet
     private Vector2 moveDir;
-    private float initialGravityScale, initialMoveSpeed, initialJumpForce;
+    // Jump
+    private bool jumpInputPressed, jumpInputHeld;
+    private bool endedJumpEarly;
+    private bool canJump;
+    // Apex Jump
+    private bool applyApexJumpBoost = false;
     private float apexJumpTimer;
+    // Coyote Jump
+    private bool coyoteTimeReady;
+    private float coyoteTimeThresehold;
+    //Collisions
     private RaycastHit2D groundHit;
     private RaycastHit2D ceilingHit;
-    // Jump
-    [SerializeField] private bool jumpInputPressed, jumpInputHeld;
-    [SerializeField] private bool endedJumpEarly;
-    private bool canJump;
-    private bool applyApexJumpBoost = false;
     [SerializeField] private bool isGrounded;
-    [SerializeField] private bool jumpReady;
-    [SerializeField] private bool coyoteTimeReady;
-    float timeLeftGrounded;
-    [SerializeField] float coyoteTimeThresehold;
-
+    [SerializeField] private bool isCeilingHit = false;
+    // Set initial stat values
+    private float initialGravityScale;
+    private float initialMoveSpeed; 
+    private float initialJumpPower;
 
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         collider = GetComponent<BoxCollider2D>();
-        // Set the gravity the player uses to reset fall when grounded
-        initialGravityScale = rb.gravityScale;
-        initialMoveSpeed = moveSpeed;
-        initialJumpForce = jumpForce;
     }
 
-    
+    private void Start()
+    {
+        // Set the gravity the player uses to reset fall when grounded
+        initialGravityScale = rb.gravityScale;
+        initialMoveSpeed = stats.moveSpeed;
+        initialJumpPower = stats.jumpPower;
+    }
+
+
     private void Update()
     {
         GetInput();
         Debug.Log("Gravity scale = " + rb.gravityScale);
         //Debug.Log("Y pos = " + transform.position.y);
+        Debug.Log($"Current Jump power {stats.jumpPower}, Initial Jump power {initialJumpPower}");
     }
     private void FixedUpdate()
     {
@@ -72,12 +75,12 @@ public class PlayerController : MonoBehaviour
     private void HandleMovement()
     {
         // Apply movement using input
-        transform.Translate(moveDir * moveSpeed * Time.fixedDeltaTime);
+        transform.Translate(moveDir * stats.moveSpeed * Time.fixedDeltaTime);
     }
 
     private void HandleJump()
     {
-        //bool apexJumpThresholdAchieved = Mathf.Abs(DistanceFromFloor()) >= apexJumpThreshold;
+        //bool apexJumpThresholdAchieved = Mathf.Abs(DistanceFromFloor()) >= stats.apexJumpThreshold;
         // Variable jump height
         HandleGravity();
         // Check if jump ended early
@@ -89,6 +92,7 @@ public class PlayerController : MonoBehaviour
         {
             ExecuteJump();
         }
+
         // Coyote time jump - can jump a short time after falling off a platform
         else if (jumpInputPressed || jumpInputHeld && coyoteTimeReady)
         {
@@ -96,6 +100,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Coyote time jump executed");
             ExecuteJump();
         }
+
         // Appex Jump - When the peak of the jump height is reached
         /*
         if (jumpInputHeld && apexJumpThresholdAchieved)
@@ -113,19 +118,18 @@ public class PlayerController : MonoBehaviour
 
     private void ExecuteJump()
     {
-        rb.velocity = Vector2.up * initialJumpForce;
-        timeLeftGrounded = 0f; // Reset time 
+        rb.velocity = Vector2.up * stats.jumpPower; 
     }
     private void HandleGravity()
     {
         // Increase player gravity when the jump button is released before landing, or when the hieght of the jump is reached
-        if (DistanceFromFloor() >= maxJumpThreshold) 
+        if (DistanceFromFloor() >= stats.maxJumpThreshold) 
             endedJumpEarly = true;
 
         if (!isGrounded && endedJumpEarly)
             rb.gravityScale = Mathf.MoveTowards(
-                rb.gravityScale, maxFallGravityScale, 
-                fallGravityScaleMultiplier * Time.fixedDeltaTime
+                rb.gravityScale, stats.maxFallGravityScale, 
+                stats.fallGravityScaleMultiplier * Time.fixedDeltaTime
                 );
 
         if (isGrounded)
@@ -137,23 +141,23 @@ public class PlayerController : MonoBehaviour
         // Apply anti gravity and speed bost at the apex of the jump for greater control
         apexJumpTimer += Time.deltaTime;
         Debug.Log($"Apply apex threshold modifiers. Elapsed Time: {apexJumpTimer}");
-        if (apexJumpTimer < apexJumpBoostDuration)
+        if (apexJumpTimer < stats.apexJumpBoostDuration)
         {
             if (!applyApexJumpBoost)
             {
                 applyApexJumpBoost = true;
-                moveSpeed *= apexJumpSpeedBonusMultiplier;
-                rb.gravityScale = apexJumpGravityScale;
+                stats.moveSpeed *= stats.apexJumpSpeedBonusMultiplier;
+                rb.gravityScale = stats.apexJumpGravityScale;
             }
         }
-        StartCoroutine(ResetApexJumpTimer(apexJumpBoostDuration));
+        StartCoroutine(ResetApexJumpTimer(stats.apexJumpBoostDuration));
     }
 
     private IEnumerator ResetApexJumpTimer(float timer)
     {
         yield return new WaitForSeconds(timer);
         Debug.Log("Reset apex threshold modifiers");
-        moveSpeed = initialMoveSpeed;
+        stats.moveSpeed = initialMoveSpeed;
         rb.gravityScale = initialGravityScale;
         apexJumpTimer = 0;
     }
@@ -166,7 +170,7 @@ public class PlayerController : MonoBehaviour
         float maxDistance = 50f;
         RaycastHit2D distanceChecker =
         Physics2D.BoxCast(
-            collider.bounds.center, collider.size, angle, Vector2.down, maxDistance , groundLayerMask
+            collider.bounds.center, collider.size, angle, Vector2.down, maxDistance , stats.groundLayerMask
             );
         float distance = distanceChecker.distance;
         Debug.Log($"Players distance from floor: {distance}");
@@ -179,14 +183,16 @@ public class PlayerController : MonoBehaviour
         float angle = 0;
         float distance = .2f;
         groundHit = Physics2D.BoxCast(
-            collider.bounds.center, collider.size, angle, Vector2.down, distance, groundLayerMask
+            collider.bounds.center, collider.size, angle, Vector2.down, distance, stats.groundLayerMask
             );
         ceilingHit = Physics2D.BoxCast(
-            collider.bounds.center, collider.size, angle, Vector2.up, distance, groundLayerMask
+            collider.bounds.center, collider.size, angle, Vector2.up, distance, stats.groundLayerMask
             );
         if (groundHit)
         {
             isGrounded = true;
+            isCeilingHit = false;
+            stats.jumpPower = initialJumpPower;
             Debug.Log($"Ground hit: {groundHit} with {groundHit.collider.gameObject.name}");
         }
         else
@@ -195,9 +201,10 @@ public class PlayerController : MonoBehaviour
         }
 
         // check ceiling hit
-        if (ceilingHit)
+        if (ceilingHit && !isCeilingHit)
         {
-            jumpForce = 0f;
+            isCeilingHit = true;
+            stats.jumpPower = 0f;
             Debug.Log($"Ceiling hit: {ceilingHit} with {ceilingHit.collider.gameObject.name}");
         }
     }

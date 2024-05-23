@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb2786b0de290854a8f5559f7abdaf98, type: 3}
+  m_Name: Player Stats
+  m_EditorClassIdentifier: 
+  moveSpeed: 6
+  jumpPower: 10.7
+  maxJumpThreshold: 3.5
+  maxFallGravityScale: 15
+  fallGravityScaleMultiplier: 20
+  coyoteTimeThreshold: 0.17
+  apexJumpThreshold: 3.5
+  apexJumpBoostDuration: 0.1
+  apexJumpGravityScale: 0
+  apexJumpSpeedBonusMultiplier: 2
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  collisionDistanceAcceptanceRadius: 0.168

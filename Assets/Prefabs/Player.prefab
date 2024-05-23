@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7058368484342321748}
   - component: {fileID: 4044608225088862476}
+  - component: {fileID: 4772955547729562835}
   - component: {fileID: 1681260884485733744}
   - component: {fileID: 2437929719134370229}
   - component: {fileID: 3068787862488524606}
@@ -48,21 +49,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcf5103f995ad264cb6f2461b536e886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: 1bd368416c63f5e4a873982e7d65e6f0, type: 2}
   moveSpeed: 6
   apexJumpSpeedBonusMultiplier: 2
   apexJumpBoostDuration: 0.1
-  apexJumpThreshold: 2
-  jumpForce: 4
+  apexJumpThreshold: 3.5
+  jumpForce: 12
+  maxJumpThreshold: 3.5
+  wallColliderRadius: 1
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  fallGravityScaleMultiplier: 10
-  maxFallGravityScale: 5
+  fallGravityScaleMultiplier: 20
+  maxFallGravityScale: 15
   apexJumpGravityScale: 0
   jumpInputPressed: 0
   jumpInputHeld: 0
   endedJumpEarly: 0
   isGrounded: 0
+  jumpReady: 0
+  coyoteTimeReady: 0
+  coyoteTimeThresehold: 0.17
+--- !u!114 &4772955547729562835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4652640799575470342}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0da7a4413bacfa41b5d509c50d739ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  initialJumpForce: 7
+  isGrounded: 0
+  canJump: 0
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!33 &1681260884485733744
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -173,8 +199,8 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_GravityScale: 2
+  m_Material: {fileID: 6200000, guid: 5722c8303d4c5e848bce3b77631a79d4, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -184,4 +210,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 5
+  m_Constraints: 4
