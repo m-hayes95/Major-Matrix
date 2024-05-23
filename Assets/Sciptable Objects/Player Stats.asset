@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb2786b0de290854a8f5559f7abdaf98, type: 3}
   m_Name: Player Stats
   m_EditorClassIdentifier: 
-  moveSpeed: 6
-  jumpPower: 10.7
+  moveSpeed: 6.18
+  jumpPower: 12
   maxJumpThreshold: 3.5
   maxFallGravityScale: 15
   fallGravityScaleMultiplier: 20
-  coyoteTimeThreshold: 0.17
+  coyoteTimeThreshold: 0.37
   apexJumpThreshold: 3.5
   apexJumpBoostDuration: 0.1
   apexJumpGravityScale: 0

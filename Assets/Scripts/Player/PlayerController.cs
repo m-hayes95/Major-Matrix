@@ -21,24 +21,21 @@ public class PlayerController : MonoBehaviour
     private float apexJumpTimer;
     // Coyote Jump
     private bool coyoteTimeReady;
-    private float coyoteTimeThresehold;
     //Collisions
     private RaycastHit2D groundHit;
     private RaycastHit2D ceilingHit;
-    [SerializeField] private bool isGrounded;
-    [SerializeField] private bool isCeilingHit = false;
+    private bool isGrounded;
+    private bool isCeilingHit = false;
     // Set initial stat values
     private float initialGravityScale;
     private float initialMoveSpeed; 
     private float initialJumpPower;
-
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         collider = GetComponent<BoxCollider2D>();
     }
-
     private void Start()
     {
         // Set the gravity the player uses to reset fall when grounded
@@ -46,20 +43,12 @@ public class PlayerController : MonoBehaviour
         initialMoveSpeed = stats.moveSpeed;
         initialJumpPower = stats.jumpPower;
     }
-
-
     private void Update()
     {
         GetInput();
         Debug.Log("Gravity scale = " + rb.gravityScale);
         //Debug.Log("Y pos = " + transform.position.y);
         Debug.Log($"Current Jump power {stats.jumpPower}, Initial Jump power {initialJumpPower}");
-    }
-    private void FixedUpdate()
-    {
-        HandleMovement();
-        HandleJump();
-        CollisionChecks();
     }
     private void GetInput()
     {
@@ -71,6 +60,13 @@ public class PlayerController : MonoBehaviour
         jumpInputHeld = Input.GetButton("Jump");
         //Debug.Log("Jump pressed:" + jumpInputPressed);
         //Debug.Log("Jump held:" + jumpInputHeld);
+    }
+
+    private void FixedUpdate()
+    {
+        HandleMovement();
+        HandleJump();
+        CollisionChecks();
     }
     private void HandleMovement()
     {
@@ -103,39 +99,32 @@ public class PlayerController : MonoBehaviour
 
         // Appex Jump - When the peak of the jump height is reached
         /*
+        // add back after fixing
         if (jumpInputHeld && apexJumpThresholdAchieved)
         {
             //JumpApexModifiers();
         }
         */
     }
-    private IEnumerator CoyoteTimeTimer()
-    {
-        yield return new WaitForSeconds(coyoteTimeThresehold);
-        Debug.Log($"Coyote time is ready: {coyoteTimeReady}");
-        if (!isGrounded) coyoteTimeReady = false;
-    }
-
-    private void ExecuteJump()
-    {
-        rb.velocity = Vector2.up * stats.jumpPower; 
-    }
     private void HandleGravity()
     {
         // Increase player gravity when the jump button is released before landing, or when the hieght of the jump is reached
-        if (DistanceFromFloor() >= stats.maxJumpThreshold) 
+        if (DistanceFromFloor() >= stats.maxJumpThreshold)
             endedJumpEarly = true;
 
         if (!isGrounded && endedJumpEarly)
             rb.gravityScale = Mathf.MoveTowards(
-                rb.gravityScale, stats.maxFallGravityScale, 
+                rb.gravityScale, stats.maxFallGravityScale,
                 stats.fallGravityScaleMultiplier * Time.fixedDeltaTime
                 );
 
         if (isGrounded)
             rb.gravityScale = initialGravityScale;
     }
-
+    private void ExecuteJump()
+    {
+        rb.velocity = Vector2.up * stats.jumpPower;
+    }
     private void JumpApexModifiers()
     {
         // Apply anti gravity and speed bost at the apex of the jump for greater control
@@ -152,7 +141,6 @@ public class PlayerController : MonoBehaviour
         }
         StartCoroutine(ResetApexJumpTimer(stats.apexJumpBoostDuration));
     }
-
     private IEnumerator ResetApexJumpTimer(float timer)
     {
         yield return new WaitForSeconds(timer);
@@ -161,9 +149,6 @@ public class PlayerController : MonoBehaviour
         rb.gravityScale = initialGravityScale;
         apexJumpTimer = 0;
     }
-
-  
-
     private float DistanceFromFloor()
     {
         float angle = 0f;
@@ -176,7 +161,6 @@ public class PlayerController : MonoBehaviour
         Debug.Log($"Players distance from floor: {distance}");
         return distance;
     }
-
     private void CollisionChecks()
     {
         Debug.Log($"Is player grounded: {isGrounded}");
@@ -194,10 +178,15 @@ public class PlayerController : MonoBehaviour
             isCeilingHit = false;
             stats.jumpPower = initialJumpPower;
             Debug.Log($"Ground hit: {groundHit} with {groundHit.collider.gameObject.name}");
+            endedJumpEarly = false;
+            canJump = true;
+            applyApexJumpBoost = false;
+            coyoteTimeReady = true;
         }
         else
         {
             isGrounded = false;
+            canJump = false;
         }
 
         // check ceiling hit
@@ -206,6 +195,21 @@ public class PlayerController : MonoBehaviour
             isCeilingHit = true;
             stats.jumpPower = 0f;
             Debug.Log($"Ceiling hit: {ceilingHit} with {ceilingHit.collider.gameObject.name}");
+        }
+    }
+    private IEnumerator CoyoteTimeTimer()
+    {
+        yield return new WaitForSeconds(stats.coyoteTimeThreshold);
+        Debug.Log($"Coyote time is ready: {coyoteTimeReady}, Time taken {stats.coyoteTimeThreshold}s");
+        if (!isGrounded) coyoteTimeReady = false;
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.GetComponent<GroundTag>())
+        {
+            // Does not work if placed under collision - Maybe change to an event called when bool changes
+            Debug.Log($"Coyote time timer started");
+            StartCoroutine(CoyoteTimeTimer());
         }
     }
     /*
@@ -228,32 +232,4 @@ public class PlayerController : MonoBehaviour
         }
     }
     */
-
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        // Using scripts to find game objects instead of tags
-        if (collision.gameObject.GetComponent<GroundTag>())
-        {
-            //isGrounded = true;
-            endedJumpEarly = false;
-            canJump = true;
-            applyApexJumpBoost = false;
-            coyoteTimeReady = true;
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.GetComponent<GroundTag>())
-        {
-            //isGrounded = false;
-            canJump = false;
-            Debug.Log($"Coyote time timer started");
-            StartCoroutine(CoyoteTimeTimer());
-        }
-    }
-
-    
-
 }
