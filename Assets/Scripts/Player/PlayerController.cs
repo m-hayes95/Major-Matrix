@@ -29,7 +29,11 @@ public class PlayerController : MonoBehaviour
     private bool applyApexJumpBoost = false;
     [SerializeField] private bool isGrounded;
     [SerializeField] private bool jumpReady;
-    
+    [SerializeField] private bool coyoteTimeReady;
+    float timeLeftGrounded;
+    [SerializeField] float coyoteTimeThresehold;
+
+
 
     private void Awake()
     {
@@ -85,6 +89,14 @@ public class PlayerController : MonoBehaviour
         {
             ExecuteJump();
         }
+        // Coyote time jump - can jump a short time after falling off a platform
+        else if (jumpInputPressed || jumpInputHeld && coyoteTimeReady)
+        {
+            coyoteTimeReady = false;
+            Debug.Log("Coyote time jump executed");
+            ExecuteJump();
+        }
+        // Appex Jump - When the peak of the jump height is reached
         /*
         if (jumpInputHeld && apexJumpThresholdAchieved)
         {
@@ -92,29 +104,32 @@ public class PlayerController : MonoBehaviour
         }
         */
     }
+    private IEnumerator CoyoteTimeTimer()
+    {
+        yield return new WaitForSeconds(coyoteTimeThresehold);
+        Debug.Log($"Coyote time is ready: {coyoteTimeReady}");
+        if (!isGrounded) coyoteTimeReady = false;
+    }
 
     private void ExecuteJump()
     {
-        Vector2 jumpDirection = new Vector2(0, initialJumpForce);
         rb.velocity = Vector2.up * initialJumpForce;
+        timeLeftGrounded = 0f; // Reset time 
     }
-
     private void HandleGravity()
     {
-        // Increase player gravity when the jump button is released before landing
-        if (DistanceFromFloor() >= maxJumpThreshold)
-        {
+        // Increase player gravity when the jump button is released before landing, or when the hieght of the jump is reached
+        if (DistanceFromFloor() >= maxJumpThreshold) 
             endedJumpEarly = true;
-        }
+
         if (!isGrounded && endedJumpEarly)
             rb.gravityScale = Mathf.MoveTowards(
                 rb.gravityScale, maxFallGravityScale, 
                 fallGravityScaleMultiplier * Time.fixedDeltaTime
                 );
+
         if (isGrounded)
             rb.gravityScale = initialGravityScale;
-        
-        
     }
 
     private void JumpApexModifiers()
@@ -142,6 +157,8 @@ public class PlayerController : MonoBehaviour
         rb.gravityScale = initialGravityScale;
         apexJumpTimer = 0;
     }
+
+  
 
     private float DistanceFromFloor()
     {
@@ -215,6 +232,7 @@ public class PlayerController : MonoBehaviour
             endedJumpEarly = false;
             canJump = true;
             applyApexJumpBoost = false;
+            coyoteTimeReady = true;
         }
     }
 
@@ -224,6 +242,8 @@ public class PlayerController : MonoBehaviour
         {
             //isGrounded = false;
             canJump = false;
+            Debug.Log($"Coyote time timer started");
+            StartCoroutine(CoyoteTimeTimer());
         }
     }
 
