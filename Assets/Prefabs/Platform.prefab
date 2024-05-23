@@ -15,12 +15,12 @@ GameObject:
   - component: {fileID: 6835635592834394165}
   - component: {fileID: 4463011146387160432}
   - component: {fileID: 8005878228590244482}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3886678663198351065
 Transform:
@@ -261,7 +261,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 4733
+  m_VersionIndex: 4736
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
