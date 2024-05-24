@@ -6,7 +6,7 @@ public abstract class BossAI : MonoBehaviour
     protected BossStatsScriptableObject stats;
     // Distance from player
     protected GameObject player;
-    protected VectorDistanceChecker vectorDistanceChecker;
+    protected VectorDistanceChecker vectorDistance;
    
     protected float distanceFromPlayer;
 
@@ -14,19 +14,31 @@ public abstract class BossAI : MonoBehaviour
     {
         stats = GetComponent<BossStatsComponent>().bossStats;
         player = FindObjectOfType<PlayerController>().gameObject;
-        vectorDistanceChecker = GetComponent<VectorDistanceChecker>();
+        vectorDistance = GetComponent<VectorDistanceChecker>();
     }
 
     protected virtual void Update()
     {
-        distanceFromPlayer = 
-            vectorDistanceChecker.CheckVector2DistanceBetweenAandB(gameObject, player);
-        Debug.Log($" The boss is { distanceFromPlayer} from the player");
-        Debug.Log($" Attack target is {player.name}");
+        if (player != null)
+        {
+            distanceFromPlayer =
+            vectorDistance.CheckVector2DistanceBetweenAandB(gameObject, player);
+            Debug.Log($" The boss is {distanceFromPlayer} from the player");
+            Debug.Log($" Attack target is {player.name}");
+        }
+        else
+            Debug.LogWarning("Player object not found in BossAI script.");
+        FacePlayer();
     }
     private void FacePlayer()
     {
-        // Look towards the player
+        // Look towards the player depending on X pos
+        if (player != null)
+        {
+            if (transform.position.x - player.transform.position.x < 0)
+                transform.localScale = new Vector3(-2, 2, 2);
+            else transform.localScale = new Vector3(2, 2, 2);
+        }
     }
     protected void Move()
     {

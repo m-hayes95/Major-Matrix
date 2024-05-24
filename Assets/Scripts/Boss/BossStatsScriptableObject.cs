@@ -13,10 +13,6 @@ public class BossStatsScriptableObject : ScriptableObject
     [Range(0f, 100f), Tooltip("How much damgae the special attacks will do to the player.")]
     public float specialAttackDamage;
 
-    [Header("Attack Target")]
-    [Tooltip("Choose the target the boss will attack.")]
-    public GameObject attackTarget;
-
     [Header("Thresholds")]
     [Range(0f, 5f), Tooltip("How close the player needs to be, to activate the close range attack.")]
     public float closeRangeAttackThreshold;
