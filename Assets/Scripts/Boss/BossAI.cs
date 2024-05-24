@@ -1,65 +1,59 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class BossAI : MonoBehaviour
+public abstract class BossAI : MonoBehaviour
 {
     //Boss stats - add sciptable object
-    [Header("Boss Stats"), SerializeField] private float moveSpeed;
-    [SerializeField] private float normalAttackDamage;
-    [SerializeField] private float specialAttackDamage;
-    [SerializeField] private float hP;
+    [Header("Boss Stats"), SerializeField] protected float moveSpeed;
+    [SerializeField] protected float normalAttackDamage;
+    [SerializeField] protected float specialAttackDamage;
+    [SerializeField] protected float hP;
     // Thresholds
-    public float closeRangeAttackThreshold;
-    public float longRangeAttackThreshold;
-    // Find gameobject
-    private PlayerController playerController;
-    private GameObject player;
+    [SerializeField] protected float closeRangeAttackThreshold;
+    [SerializeField] protected float longRangeAttackThreshold;
+    // Components
+    [SerializeField] protected GameObject player;
+    protected VectorDistanceChecker vectorDistanceChecker;
     // Distance from player
-    
+    protected float distanceFromPlayer;
 
-    private void Start()
+    private void Awake()
     {
-        playerController = FindAnyObjectByType<PlayerController>();
-        player = playerController.gameObject;
+        vectorDistanceChecker = GetComponent<VectorDistanceChecker>();
     }
-    private void Update()
+
+    protected virtual void Update()
     {
-        DistanceFromPlayer();
+        distanceFromPlayer = 
+            vectorDistanceChecker.CheckVector2DistanceBetweenAandB(gameObject, player);
+        Debug.Log($" The boss is { distanceFromPlayer} from the player");
     }
     private void FacePlayer()
     {
         // Look towards the player
     }
-    public float DistanceFromPlayer()
-    {
-        float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
-        Debug.Log($"player is {distanceToPlayer} away from the boss");
-        return distanceToPlayer;
-    }
-    public void Move()
+    protected void Move()
     {
        // Move the boss character
     }
-    
-    public void NormalRangeAttack()
+
+    protected void NormalRangeAttack()
     {
         // Attack the player if they cross a certain distance
     }
-    public void NormalCloseAttack()
+    protected void NormalCloseAttack()
     {
         // Attack the player if they get too close
     }
 
-    public void SpecialLowAttack()
+    protected void SpecialLowAttack()
     {
         // Cross Screen attack from the ground
     }
-    public void SpecialHighAttack()
+    protected void SpecialHighAttack()
     {
         // Cross screen attack from the ceiling
     }
-    public void Sheild()
+    protected void Sheild()
     {
 
     }

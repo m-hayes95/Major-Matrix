@@ -11,17 +11,19 @@ public class BossFSM : BossAI
     {
         sM = StateMachine.Idle;
     }
-    private void Update()
+
+    protected override void Update()
     {
+        base.Update();
         switch (sM)
         {
             case StateMachine.Idle:
-                if (DistanceFromPlayer() > longRangeAttackThreshold) sM = StateMachine.RangeAttack;
-                if (DistanceFromPlayer() > closeRangeAttackThreshold) sM = StateMachine.CloseAttack;
+                if (distanceFromPlayer > longRangeAttackThreshold) sM = StateMachine.RangeAttack;
+                if (distanceFromPlayer < closeRangeAttackThreshold) sM = StateMachine.CloseAttack;
                 break;
             case StateMachine.RangeAttack:
                 NormalRangeAttack();
-                sM = StateMachine.Idle;  
+                sM = StateMachine.Idle;
                 break;
             case StateMachine.CloseAttack:
                 NormalCloseAttack();
@@ -43,5 +45,4 @@ public class BossFSM : BossAI
                 break;
         }
     }
-
 }
