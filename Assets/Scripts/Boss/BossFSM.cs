@@ -18,8 +18,10 @@ public class BossFSM : BossAI
         switch (sM)
         {
             case StateMachine.Idle:
-                if (distanceFromPlayer > stats.longRangeAttackThreshold) sM = StateMachine.RangeAttack;
-                if (distanceFromPlayer < stats.closeRangeAttackThreshold) sM = StateMachine.CloseAttack;
+                if (distanceFromPlayer > stats.longRangeAttackThreshold && canAttack) 
+                    sM = StateMachine.RangeAttack;
+                if (distanceFromPlayer < stats.closeRangeAttackThreshold && canAttack) 
+                    sM = StateMachine.CloseAttack;
                 break;
             case StateMachine.RangeAttack:
                 NormalRangeAttack();
