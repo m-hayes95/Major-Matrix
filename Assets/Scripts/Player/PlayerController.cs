@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     // Stats
-    [SerializeField] private PlayerStatsScriptableObject stats;
+    public PlayerStatsScriptableObject stats;
     // Game object components
     private Rigidbody2D rb;
     private BoxCollider2D collider;

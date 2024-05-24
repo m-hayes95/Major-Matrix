@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 4.3
   maxHP: 100
-  normalAttackDamage: 1
+  normalAttackDamage: 50
   specialAttackDamage: 2
-  attackTarget: {fileID: 4652640799575470342, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
   closeRangeAttackThreshold: 3
   longRangeAttackThreshold: 8
+  resetAttackTimer: 3

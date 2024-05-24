@@ -18,4 +18,8 @@ public class BossStatsScriptableObject : ScriptableObject
     public float closeRangeAttackThreshold;
     [Range(0f, 20f), Tooltip("How far the player needs to be, to activate the long range attack.")]
     public float longRangeAttackThreshold;
+
+    [Header("Timers")]
+    [Range(0f, 10f), Tooltip("Set the amount of time in seconds for the reset attack timer.")]
+    public float resetAttackTimer;
 }

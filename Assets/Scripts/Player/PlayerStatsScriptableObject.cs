@@ -6,6 +6,8 @@ public class PlayerStatsScriptableObject : ScriptableObject
     // Stats for the player game object
 
     [Header("Player Stats")]
+    [Range(1f, 200f), Tooltip("How much HP the player will start with.")]
+    public float maxHP;
     [Range(1f, 10f), Tooltip("How fast the payer will move.")]
     public float moveSpeed;
     [Range(5f, 20f), Tooltip("How much power the player will use to jump.")]

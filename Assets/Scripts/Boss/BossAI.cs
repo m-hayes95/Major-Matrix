@@ -5,11 +5,12 @@ public abstract class BossAI : MonoBehaviour
 {
     //Boss stats
     protected BossStatsScriptableObject stats;
-    // Distance from player
+    // References
     protected GameObject player;
     protected VectorDistanceChecker vectorDistance;
-   
     protected float distanceFromPlayer;
+
+    private PlayerHealth playerHP;
     // Do once
     protected bool canAttack = true;
 
@@ -17,6 +18,7 @@ public abstract class BossAI : MonoBehaviour
     {
         stats = GetComponent<BossStatsComponent>().bossStats;
         player = FindObjectOfType<PlayerController>().gameObject;
+        playerHP = player.GetComponent<PlayerHealth>();
         vectorDistance = GetComponent<VectorDistanceChecker>();
     }
 
@@ -55,17 +57,19 @@ public abstract class BossAI : MonoBehaviour
         {
             Debug.Log($"{gameObject.name} attacked {player.name} with a normal ranged attack - {stats.normalAttackDamage} HP");
             canAttack = false;
-            StartCoroutine(ResetAttack(.1f));
+            StartCoroutine(ResetAttack(stats.resetAttackTimer));
         }
     }
     protected void NormalCloseAttack()
     {
         // Attack the player if they get too close
-        if (canAttack)
+        if (canAttack && playerHP)
         {
             Debug.Log($"{gameObject.name} attacked {player.name} with a normal close attack - {stats.normalAttackDamage} HP");
             canAttack = false;
-            StartCoroutine(ResetAttack(.1f));
+            playerHP.DamagePlayer(stats.normalAttackDamage);
+            StartCoroutine(ResetAttack(stats.resetAttackTimer));
+            // Play animation for attack
         }
     }
 
@@ -76,7 +80,7 @@ public abstract class BossAI : MonoBehaviour
         {
             Debug.Log($"{gameObject.name} attacked {player.name} with a special low attack - {stats.specialAttackDamage} HP");
             canAttack = false;
-            StartCoroutine (ResetAttack(3));
+            StartCoroutine (ResetAttack(stats.resetAttackTimer));
         }
     }
     protected void SpecialHighAttack()
@@ -84,7 +88,7 @@ public abstract class BossAI : MonoBehaviour
         // Cross screen attack from the ceiling
         Debug.Log($"{gameObject.name} attacked {player.name} with a special high attack - {stats.specialAttackDamage} HP");
         canAttack = false;
-        StartCoroutine(ResetAttack(3));
+        StartCoroutine(ResetAttack(stats.resetAttackTimer));
     }
     protected void Sheild()
     {
