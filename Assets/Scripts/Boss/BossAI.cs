@@ -2,22 +2,18 @@ using UnityEngine;
 
 public abstract class BossAI : MonoBehaviour
 {
-    //Boss stats - add sciptable object
-    [Header("Boss Stats"), SerializeField] protected float moveSpeed;
-    [SerializeField] protected float normalAttackDamage;
-    [SerializeField] protected float specialAttackDamage;
-    [SerializeField] protected float hP;
-    // Thresholds
-    [SerializeField] protected float closeRangeAttackThreshold;
-    [SerializeField] protected float longRangeAttackThreshold;
-    // Components
-    [SerializeField] protected GameObject player;
-    protected VectorDistanceChecker vectorDistanceChecker;
+    //Boss stats
+    protected BossStatsScriptableObject stats;
     // Distance from player
+    protected GameObject player;
+    protected VectorDistanceChecker vectorDistanceChecker;
+   
     protected float distanceFromPlayer;
 
     private void Awake()
     {
+        stats = GetComponent<BossStatsComponent>().bossStats;
+        player = FindObjectOfType<PlayerController>().gameObject;
         vectorDistanceChecker = GetComponent<VectorDistanceChecker>();
     }
 
@@ -26,6 +22,7 @@ public abstract class BossAI : MonoBehaviour
         distanceFromPlayer = 
             vectorDistanceChecker.CheckVector2DistanceBetweenAandB(gameObject, player);
         Debug.Log($" The boss is { distanceFromPlayer} from the player");
+        Debug.Log($" Attack target is {player.name}");
     }
     private void FacePlayer()
     {
