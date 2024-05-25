@@ -5,8 +5,9 @@ using UnityEngine;
 public class BossFSM : BossAI
 {
     private enum StateMachine 
-    { Idle, RangeAttack, CloseAttack, SpecialLowAttack, SpecialHighAttack, Sheild };
+    { Idle, RangeAttack, CloseAttack, SpecialLowAttack, SpecialHighAttack, Shield };
     [SerializeField] private StateMachine sM;
+    private bool canShield = true;
     private void Start()
     {
         sM = StateMachine.Idle;
@@ -15,13 +16,20 @@ public class BossFSM : BossAI
     protected override void Update()
     {
         base.Update();
+        Debug.Log($"Boss State Machine Current State: {sM}");
         switch (sM)
         {
             case StateMachine.Idle:
+
+                if (!shield.GetShieldStatus() && shield.GetCurrentShieldsAmount() > 0 && canShield && 
+                    bossHP.GetBossCurrentHP() <= stats.maxHPtoAllowShield && RandomChance(stats.chanceToShield))
+                        sM = StateMachine.Shield;
+
                 if (distanceFromPlayer > stats.longRangeAttackThreshold && canAttack)
                 {
-                    if (!UseSpecialAttack()) sM = StateMachine.RangeAttack;
-                    else if (UseSpecialAttack() && DistanceY() >= stats.specialHighAttackMinY)
+                    // Randomise if boss should use a special or normal attack
+                    if (!RandomChance(stats.chanceToUseSpecialAttack)) sM = StateMachine.RangeAttack;
+                    else if (RandomChance(stats.chanceToUseSpecialAttack) && DistanceY() >= stats.specialHighAttackMinY)
                     {
                         sM = StateMachine.SpecialHighAttack;    
                     }
@@ -50,12 +58,22 @@ public class BossFSM : BossAI
                 SpecialHighAttack();
                 sM = StateMachine.Idle;
                 break;
-            case StateMachine.Sheild:
-                Sheild();
+            case StateMachine.Shield:
+                canShield = false;
+                Shield();
+                StartCoroutine(ShieldCooldown(stats.shieldCooldownTime));
                 sM = StateMachine.Idle;
                 break;
             default:
                 break;
         }
+    }
+
+    private IEnumerator ShieldCooldown(float seconds)
+    {
+        Debug.Log("Shield cooldown started");
+        yield return new WaitForSeconds(seconds);
+        Debug.Log("Shield cooldown reset");
+        canShield = !canShield;
     }
 }

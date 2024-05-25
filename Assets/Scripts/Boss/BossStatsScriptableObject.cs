@@ -12,6 +12,8 @@ public class BossStatsScriptableObject : ScriptableObject
     public float normalAttackDamage;
     [Range(0f, 100f), Tooltip("How much damgae the special attacks will do to the player.")]
     public float specialAttackDamage;
+    [Range(0, 10), Tooltip("How many shields the boss will start with. Once shields reach 0, the boss cannot shield again.")]
+    public int maxShields;
 
     [Header("Thresholds")]
     [Range(0f, 5f), Tooltip("How close the player needs to be, to activate the close range attack.")]
@@ -20,12 +22,22 @@ public class BossStatsScriptableObject : ScriptableObject
     public float longRangeAttackThreshold;
     [Range(0f, 10f), Tooltip("Only applys to special attacks. Set the min amount for the player's height to determine if the Boss should use a High attack instead of a low attack (Uses difference in Y poistion from the player to the boss character. The higher the value, the higher the player needs to be in order to call the high special attacks).")]
     public float specialHighAttackMinY;
+    [Range(0f, 200f), Tooltip("Set the max HP the boss is allowed to shield from (E.g if set to 50, the boss can only shield when their health is 50 or less).")]
+    public float maxHPtoAllowShield;
 
     [Header("Chances")]
     [Range(0f, 1f), Tooltip("Select the chance of a special attack occuring over a normal attack when the players distance meets the longRangeAttackThreshold (0 = no chance, 0.1 = 1/10 chance, 0.8 = 8/10 chance, so on...)")]
     public float chanceToUseSpecialAttack;
+    [Range(0f, 1f), Tooltip("Set the chance the enemy will shield at the set maxHPtoAllowShield threshold")]
+    public float chanceToShield;
 
     [Header("Timers")]
     [Range(0f, 10f), Tooltip("Set the amount of time in seconds for the reset attack timer.")]
     public float resetAttackTimer;
+    [Range(0f, 10f), Tooltip("Set the amount of time in seconds for the shield duration.")]
+    public float shieldTimer;
+
+    [Header("Cooldowns")]
+    [Range(0f, 50f), Tooltip("Set the amount of time (in seconds) for the shield cooldown (Boss can not shield again during the cooldown period).")]
+    public float shieldCooldownTime;
 }

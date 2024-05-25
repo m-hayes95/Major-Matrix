@@ -8,6 +8,9 @@ public abstract class BossAI : MonoBehaviour
     // References
     protected GameObject player;
     protected float distanceFromPlayer;
+    protected BossHealth bossHP;
+    protected Shield shield;
+
     private PlayerHealth playerHP;
     // Do once
     protected bool canAttack = true;
@@ -17,6 +20,8 @@ public abstract class BossAI : MonoBehaviour
         stats = GetComponent<BossStatsComponent>().bossStats;
         player = FindObjectOfType<PlayerController>().gameObject;
         playerHP = player.GetComponent<PlayerHealth>();
+        bossHP = GetComponent<BossHealth>();
+        shield = GetComponent<Shield>();
     }
 
     protected virtual void Update()
@@ -31,7 +36,7 @@ public abstract class BossAI : MonoBehaviour
             Debug.LogWarning("Player object not found in BossAI script.");
 
         FacePlayer();
-        UseSpecialAttack();
+        //RandomChance();
 
         Debug.Log($"AZ: Distance Y: {DistanceY()}....... playerY: {player.transform.position.y} - bossY {transform.position.y}");
         Debug.Log($"BZ: Vector Distance Method = {Vector2.Distance(transform.position, player.transform.position)}");
@@ -58,15 +63,15 @@ public abstract class BossAI : MonoBehaviour
     {
        // Move the boss character
     }
-    protected bool UseSpecialAttack()
+    protected bool RandomChance(float chanceModifier)
     {
         // Uses random chance to decide if the boss should use a normal or special attack
-        bool useSpecialAttack;
+        bool randomChance;
         float rand = Random.value;
-        if (rand < stats.chanceToUseSpecialAttack) useSpecialAttack = true;
-        else useSpecialAttack = false;
-        Debug.Log($"Random Value is {rand} use special attack = {useSpecialAttack}");
-        return useSpecialAttack;
+        if (rand < chanceModifier) randomChance = true;
+        else randomChance = false;
+        Debug.Log($"Random Value is {rand} random chance = {randomChance}");
+        return randomChance;
     }
 
     protected void NormalRangeAttack()
@@ -113,12 +118,10 @@ public abstract class BossAI : MonoBehaviour
         StartCoroutine(ResetAttack(stats.resetAttackTimer));
         // Play animation for attack
     }
-    protected void Sheild()
+    protected void Shield()
     {
-        // Make the boss resistant to player damage
-
+        shield.UseShield();
     }
-
     private IEnumerator ResetAttack(float resetTimer)
     {
         yield return new WaitForSeconds( resetTimer );
