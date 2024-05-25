@@ -18,6 +18,12 @@ public class BossStatsScriptableObject : ScriptableObject
     public float closeRangeAttackThreshold;
     [Range(0f, 20f), Tooltip("How far the player needs to be, to activate the long range attack.")]
     public float longRangeAttackThreshold;
+    [Range(0f, 10f), Tooltip("Only applys to special attacks. Set the min amount for the player's height to determine if the Boss should use a High attack instead of a low attack (Uses difference in Y poistion from the player to the boss character. The higher the value, the higher the player needs to be in order to call the high special attacks).")]
+    public float specialHighAttackMinY;
+
+    [Header("Chances")]
+    [Range(0f, 1f), Tooltip("Select the chance of a special attack occuring over a normal attack when the players distance meets the longRangeAttackThreshold (0 = no chance, 0.1 = 1/10 chance, 0.8 = 8/10 chance, so on...)")]
+    public float chanceToUseSpecialAttack;
 
     [Header("Timers")]
     [Range(0f, 10f), Tooltip("Set the amount of time in seconds for the reset attack timer.")]

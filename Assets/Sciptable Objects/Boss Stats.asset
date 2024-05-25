@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 4.3
   maxHP: 100
-  normalAttackDamage: 50
+  normalAttackDamage: 1
   specialAttackDamage: 2
   closeRangeAttackThreshold: 3
   longRangeAttackThreshold: 8
-  resetAttackTimer: 3
+  specialHighAttackMinY: 1.5
+  chanceToUseSpecialAttack: 0.1
+  resetAttackTimer: 1
