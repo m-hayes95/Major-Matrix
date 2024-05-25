@@ -116,6 +116,7 @@ public abstract class BossAI : MonoBehaviour
     protected void Sheild()
     {
         // Make the boss resistant to player damage
+
     }
 
     private IEnumerator ResetAttack(float resetTimer)

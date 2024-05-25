@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     // Game object components
     private Rigidbody2D rb;
     private BoxCollider2D collider;
+    // Get Refs
+    [SerializeField]private BossHealth bossHealth;
     // Movemet
     private Vector2 moveDir;
     // Jump
@@ -50,6 +52,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Gravity scale = " + rb.gravityScale);
         //Debug.Log("Y pos = " + transform.position.y);
         Debug.Log($"Current Jump power {stats.jumpPower}, Initial Jump power {initialJumpPower}");
+        if (Input.GetKeyDown(KeyCode.K)) bossHealth.DamageBoss(10);
     }
     private void GetInput()
     {
