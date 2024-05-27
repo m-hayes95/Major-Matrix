@@ -1,4 +1,6 @@
 using System.Collections;
+using Unity.VisualScripting;
+using UnityEditor.Purchasing;
 using UnityEngine;
 
 public abstract class BossAI : MonoBehaviour
@@ -14,6 +16,7 @@ public abstract class BossAI : MonoBehaviour
     private PlayerHealth playerHP;
     // Do once
     protected bool canAttack = true;
+    protected bool canChase = true;
 
     private void Awake()
     {
@@ -34,7 +37,6 @@ public abstract class BossAI : MonoBehaviour
         }
         else
             Debug.LogWarning("Player object not found in BossAI script.");
-
         FacePlayer();
         //RandomChance();
 
@@ -59,9 +61,27 @@ public abstract class BossAI : MonoBehaviour
         float distanceY = player.transform.position.y - transform.position.y;
         return distanceY;
     }
-    protected void Move()
+    protected void MoveToPlayer()
     {
-       // Move the boss character
+        // Move the boss character when the player is in the safe zone
+        canChase = false;
+        if (player != null)
+        {
+            Vector2 moveDir = new Vector2(player.transform.position.x - transform.position.x, 0);
+            transform.Translate(moveDir * stats.moveSpeed * Time.deltaTime);
+        }
+        else
+        {
+            Debug.LogWarning("Player is not assigned!");
+        }
+        StartCoroutine(ChaseCooldown(stats.chaseCooldown));
+        
+    }
+
+    private IEnumerator ChaseCooldown(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        canChase = !canChase;
     }
     protected bool RandomChance(float chanceModifier)
     {

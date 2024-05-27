@@ -5,7 +5,7 @@ using UnityEngine;
 public class BossFSM : BossAI
 {
     private enum StateMachine 
-    { Idle, RangeAttack, CloseAttack, SpecialLowAttack, SpecialHighAttack, Shield };
+    { Idle, RangeAttack, CloseAttack, SpecialLowAttack, SpecialHighAttack, Shield, ChasePlayer };
     [SerializeField] private StateMachine sM;
     private bool canShield = true;
     private void Start()
@@ -41,7 +41,11 @@ public class BossFSM : BossAI
                     
                 if (distanceFromPlayer < stats.closeRangeAttackThreshold && canAttack) 
                     sM = StateMachine.CloseAttack;
-                break;
+
+                if (canChase && distanceFromPlayer > stats.closeRangeAttackThreshold &&
+                 distanceFromPlayer < stats.longRangeAttackThreshold) 
+                    sM = StateMachine.ChasePlayer;
+                    break;
             case StateMachine.RangeAttack:
                 NormalRangeAttack();
                 sM = StateMachine.Idle;
@@ -64,6 +68,12 @@ public class BossFSM : BossAI
                 StartCoroutine(ShieldCooldown(stats.shieldCooldownTime));
                 sM = StateMachine.Idle;
                 break;
+            case StateMachine.ChasePlayer:
+                Debug.Log($"Boss can chase player: {canChase}");
+                MoveToPlayer();
+                StartCoroutine(StateCooldown(stats.chaseTimer, StateMachine.Idle));
+                break;
+
             default:
                 break;
         }
@@ -75,5 +85,12 @@ public class BossFSM : BossAI
         yield return new WaitForSeconds(seconds);
         Debug.Log("Shield cooldown reset");
         canShield = !canShield;
+    }
+
+    private IEnumerator StateCooldown(float seconds, StateMachine nextState)
+    {
+        yield return new WaitForSeconds(seconds);
+        Debug.Log($"State Cooldown: Waited for {seconds} seconds before entering the next state: {nextState}");
+        sM = nextState;
     }
 }

@@ -40,4 +40,9 @@ public class BossStatsScriptableObject : ScriptableObject
     [Header("Cooldowns")]
     [Range(0f, 50f), Tooltip("Set the amount of time (in seconds) for the shield cooldown (Boss can not shield again during the cooldown period).")]
     public float shieldCooldownTime;
+    [Range(0f, 10f), Tooltip("Set how long the enemy will chase the player before stoping (in seconds).")]
+    public float chaseTimer;
+    [Range(0f, 20f), Tooltip("set the amount of time (in seconds), for how long the boss must wait before they are able to chase the player again")]
+    public float chaseCooldown;
 }
+

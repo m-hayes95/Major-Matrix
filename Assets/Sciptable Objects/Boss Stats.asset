@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 099adb760627820459c161d8130ec04d, type: 3}
   m_Name: Boss Stats
   m_EditorClassIdentifier: 
-  moveSpeed: 4.3
-  maxHP: 39
-  normalAttackDamage: 1
-  specialAttackDamage: 2
-  maxShields: 2
+  moveSpeed: 1
+  maxHP: 100
+  normalAttackDamage: 10
+  specialAttackDamage: 10
+  maxShields: 3
   closeRangeAttackThreshold: 3
   longRangeAttackThreshold: 8
   specialHighAttackMinY: 1.5
@@ -26,3 +26,5 @@ MonoBehaviour:
   resetAttackTimer: 1
   shieldTimer: 3
   shieldCooldownTime: 9.6
+  chaseTimer: 2
+  chaseCooldown: 10.6
