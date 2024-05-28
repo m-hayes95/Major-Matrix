@@ -26,6 +26,7 @@ public class Projectile : MonoBehaviour
                 Invoke(DESTROY, .1f);
             }
         }
+        Invoke(DESTROY, 3f);
     }
 
     private void DestroyBullet()
