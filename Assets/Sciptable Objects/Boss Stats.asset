@@ -15,7 +15,7 @@ MonoBehaviour:
   moveSpeed: 1
   maxHP: 100
   normalAttackDamage: 10
-  specialAttackDamage: 10
+  specialAttackDamage: 20
   maxShields: 3
   closeRangeAttackThreshold: 3
   longRangeAttackThreshold: 8

@@ -94,6 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7028844911701327984}
   - component: {fileID: 8031012053645395044}
+  - component: {fileID: 4556585605128443284}
   m_Layer: 8
   m_Name: Sepcial Attack - low
   m_TagString: Untagged
@@ -149,7 +150,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0066283345, y: 0.3075479}
+  m_Offset: {x: -0.0020868778, y: 0.2757579}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -160,5 +161,20 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.9232651, y: 1.6521552}
+  m_Size: {x: 2.0595083, y: 1.7702329}
   m_EdgeRadius: 0
+--- !u!114 &4556585605128443284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6375700386247670218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b3aab138b4622a409998a43f468681a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStats: {fileID: 11400000, guid: 1bd368416c63f5e4a873982e7d65e6f0, type: 2}
+  bossStats: {fileID: 11400000, guid: 12f17780ed1098b4e8159c01f0f5ae70, type: 2}
+  isSpecialAttack: 1
