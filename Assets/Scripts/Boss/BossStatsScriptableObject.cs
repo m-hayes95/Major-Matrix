@@ -44,5 +44,13 @@ public class BossStatsScriptableObject : ScriptableObject
     public float chaseTimer;
     [Range(0f, 20f), Tooltip("set the amount of time (in seconds), for how long the boss must wait before they are able to chase the player again")]
     public float chaseCooldown;
+
+    [Header("Special Attack Stats")]
+    [Range(1, 5), Tooltip("Set the amount of attacks each special attack has.")]
+    public int numberOfAttacks;
+    [Range(-1f,1f), Tooltip("Set the value of the next attack's Y offset.")]
+    public float offsetY;
+    [Range(1f, 5f), Tooltip("Set the value of the space between each attack on the X axis.")]
+    public float spacingX;
 }
 

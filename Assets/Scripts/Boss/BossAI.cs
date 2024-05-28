@@ -13,6 +13,7 @@ public abstract class BossAI : MonoBehaviour
 
     private PlayerHealth playerHP;
     private Shoot shoot;
+    private SpeicalAttackLow specialAttackLow;
     // Do once
     protected bool canAttack = true;
     protected bool canChase = true;
@@ -25,6 +26,7 @@ public abstract class BossAI : MonoBehaviour
         bossHP = GetComponent<BossHealth>();
         shield = GetComponent<Shield>();
         shoot = GetComponent<Shoot>();
+        specialAttackLow = GetComponent<SpeicalAttackLow>();
     }
 
     protected virtual void Update()
@@ -125,6 +127,7 @@ public abstract class BossAI : MonoBehaviour
         // Cross Screen attack from the ground
         if (canAttack)
         {
+            specialAttackLow.ExecuteSpecialAttack();
             Debug.Log($"{gameObject.name} attacked {player.name} with a special low attack - {stats.specialAttackDamage} HP");
             canAttack = false;
             StartCoroutine (ResetAttack(stats.resetAttackTimer));

@@ -2022,6 +2022,7 @@ GameObject:
   - component: {fileID: 1913649310}
   - component: {fileID: 1913649311}
   - component: {fileID: 1913649313}
+  - component: {fileID: 1913649314}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -2209,6 +2210,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 5379510509899357765, guid: 105d244bc4d92d7489b112fcadf32af5, type: 3}
   spawnPoint: {fileID: 1277978894}
+--- !u!114 &1913649314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913649301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7190a18b5ec1cd24897b14dc5b3a6555, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  specialAttackGameObject: {fileID: 6375700386247670218, guid: 7bcfd5b3cd418284281db8337cd286d7, type: 3}
+  amountOfAttacks: 5
+  offset: -0.3
 --- !u!850595691 &1983773006
 LightingSettings:
   m_ObjectHideFlags: 0
