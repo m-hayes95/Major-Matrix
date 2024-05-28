@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class BossAI : MonoBehaviour
 {
@@ -17,7 +18,9 @@ public abstract class BossAI : MonoBehaviour
     // Do once
     protected bool canAttack = true;
     protected bool canChase = true;
+    protected bool usingSpecialAttack = false;
 
+    
     private void Awake()
     {
         stats = GetComponent<BossStatsComponent>().bossStats;
@@ -27,6 +30,10 @@ public abstract class BossAI : MonoBehaviour
         shield = GetComponent<Shield>();
         shoot = GetComponent<Shoot>();
         specialAttackLow = GetComponent<SpeicalAttackLow>();
+
+        if (specialAttackLow.OnAttackFinished == null)
+            specialAttackLow.OnAttackFinished = new UnityEvent();
+        specialAttackLow.OnAttackFinished.AddListener(ResetSpecialAttackBool);
     }
 
     protected virtual void Update()
@@ -125,9 +132,10 @@ public abstract class BossAI : MonoBehaviour
     protected void SpecialLowAttack()
     {
         // Cross Screen attack from the ground
-        if (canAttack)
+        if (canAttack && !usingSpecialAttack)
         {
-            specialAttackLow.ExecuteSpecialAttack();
+            usingSpecialAttack = true;
+            StartCoroutine(specialAttackLow.ExecuteSpecialAttack(0.5f));
             Debug.Log($"{gameObject.name} attacked {player.name} with a special low attack - {stats.specialAttackDamage} HP");
             canAttack = false;
             StartCoroutine (ResetAttack(stats.resetAttackTimer));
@@ -141,6 +149,11 @@ public abstract class BossAI : MonoBehaviour
         canAttack = false;
         StartCoroutine(ResetAttack(stats.resetAttackTimer));
         // Play animation for attack
+    }
+
+    private void ResetSpecialAttackBool()
+    {
+        usingSpecialAttack = false; 
     }
     protected void Shield()
     {

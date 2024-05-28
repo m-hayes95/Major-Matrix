@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7269870468694186814}
   - component: {fileID: 3706939981177657815}
   - component: {fileID: 6634835009884005910}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -144,7 +144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 650150534198489183}
   - component: {fileID: 8218865952701953220}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Projectile Visuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}

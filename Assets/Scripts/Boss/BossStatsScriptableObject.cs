@@ -46,7 +46,7 @@ public class BossStatsScriptableObject : ScriptableObject
     public float chaseCooldown;
 
     [Header("Special Attack Stats")]
-    [Range(1, 5), Tooltip("Set the amount of attacks each special attack has.")]
+    [Range(1, 10), Tooltip("Set the amount of attacks each special attack has.")]
     public int numberOfAttacks;
     [Range(-1f,1f), Tooltip("Set the value of the next attack's Y offset.")]
     public float offsetY;

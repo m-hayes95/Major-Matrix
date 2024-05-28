@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2992531210367595319}
   - component: {fileID: 6303360794995957512}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Visuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7028844911701327984}
   - component: {fileID: 8031012053645395044}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sepcial Attack - low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
