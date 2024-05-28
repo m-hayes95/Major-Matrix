@@ -48,6 +48,7 @@ public class BossFSM : BossAI
                     break;
             case StateMachine.RangeAttack:
                 NormalRangeAttack();
+                //StartCoroutine(StateCooldown(4f, StateMachine.Idle));
                 sM = StateMachine.Idle;
                 break;
             case StateMachine.CloseAttack:

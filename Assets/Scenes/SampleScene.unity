@@ -141,7 +141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7058368484342321748, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -5.88
       objectReference: {fileID: 0}
     - target: {fileID: 7058368484342321748, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1273,6 +1273,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7058368484342321748, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
   m_PrefabInstance: {fileID: 58877964}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1277978893
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1277978894}
+  m_Layer: 0
+  m_Name: Spawn Bullet
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1277978894
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277978893}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.69, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1913649302}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1336891473
 Mesh:
   m_ObjectHideFlags: 0
@@ -1990,6 +2021,7 @@ GameObject:
   - component: {fileID: 1913649309}
   - component: {fileID: 1913649310}
   - component: {fileID: 1913649311}
+  - component: {fileID: 1913649313}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -2012,6 +2044,7 @@ Transform:
   m_Children:
   - {fileID: 382169882}
   - {fileID: 910564140}
+  - {fileID: 1277978894}
   m_Father: {fileID: 680761365}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1913649303
@@ -2162,6 +2195,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shieldVisual: {fileID: 910564138}
+--- !u!114 &1913649313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913649301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 538f2e9179629c245848003626330d52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 5379510509899357765, guid: 105d244bc4d92d7489b112fcadf32af5, type: 3}
+  spawnPoint: {fileID: 1277978894}
 --- !u!850595691 &1983773006
 LightingSettings:
   m_ObjectHideFlags: 0

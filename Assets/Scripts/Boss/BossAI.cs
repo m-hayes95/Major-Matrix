@@ -1,6 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
-using UnityEditor.Purchasing;
 using UnityEngine;
 
 public abstract class BossAI : MonoBehaviour
@@ -14,6 +12,7 @@ public abstract class BossAI : MonoBehaviour
     protected Shield shield;
 
     private PlayerHealth playerHP;
+    private Shoot shoot;
     // Do once
     protected bool canAttack = true;
     protected bool canChase = true;
@@ -25,6 +24,7 @@ public abstract class BossAI : MonoBehaviour
         playerHP = player.GetComponent<PlayerHealth>();
         bossHP = GetComponent<BossHealth>();
         shield = GetComponent<Shield>();
+        shoot = GetComponent<Shoot>();
     }
 
     protected virtual void Update()
@@ -99,9 +99,10 @@ public abstract class BossAI : MonoBehaviour
         // Attack the player if they cross a certain distance
         if (canAttack && playerHP)
         {
+            shoot.FireWeapon(Vector3.left, 10f);
             Debug.Log($"{gameObject.name} attacked {player.name} with a normal ranged attack - {stats.normalAttackDamage} HP");
             canAttack = false;
-            playerHP.DamagePlayer(stats.normalAttackDamage);
+            //playerHP.DamagePlayer(stats.normalAttackDamage);
             StartCoroutine(ResetAttack(stats.resetAttackTimer));
             // Play animation for attack
         }
