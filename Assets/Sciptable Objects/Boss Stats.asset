@@ -19,7 +19,7 @@ MonoBehaviour:
   maxShields: 3
   closeRangeAttackThreshold: 3
   longRangeAttackThreshold: 8
-  specialHighAttackMinY: 1.3
+  specialHighAttackMinY: 0.6
   maxHPtoAllowShield: 50
   chanceToUseSpecialAttack: 0.1
   chanceToShield: 0.1

@@ -74,6 +74,7 @@ public abstract class BossAI : MonoBehaviour
     {
         // Check distance between Y pos for boss and player, boss always 0
         float distanceY = player.transform.position.y - transform.position.y;
+        Debug.Log($"Y distance from player {distanceY}");
         return distanceY;
     }
     protected void MoveToPlayer()
@@ -112,7 +113,7 @@ public abstract class BossAI : MonoBehaviour
     protected void NormalRangeAttack()
     {
         // Attack the player if they cross a certain distance
-        if (canAttack && playerHP)
+        if (canAttack && !usingSpecialAttack)
         {
             shoot.FireWeapon(Vector3.left, 10f);
             Debug.Log($"{gameObject.name} attacked {player.name} with a normal ranged attack - {stats.normalAttackDamage} HP");
