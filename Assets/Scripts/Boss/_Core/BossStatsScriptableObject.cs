@@ -52,5 +52,7 @@ public class BossStatsScriptableObject : ScriptableObject
     public float offsetY;
     [Range(1f, 5f), Tooltip("Set the value of the space between each attack on the X axis.")]
     public float spacingX;
+    [Range(0f, 1f), Tooltip("How much time (in seconds) should each interval of attacks be")]
+    public float timeBetweenAttacks;
 }
 
