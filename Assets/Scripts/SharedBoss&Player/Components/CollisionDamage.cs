@@ -20,20 +20,34 @@ public class CollisionDamage : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision != null && collision.gameObject.GetComponent<PlayerHealth>())
-        {
-            collision.gameObject.GetComponent<PlayerHealth>().DamagePlayer(damageAmount);
-            if (!isSpecialAttack) Invoke(DESTROY, .1f);
-        }
-        else if (collision.gameObject.GetComponent<BossHealth>())
-        {
-            // Damage boss
-            Invoke(DESTROY, .1f);
-        }
-        if (!isSpecialAttack) Invoke(DESTROY, 3f);
+            PlayerCollisions(collision);
+        if (collision != null && collision.gameObject.GetComponent<BossHealth>())
+            BossCollisions(collision);
+        if (collision != null && collision.gameObject.GetComponent<PlatformTag>())
+            PlatformCollisions();
+        if (!isSpecialAttack) 
+            Invoke(DESTROY, 3f);
+    }
+    private void PlayerCollisions(Collision2D collision)
+    {
+        collision.gameObject.GetComponent<PlayerHealth>().DamagePlayer(damageAmount);
+        if (!isSpecialAttack) Invoke(DESTROY, .1f);
+        else gameObject.SetActive(false);
+    }
+    private void BossCollisions(Collision2D collision)
+    {
+        // Damage boss
+        Invoke(DESTROY, .1f);
+    }
+    private void PlatformCollisions()
+    {
+        if (!isSpecialAttack) Invoke(DESTROY, .1f);
+        else gameObject.SetActive(false);
     }
 
     private void DestroyBullet()
     {
+        Debug.Log("Destroyd game object");
         Destroy(gameObject);
     }
 }

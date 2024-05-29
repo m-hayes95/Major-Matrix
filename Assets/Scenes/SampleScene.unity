@@ -2223,8 +2223,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   specialAttackGameObject: {fileID: 6375700386247670218, guid: 7bcfd5b3cd418284281db8337cd286d7, type: 3}
-  amountOfAttacks: 5
-  offset: -0.3
+  highAttackPosistion: {fileID: 0}
+  OnAttackFinished:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!850595691 &1983773006
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -2528,10 +2530,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1336891473}
-    - target: {fileID: 6835635592834394165, guid: 90cafc76bef6b084f8844f94c6bc6068, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: e96469b13eda1d5499e903bfde633630, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

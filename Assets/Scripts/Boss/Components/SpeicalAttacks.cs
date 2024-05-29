@@ -29,7 +29,6 @@ public class SpeicalAttacks : BossAI
         if (lowOrHigh != 0 || lowOrHigh != 1) 
             Debug.LogWarning($"The current arguent: {lowOrHigh} is not valid. The attack for the call speical attack low or high method requies a 0 (low attack) or 1 (high attack).");
         StartCoroutine(ExecuteSpecialAttack(lowOrHigh));
-        // need y and y scale to pass in correct info
     }
 
     public IEnumerator ExecuteSpecialAttack(int lowOrHigh)
@@ -63,6 +62,7 @@ public class SpeicalAttacks : BossAI
             );
         newAttack.transform.localScale = scale;
         attacks.Add(newAttack);
+        if (lowOrHigh == 1) DropHighAttacks(newAttack);
     }
 
     private void SpawnRight(int lowOrHigh)
@@ -83,6 +83,12 @@ public class SpeicalAttacks : BossAI
             );
         newAttack.transform.localScale = scale;
         attacks.Add(newAttack);
+        if (lowOrHigh == 1) DropHighAttacks(newAttack);
+    }
+
+    private void DropHighAttacks(GameObject gameObject)
+    {
+        gameObject.GetComponent<Rigidbody2D>().gravityScale = 5f;
     }
 
     private void AttackFinished()
