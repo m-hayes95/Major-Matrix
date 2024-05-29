@@ -9,13 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3886678663198351065}
-  - component: {fileID: 4180711311046136432}
   - component: {fileID: 6094928316654936879}
   - component: {fileID: 5360814408114654734}
   - component: {fileID: 6835635592834394165}
   - component: {fileID: 4463011146387160432}
   - component: {fileID: 8005878228590244482}
-  m_Layer: 6
+  - component: {fileID: 2225483852293378550}
+  m_Layer: 9
   m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,18 +37,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4180711311046136432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4713086572492063708}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5fc82e297837ba469a3192326791a7b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6094928316654936879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,7 +249,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 4736
+  m_VersionIndex: 4739
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -314,7 +302,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c22777d6e868e4f2fb421913386b154e, type: 2}
+  - {fileID: 2100000, guid: e96469b13eda1d5499e903bfde633630, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -389,3 +377,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.0174322, y: 1.025136}
   m_EdgeRadius: 0
+--- !u!114 &2225483852293378550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4713086572492063708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5295584df00bdbf47ac3eb30ce4d8656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb2786b0de290854a8f5559f7abdaf98, type: 3}
   m_Name: Player Stats
   m_EditorClassIdentifier: 
+  maxHP: 100
   moveSpeed: 6.18
   jumpPower: 12
   maxJumpThreshold: 3.5
@@ -24,5 +25,5 @@ MonoBehaviour:
   apexJumpSpeedBonusMultiplier: 2
   groundLayerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 576
   collisionDistanceAcceptanceRadius: 0.168

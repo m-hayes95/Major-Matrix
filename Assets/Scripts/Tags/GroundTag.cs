@@ -2,5 +2,5 @@ using UnityEngine;
 
 public class GroundTag : MonoBehaviour
 {
-    // Used as a tag to identify game object in scene.
+    // This class is used as a reference to the Ground game objects within the scene
 }
