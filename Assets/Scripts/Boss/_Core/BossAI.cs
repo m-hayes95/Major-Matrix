@@ -30,7 +30,7 @@ public abstract class BossAI : MonoBehaviour
         shield = GetComponent<Shield>();
         shoot = GetComponent<Shoot>();
         specialAttackLow = GetComponent<SpeicalAttackLow>();
-
+        // Dont allow interuptions for special attacks
         if (specialAttackLow.OnAttackFinished == null)
             specialAttackLow.OnAttackFinished = new UnityEvent();
         specialAttackLow.OnAttackFinished.AddListener(ResetSpecialAttackBool);
