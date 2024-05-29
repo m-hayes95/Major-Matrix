@@ -10,7 +10,7 @@ public class CollisionDamage : MonoBehaviour
     private bool isSpecialAttack;
 
     private float damageAmount;
-    private const string DESTROY = "DestroyBullet";
+    private const string DESPAWN = "DespawnGameobject";
 
     private void Start()
     {
@@ -26,28 +26,25 @@ public class CollisionDamage : MonoBehaviour
         if (collision != null && collision.gameObject.GetComponent<PlatformTag>())
             PlatformCollisions();
         if (!isSpecialAttack) 
-            Invoke(DESTROY, 3f);
+            Invoke(DESPAWN, 3f);
     }
     private void PlayerCollisions(Collision2D collision)
     {
         collision.gameObject.GetComponent<PlayerHealth>().DamagePlayer(damageAmount);
-        if (!isSpecialAttack) Invoke(DESTROY, .1f);
-        else gameObject.SetActive(false);
+        Invoke(DESPAWN, .1f);
     }
     private void BossCollisions(Collision2D collision)
     {
         // Damage boss
-        Invoke(DESTROY, .1f);
+        Invoke(DESPAWN, .1f);
     }
     private void PlatformCollisions()
     {
-        if (!isSpecialAttack) Invoke(DESTROY, .1f);
-        else gameObject.SetActive(false);
+        Invoke(DESPAWN, .1f);
     }
 
-    private void DestroyBullet()
+    private void DespawnGameobject()
     {
-        Debug.Log("Destroyd game object");
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

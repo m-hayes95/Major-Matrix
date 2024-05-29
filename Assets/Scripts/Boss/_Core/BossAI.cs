@@ -6,6 +6,7 @@ public abstract class BossAI : MonoBehaviour
 {
     //Boss stats
     protected BossStatsScriptableObject stats;
+
     // References
     protected GameObject player;
     protected float distanceFromPlayer;
@@ -15,6 +16,11 @@ public abstract class BossAI : MonoBehaviour
     private PlayerHealth playerHP;
     private Shoot shoot;
     private SpeicalAttacks specialAttacks;
+
+    // Special Attack Selector
+    private int lowSpecialAttack = 0;
+    private int highSpecialAttack = 1;
+
     // Do once
     protected bool canAttack = true;
     protected bool canChase = true;
@@ -135,8 +141,7 @@ public abstract class BossAI : MonoBehaviour
         if (canAttack && !usingSpecialAttack)
         {
             usingSpecialAttack = true;
-            //StartCoroutine(specialAttackLow.ExecuteSpecialAttack(0.5f));
-            specialAttacks.CallSpecialAttackLowOrHigh(1);
+            specialAttacks.CallSpecialAttackLowOrHigh(lowSpecialAttack);
             Debug.Log($"{gameObject.name} attacked {player.name} with a special low attack - {stats.specialAttackDamage} HP");
             canAttack = false;
             StartCoroutine (ResetAttack(stats.resetAttackTimer));
@@ -146,9 +151,14 @@ public abstract class BossAI : MonoBehaviour
     protected void SpecialHighAttack()
     {
         // Cross screen attack from the ceiling
-        Debug.Log($"{gameObject.name} attacked {player.name} with a special high attack - {stats.specialAttackDamage} HP");
-        canAttack = false;
-        StartCoroutine(ResetAttack(stats.resetAttackTimer));
+        if (canAttack && !usingSpecialAttack)
+        {
+            usingSpecialAttack = true;
+            specialAttacks.CallSpecialAttackLowOrHigh(highSpecialAttack);
+            Debug.Log($"{gameObject.name} attacked {player.name} with a special high attack - {stats.specialAttackDamage} HP");
+            canAttack = false;
+            StartCoroutine(ResetAttack(stats.resetAttackTimer));
+        }
         // Play animation for attack
     }
 

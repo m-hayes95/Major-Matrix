@@ -54,5 +54,10 @@ public class BossStatsScriptableObject : ScriptableObject
     public float spacingX;
     [Range(0f, 1f), Tooltip("How much time (in seconds) should each interval of attacks be")]
     public float timeBetweenAttacks;
+    [Header("High Special Attack Modifiers")]
+    [Range(0f, 10f), Tooltip("How much gravity is applied to the falling high special attacks.")]
+    public float highSpecialAttackGravityScale;
+    [Range(0f, 15f), Tooltip("How high up the high special attack will spawn.")]
+    public float spawnHeight;
 }
 

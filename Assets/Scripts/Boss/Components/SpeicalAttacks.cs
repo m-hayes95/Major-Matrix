@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UIElements;
 
 public class SpeicalAttacks : BossAI
 {
@@ -30,8 +31,7 @@ public class SpeicalAttacks : BossAI
             Debug.LogWarning($"The current arguent: {lowOrHigh} is not valid. The attack for the call speical attack low or high method requies a 0 (low attack) or 1 (high attack).");
         StartCoroutine(ExecuteSpecialAttack(lowOrHigh));
     }
-
-    public IEnumerator ExecuteSpecialAttack(int lowOrHigh)
+    private  IEnumerator ExecuteSpecialAttack(int lowOrHigh)
     {
         attacks = new List<GameObject>();
         for (int i = 0; i < stats.numberOfAttacks; ++i)
@@ -56,13 +56,8 @@ public class SpeicalAttacks : BossAI
             spawnPosition = leftPositionHigh += new Vector3(-stats.spacingX, stats.offsetY, 0);
             scale = new Vector3(1, -1, 1);
         }
-        
-        GameObject newAttack = Instantiate(
-            specialAttackGameObject, spawnPosition, Quaternion.identity
-            );
-        newAttack.transform.localScale = scale;
-        attacks.Add(newAttack);
-        if (lowOrHigh == 1) DropHighAttacks(newAttack);
+
+        InstatiateNewAttack(spawnPosition, scale, lowOrHigh);
     }
 
     private void SpawnRight(int lowOrHigh)
@@ -78,17 +73,24 @@ public class SpeicalAttacks : BossAI
             spawnPosition = rightPositionHigh += new Vector3(stats.spacingX, stats.offsetY, 0);
             scale = new Vector3(1, -1, 1);
         };
+
+        InstatiateNewAttack(spawnPosition, scale, lowOrHigh);
+    }
+
+    private void InstatiateNewAttack(Vector3 spawnVector, Vector3 scaleVector, int lowOrHigh)
+    {
         GameObject newAttack = Instantiate(
-            specialAttackGameObject, spawnPosition, Quaternion.identity
+            specialAttackGameObject, spawnVector, Quaternion.identity
             );
-        newAttack.transform.localScale = scale;
+        newAttack.transform.localScale = scaleVector;
         attacks.Add(newAttack);
         if (lowOrHigh == 1) DropHighAttacks(newAttack);
     }
 
     private void DropHighAttacks(GameObject gameObject)
     {
-        gameObject.GetComponent<Rigidbody2D>().gravityScale = 5f;
+        gameObject.GetComponent<Rigidbody2D>().gravityScale = 
+            stats.highSpecialAttackGravityScale;
     }
 
     private void AttackFinished()
