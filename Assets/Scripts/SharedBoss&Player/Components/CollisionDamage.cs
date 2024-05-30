@@ -8,6 +8,7 @@ public class CollisionDamage : MonoBehaviour
     private BossStatsScriptableObject bossStats;
     [SerializeField, Tooltip("Tick yes if this component is attached to a special attack.")] 
     private bool isSpecialAttack;
+    [SerializeField] private GameObject impactEffect;
 
     private float bossDamageAmount, playerDamageAmount;
     private const string DESPAWN = "DespawnGameobject";
@@ -32,20 +33,29 @@ public class CollisionDamage : MonoBehaviour
     private void PlayerCollisions(Collision2D collision)
     {
         collision.gameObject.GetComponent<PlayerHealth>().DamagePlayer(bossDamageAmount);
+        ImpactEffect();
         Invoke(DESPAWN, .1f);
     }
     private void BossCollisions(Collision2D collision)
     {
         collision.gameObject.GetComponent<BossHealth>().DamageBoss(playerDamageAmount);
+        ImpactEffect();
         Invoke(DESPAWN, .1f);
     }
     private void PlatformCollisions()
     {
+        ImpactEffect();
         Invoke(DESPAWN, .1f);
     }
 
     private void DespawnGameobject()
-    {
+    {   
         gameObject.SetActive(false);
+    }
+
+    private void ImpactEffect()
+    {
+        GameObject newEffect = Instantiate(impactEffect, transform.position, Quaternion.identity);
+        Destroy(newEffect, .2f);
     }
 }
