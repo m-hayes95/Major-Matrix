@@ -15,6 +15,8 @@ MonoBehaviour:
   maxHP: 100
   moveSpeed: 6.18
   jumpPower: 12
+  weaponPower: 10
+  shotVelocity: 8.3
   maxJumpThreshold: 3.5
   maxFallGravityScale: 15
   fallGravityScaleMultiplier: 20

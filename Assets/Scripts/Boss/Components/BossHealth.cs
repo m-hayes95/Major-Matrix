@@ -1,17 +1,23 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class BossHealth : BossAI
 {
+    [SerializeField] private GameObject bossVisuals;
+    [SerializeField] private ParticleSystem deathEffect;
     private float currentHP;
     private UnityEvent OnDeath;
-  
+    private bool isDead;
+    
+
     private void Start()
     {
         currentHP = stats.maxHP;
         if (OnDeath == null)
             OnDeath = new UnityEvent();
         OnDeath.AddListener(BossDead);
+        isDead = false;
     }
 
     public float GetBossCurrentHP()
@@ -23,7 +29,7 @@ public class BossHealth : BossAI
     {
         if (!shield.GetShieldStatus() && currentHP > 0)
         {
-            Debug.Log($"Boss took {damageAmount} - damage, current HP: {currentHP}");
+            Debug.Log($"Boss Health: took {damageAmount} - damage, current HP: {currentHP}");
             currentHP -= damageAmount;
             if (currentHP <= 0)
                 OnDeath.Invoke();
@@ -33,6 +39,20 @@ public class BossHealth : BossAI
 
     private void BossDead()
     {
-        Debug.Log("Boss' current HP reached 0, Boss Died");
+        isDead = true;
+        Debug.Log("Boss Health: current HP reached 0, Boss Died");
+        DeathEffect();
+        bossVisuals.SetActive(false);
+    }
+
+    private void DeathEffect()
+    {
+        ParticleSystem newEffect = Instantiate(deathEffect, transform.position, Quaternion.identity);
+    }
+
+
+    public bool GetIsDead()
+    {
+        return isDead;
     }
 }
