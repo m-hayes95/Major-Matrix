@@ -22,7 +22,7 @@ public class Shoot : MonoBehaviour
         GameObject newBullet = Instantiate(bullet, spawnPoint.position, Quaternion.identity);
         trackShot = newBullet.transform.position;
         newBullet.GetComponent<Rigidbody2D>().velocity =
-                transform.TransformDirection(Vector2.left * velocity);
+                transform.TransformDirection(Vector2.right * velocity);
     }
 
     private void OnDrawGizmos()

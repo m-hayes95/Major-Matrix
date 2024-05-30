@@ -102,7 +102,7 @@ public abstract class BossAI : MonoBehaviour
         canChase = false;
         if (player != null)
         {
-            Vector2 moveDir = new Vector2(player.transform.position.x - transform.position.x, 0);
+            Vector2 moveDir = new Vector2(transform.position.x - player.transform.position.x, 0);
             transform.Translate(moveDir * stats.moveSpeed * Time.deltaTime);
         }
         else
