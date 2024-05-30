@@ -9,13 +9,14 @@ public class CollisionDamage : MonoBehaviour
     [SerializeField, Tooltip("Tick yes if this component is attached to a special attack.")] 
     private bool isSpecialAttack;
 
-    private float damageAmount;
+    private float bossDamageAmount, playerDamageAmount;
     private const string DESPAWN = "DespawnGameobject";
 
     private void Start()
     {
-        if (!isSpecialAttack) damageAmount = bossStats.normalAttackDamage;
-        else if (isSpecialAttack) damageAmount = bossStats.specialAttackDamage;
+        if (!isSpecialAttack) bossDamageAmount = bossStats.normalAttackDamage;
+        else if (isSpecialAttack) bossDamageAmount = bossStats.specialAttackDamage;
+        playerDamageAmount = playerStats.weaponPower;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -30,12 +31,12 @@ public class CollisionDamage : MonoBehaviour
     }
     private void PlayerCollisions(Collision2D collision)
     {
-        collision.gameObject.GetComponent<PlayerHealth>().DamagePlayer(damageAmount);
+        collision.gameObject.GetComponent<PlayerHealth>().DamagePlayer(bossDamageAmount);
         Invoke(DESPAWN, .1f);
     }
     private void BossCollisions(Collision2D collision)
     {
-        // Damage boss
+        collision.gameObject.GetComponent<BossHealth>().DamageBoss(playerDamageAmount);
         Invoke(DESPAWN, .1f);
     }
     private void PlatformCollisions()

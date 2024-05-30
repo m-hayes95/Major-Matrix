@@ -12,6 +12,8 @@ public class PlayerStatsScriptableObject : ScriptableObject
     public float moveSpeed;
     [Range(5f, 20f), Tooltip("How much power the player will use to jump.")]
     public float jumpPower;
+    [Range(0f, 20f), Tooltip("How much damage each shot does.")]
+    public float weaponPower;
     [Range(1f, 20f), Tooltip("How much velocity each shot has.")]
     public float shotVelocity;
 

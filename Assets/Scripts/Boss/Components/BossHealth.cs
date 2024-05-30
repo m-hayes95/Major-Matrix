@@ -23,7 +23,7 @@ public class BossHealth : BossAI
     {
         if (!shield.GetShieldStatus() && currentHP > 0)
         {
-            Debug.Log($"Boss took {damageAmount} - damage, current HP: {currentHP}");
+            Debug.Log($"Boss Health: took {damageAmount} - damage, current HP: {currentHP}");
             currentHP -= damageAmount;
             if (currentHP <= 0)
                 OnDeath.Invoke();
@@ -33,6 +33,6 @@ public class BossHealth : BossAI
 
     private void BossDead()
     {
-        Debug.Log("Boss' current HP reached 0, Boss Died");
+        Debug.Log("Boss Health: current HP reached 0, Boss Died");
     }
 }
