@@ -6,23 +6,41 @@ public class Shoot : MonoBehaviour
     private GameObject bullet;
     [SerializeField, Tooltip("Add the spawn point transform, where the bullet will spawn from, to this field")] 
     private Transform spawnPoint;
+    private Transform newTarget;
     private GameObject newBullet;
+  
 
-    /* Test
-    private void Update()
+    public void FireWeaponBoss(Transform target, float velocity)
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            FireWeapon(Vector3.right, 100);
-        }
+        InstantiateNewBullet();
+        newTarget = target;
+        SetVelocityAndDir(velocity);
     }
-    */
-    public void FireWeapon(Transform target, float velocity)
+    public void FireWeaponPlayer(float velocity)
+    {
+        InstantiateNewBullet();
+        SetVelocityAndDir(velocity);
+    }
+
+    private void InstantiateNewBullet()
     {
         newBullet = Instantiate(bullet, spawnPoint.position, Quaternion.identity);
-        Vector3 direction = target.position - newBullet.transform.position;
-        newBullet.GetComponent<Rigidbody2D>().velocity =
-                new Vector2(direction.x, direction.y).normalized * velocity;
+    }
+
+    private void SetVelocityAndDir(float velocity)
+    {
+        Vector2 direction;
+        if (newTarget != null) // Use for boss
+        {
+            Vector3 tartgetPos = newTarget.position - newBullet.transform.position;
+            direction = new Vector2(tartgetPos.x, tartgetPos.y);
+        } 
+        else 
+        {
+            direction = Vector2.right;
+        }
+        newBullet.GetComponent<Rigidbody2D>().velocity = direction.normalized * velocity;
+
     }
 
     private void OnDrawGizmos()

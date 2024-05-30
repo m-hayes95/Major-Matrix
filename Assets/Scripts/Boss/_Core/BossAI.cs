@@ -129,7 +129,7 @@ public abstract class BossAI : MonoBehaviour
         // Attack the player if they cross a certain distance
         if (canAttack && !usingSpecialAttack)
         {
-            shoot.FireWeapon(target, stats.shotFoce);
+            shoot.FireWeaponBoss(target, stats.shotFoce);
             Debug.Log($"{gameObject.name} attacked {player.name} with a normal ranged attack - {stats.normalAttackDamage} HP");
             canAttack = false;
             //playerHP.DamagePlayer(stats.normalAttackDamage);

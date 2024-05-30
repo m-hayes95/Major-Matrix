@@ -131,6 +131,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 680761365}
     m_Modifications:
+    - target: {fileID: 3194291627596963576, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 1605956353778399567, guid: 6d2dd274b34304e40b4ebc11c48c0aac, type: 3}
     - target: {fileID: 4044608225088862476, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
       propertyPath: bossHealth
       value: 
@@ -186,7 +190,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4652640799575470342, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 1241999179}
   m_SourcePrefab: {fileID: 100100000, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
 --- !u!43 &92674806
 Mesh:
@@ -426,6 +433,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3886678663198351065, guid: 90cafc76bef6b084f8844f94c6bc6068, type: 3}
   m_PrefabInstance: {fileID: 238994321}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &277595037 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4652640799575470342, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
+  m_PrefabInstance: {fileID: 58877964}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &287460908
 GameObject:
@@ -1534,6 +1546,18 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7058368484342321748, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
   m_PrefabInstance: {fileID: 58877964}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1241999179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 277595037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90d27b066f2a1844180ad4de4086efec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1277978893
 GameObject:
   m_ObjectHideFlags: 0
@@ -2416,7 +2440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 538f2e9179629c245848003626330d52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 5379510509899357765, guid: 105d244bc4d92d7489b112fcadf32af5, type: 3}
+  bullet: {fileID: 8593140917964682911, guid: 0db2caf4dd956d0438ab99d44cb9f924, type: 3}
   spawnPoint: {fileID: 1277978894}
 --- !u!114 &1913649314
 MonoBehaviour:

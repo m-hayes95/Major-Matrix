@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public PlayerStatsScriptableObject stats;
     // Game object components
     private Rigidbody2D rb;
-    private BoxCollider2D collider;
+    private new BoxCollider2D collider;
 
     // Movemet
     private Vector2 moveDir;
