@@ -22,16 +22,13 @@ public abstract class BossAI : MonoBehaviour
     private int highSpecialAttack = 1;
 
     // Shooting Direction
-    private Transform forwardDirection;
+    private Transform target;
 
     // Do once
     protected bool canAttack = true;
     protected bool canChase = true;
     protected bool usingSpecialAttack = false;
     private bool facingLeft = true;
-
-    // Events
-    private UnityEvent ChangeDir;
 
     private void Awake()
     {
@@ -46,14 +43,12 @@ public abstract class BossAI : MonoBehaviour
         if (specialAttacks.OnAttackFinished == null)
             specialAttacks.OnAttackFinished = new UnityEvent();
         specialAttacks.OnAttackFinished.AddListener(ResetSpecialAttackBool);
-        if (ChangeDir == null)
-            ChangeDir = new UnityEvent();
-        ChangeDir.AddListener(FacePlayer);
     }
 
     protected virtual void Update()
     {
-        forwardDirection = player.transform;
+        target = player.transform;
+
         if (player != null)
         {
             distanceFromPlayer =
@@ -134,7 +129,7 @@ public abstract class BossAI : MonoBehaviour
         // Attack the player if they cross a certain distance
         if (canAttack && !usingSpecialAttack)
         {
-            shoot.FireWeapon(forwardDirection, stats.shotFoce);
+            shoot.FireWeapon(target, stats.shotFoce);
             Debug.Log($"{gameObject.name} attacked {player.name} with a normal ranged attack - {stats.normalAttackDamage} HP");
             canAttack = false;
             //playerHP.DamagePlayer(stats.normalAttackDamage);
