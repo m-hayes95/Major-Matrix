@@ -17,11 +17,12 @@ MonoBehaviour:
   normalAttackDamage: 10
   specialAttackDamage: 20
   maxShields: 3
+  shotFoce: 20
   closeRangeAttackThreshold: 3
   longRangeAttackThreshold: 8
   specialHighAttackMinY: 0.6
   maxHPtoAllowShield: 50
-  chanceToUseSpecialAttack: 0.1
+  chanceToUseSpecialAttack: 0
   chanceToShield: 0.1
   resetAttackTimer: 1
   shieldTimer: 3

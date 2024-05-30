@@ -14,6 +14,8 @@ public class BossStatsScriptableObject : ScriptableObject
     public float specialAttackDamage;
     [Range(0, 10), Tooltip("How many shields the boss will start with. Once shields reach 0, the boss cannot shield again.")]
     public int maxShields;
+    [Range(0f, 20f), Tooltip("How much force should be applied to the bullets when shot.")]
+    public float shotFoce;
 
     [Header("Thresholds")]
     [Range(0f, 5f), Tooltip("How close the player needs to be, to activate the close range attack.")]
@@ -54,6 +56,7 @@ public class BossStatsScriptableObject : ScriptableObject
     public float spacingX;
     [Range(0f, 1f), Tooltip("How much time (in seconds) should each interval of attacks be")]
     public float timeBetweenAttacks;
+
     [Header("High Special Attack Modifiers")]
     [Range(0f, 10f), Tooltip("How much gravity is applied to the falling high special attacks.")]
     public float highSpecialAttackGravityScale;
