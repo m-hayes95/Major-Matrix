@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.UI;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,7 +14,8 @@ public class PlayerController : MonoBehaviour
     private new BoxCollider2D collider;
 
     // Movemet
-    private Vector2 moveDir;
+    private Vector3 moveDir;
+    bool facingRight = true;
     // Jump
     private bool jumpInputPressed, jumpInputHeld;
     private bool endedJumpEarly;
@@ -55,8 +57,12 @@ public class PlayerController : MonoBehaviour
     private void GetInput()
     {
         // Movement Input
-        float horizontalInput = Input.GetAxis("Horizontal");
-        moveDir = new Vector2(horizontalInput, 0);
+        Vector2 input = new Vector2(0, 0);
+        if (Input.GetKey(KeyCode.A)) input.x = -1;
+        if (Input.GetKey(KeyCode.D)) input.x = +1;
+        input = input.normalized;
+        moveDir = new Vector3(input.x, 0, 0 );
+        
         // Jump Input
         jumpInputPressed = Input.GetButtonDown("Jump");
         jumpInputHeld = Input.GetButton("Jump");
@@ -73,7 +79,15 @@ public class PlayerController : MonoBehaviour
     private void HandleMovement()
     {
         // Apply movement using input
-        transform.Translate(moveDir * stats.moveSpeed * Time.fixedDeltaTime);
+        transform.position += moveDir * stats.moveSpeed * Time.deltaTime;
+        if (!facingRight && moveDir.x > 0) TurnPlayer();
+        if (facingRight && moveDir.x < 0) TurnPlayer();
+    }
+
+    private void TurnPlayer()
+    {
+        transform.Rotate(0f,180f,0f);
+        facingRight = !facingRight;
     }
 
     private void HandleJump()

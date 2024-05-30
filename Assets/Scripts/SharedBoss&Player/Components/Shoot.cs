@@ -8,7 +8,6 @@ public class Shoot : MonoBehaviour
     private Transform spawnPoint;
     private Transform newTarget;
     private GameObject newBullet;
-  
 
     public void FireWeaponBoss(Transform target, float velocity)
     {
@@ -24,9 +23,9 @@ public class Shoot : MonoBehaviour
 
     private void InstantiateNewBullet()
     {
-        newBullet = Instantiate(bullet, spawnPoint.position, Quaternion.identity);
+        newBullet = Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
     }
-
+    
     private void SetVelocityAndDir(float velocity)
     {
         Vector2 direction;
@@ -37,11 +36,13 @@ public class Shoot : MonoBehaviour
         } 
         else 
         {
-            direction = Vector2.right;
+            direction = transform.right;
+            Debug.Log($"Player is shooting right: {direction}");
         }
         newBullet.GetComponent<Rigidbody2D>().velocity = direction.normalized * velocity;
 
     }
+    
 
     private void OnDrawGizmos()
     {
