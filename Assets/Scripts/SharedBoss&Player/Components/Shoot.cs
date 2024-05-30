@@ -6,6 +6,7 @@ public class Shoot : MonoBehaviour
     private GameObject bullet;
     [SerializeField, Tooltip("Add the spawn point transform, where the bullet will spawn from, to this field")] 
     private Transform spawnPoint;
+    private Vector3 trackShot;
 
     /* Test
     private void Update()
@@ -16,10 +17,17 @@ public class Shoot : MonoBehaviour
         }
     }
     */
-    public void FireWeapon(Vector3 shootDirection, float shotForce)
+    public void FireWeapon(Transform shootDirection, float velocity)
     {
         GameObject newBullet = Instantiate(bullet, spawnPoint.position, Quaternion.identity);
-        Rigidbody2D rb = newBullet.GetComponent<Rigidbody2D>();
-        rb.AddForce(shootDirection * shotForce, ForceMode2D.Impulse);
+        trackShot = newBullet.transform.position;
+        newBullet.GetComponent<Rigidbody2D>().velocity =
+                transform.TransformDirection(Vector2.left * velocity);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawLine(spawnPoint.position, trackShot);
     }
 }

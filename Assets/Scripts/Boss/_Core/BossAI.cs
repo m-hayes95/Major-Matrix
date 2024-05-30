@@ -21,12 +21,18 @@ public abstract class BossAI : MonoBehaviour
     private int lowSpecialAttack = 0;
     private int highSpecialAttack = 1;
 
+    // Shooting Direction
+    private Transform forwardDirection;
+
     // Do once
     protected bool canAttack = true;
     protected bool canChase = true;
     protected bool usingSpecialAttack = false;
+    private bool facingLeft = true;
 
-    
+    // Events
+    private UnityEvent ChangeDir;
+
     private void Awake()
     {
         stats = GetComponent<BossStatsComponent>().bossStats;
@@ -40,10 +46,14 @@ public abstract class BossAI : MonoBehaviour
         if (specialAttacks.OnAttackFinished == null)
             specialAttacks.OnAttackFinished = new UnityEvent();
         specialAttacks.OnAttackFinished.AddListener(ResetSpecialAttackBool);
+        if (ChangeDir == null)
+            ChangeDir = new UnityEvent();
+        ChangeDir.AddListener(FacePlayer);
     }
 
     protected virtual void Update()
     {
+        forwardDirection = player.transform;
         if (player != null)
         {
             distanceFromPlayer =
@@ -52,23 +62,32 @@ public abstract class BossAI : MonoBehaviour
         }
         else
             Debug.LogWarning("Player object not found in BossAI script.");
-        FacePlayer();
-        //RandomChance();
+        
+        CheckWhichSidePlayerIsOn();
+        
 
         Debug.Log($"AZ: Distance Y: {DistanceY()}....... playerY: {player.transform.position.y} - bossY {transform.position.y}");
         Debug.Log($"BZ: Vector Distance Method = {Vector2.Distance(transform.position, player.transform.position)}");
+    }
+
+    private void CheckWhichSidePlayerIsOn()
+    {
+        float xDistanceFromPlayer = transform.position.x - player.transform.position.x;
+        if (!facingLeft && xDistanceFromPlayer > 0)
+        {
+            FacePlayer();
+        }
+        if (facingLeft && xDistanceFromPlayer < 0)
+        {
+            FacePlayer();
+        }
     }
     
     private void FacePlayer()
     {
         // Look towards the player depending on X pos
-        float xDistanceFromPlayer = transform.position.x - player.transform.position.x;
-        if (player != null)   
-        {
-            if (transform.position.x - player.transform.position.x < 0)
-                transform.localScale = new Vector3(-1, 1, 1);
-            else transform.localScale = new Vector3(1,1, 1);
-        }
+        facingLeft = !facingLeft;
+        transform.Rotate(0f, -180f, 0f);
     }
     protected float DistanceY()
     {
@@ -115,7 +134,7 @@ public abstract class BossAI : MonoBehaviour
         // Attack the player if they cross a certain distance
         if (canAttack && !usingSpecialAttack)
         {
-            shoot.FireWeapon(Vector3.left, 10f);
+            shoot.FireWeapon(forwardDirection, stats.shotFoce);
             Debug.Log($"{gameObject.name} attacked {player.name} with a normal ranged attack - {stats.normalAttackDamage} HP");
             canAttack = false;
             //playerHP.DamagePlayer(stats.normalAttackDamage);
