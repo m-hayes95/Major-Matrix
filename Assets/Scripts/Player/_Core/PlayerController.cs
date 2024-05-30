@@ -12,12 +12,12 @@ public class PlayerController : MonoBehaviour
     // Game object components
     private Rigidbody2D rb;
     private new BoxCollider2D collider;
-
+    private PlayerHealth hp;
+    private PlayerInput input;
     // Movemet
     private Vector3 moveDir;
     bool facingRight = true;
     // Jump
-    private bool jumpInputPressed, jumpInputHeld;
     private bool endedJumpEarly;
     private bool canJump;
     // Apex Jump
@@ -39,6 +39,8 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         collider = GetComponent<BoxCollider2D>();
+        hp = GetComponent<PlayerHealth>();
+        input = GetComponent<PlayerInput>();
     }
     private void Start()
     {
@@ -49,36 +51,25 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        GetInput();
         Debug.Log("Gravity scale = " + rb.gravityScale);
         //Debug.Log("Y pos = " + transform.position.y);
         Debug.Log($"Current Jump power {stats.jumpPower}, Initial Jump power {initialJumpPower}");
     }
-    private void GetInput()
-    {
-        // Movement Input
-        Vector2 input = new Vector2(0, 0);
-        if (Input.GetKey(KeyCode.A)) input.x = -1;
-        if (Input.GetKey(KeyCode.D)) input.x = +1;
-        input = input.normalized;
-        moveDir = new Vector3(input.x, 0, 0 );
-        
-        // Jump Input
-        jumpInputPressed = Input.GetButtonDown("Jump");
-        jumpInputHeld = Input.GetButton("Jump");
-        //Debug.Log("Jump pressed:" + jumpInputPressed);
-        //Debug.Log("Jump held:" + jumpInputHeld);
-    }
 
     private void FixedUpdate()
     {
-        HandleMovement();
-        HandleJump();
-        CollisionChecks();
+        if (!hp.GetIsDead())
+        {
+            HandleMovement();
+            HandleJump();
+            CollisionChecks();
+        }
+            
     }
     private void HandleMovement()
     {
         // Apply movement using input
+        moveDir = new Vector3(input.MovementInputNormalized().x, 0, 0);
         transform.position += moveDir * stats.moveSpeed * Time.deltaTime;
         if (!facingRight && moveDir.x > 0) TurnPlayer();
         if (facingRight && moveDir.x < 0) TurnPlayer();
@@ -96,17 +87,17 @@ public class PlayerController : MonoBehaviour
         // Variable jump height
         HandleGravity();
         // Check if jump ended early
-        if (!endedJumpEarly && !isGrounded && !jumpInputHeld && rb.velocity.y > 0) 
+        if (!endedJumpEarly && !isGrounded && !input.jumpInputHeld && rb.velocity.y > 0) 
             endedJumpEarly = true;
         
         // Jump input
-        if (jumpInputPressed || jumpInputHeld && canJump)
+        if (input.jumpInputPressed || input.jumpInputHeld && canJump)
         {
             ExecuteJump();
         }
 
         // Coyote time jump - can jump a short time after falling off a platform
-        else if (jumpInputPressed || jumpInputHeld && coyoteTimeReady)
+        else if (input.jumpInputPressed || input.jumpInputHeld && coyoteTimeReady)
         {
             coyoteTimeReady = false;
             Debug.Log("Coyote time jump executed");

@@ -1,11 +1,16 @@
+
 using UnityEngine;
 using UnityEngine.Events;
 
 public class PlayerHealth : MonoBehaviour
 {
+    [SerializeField] private GameObject playerVisuals;
+    [SerializeField] private ParticleSystem deathEffect;
     private PlayerController playerController;
     private float currentHP;
     private UnityEvent OnDeath;
+    private bool isDead;
+    
 
     private void Awake()
     {
@@ -18,6 +23,7 @@ public class PlayerHealth : MonoBehaviour
         if (OnDeath == null)
             OnDeath = new UnityEvent();
         OnDeath.AddListener(PlayerDead);
+        isDead = false; 
     }
 
     private void Update()
@@ -42,6 +48,18 @@ public class PlayerHealth : MonoBehaviour
 
     private void PlayerDead()
     {
+        isDead = true;
         Debug.Log("Players current HP reached 0, Player Died");
+        DeathEffect();
+        playerVisuals.SetActive(false);
+    }
+
+    private void DeathEffect()
+    {
+        ParticleSystem newEffect = Instantiate(deathEffect, transform.position, Quaternion.identity);
+    }
+    public bool GetIsDead()
+    {
+        return isDead;
     }
 }
