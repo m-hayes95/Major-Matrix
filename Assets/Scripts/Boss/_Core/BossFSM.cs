@@ -5,7 +5,7 @@ using UnityEngine;
 public class BossFSM : BossAI
 {
     private enum StateMachine 
-    { Idle, RangeAttack, CloseAttack, SpecialLowAttack, SpecialHighAttack, Shield, ChasePlayer };
+    { Idle, RangeAttack, CloseAttack, SpecialLowAttack, SpecialHighAttack, Shield, ChasePlayer, Dead };
     [SerializeField] private StateMachine sM;
     private bool canShield = true;
     private void Start()
@@ -16,10 +16,13 @@ public class BossFSM : BossAI
     protected override void Update()
     {
         base.Update();
+        
         Debug.Log($"Boss State Machine Current State: {sM}");
         switch (sM)
         {
             case StateMachine.Idle:
+
+                if (bossHP.GetIsDead()) sM = StateMachine.Dead;
 
                 if (!shield.GetShieldStatus() && shield.GetCurrentShieldsAmount() > 0 && canShield && 
                     bossHP.GetBossCurrentHP() <= stats.maxHPtoAllowShield && RandomChance(stats.chanceToShield))
@@ -73,6 +76,9 @@ public class BossFSM : BossAI
                 Debug.Log($"Boss can chase player: {canChase}");
                 MoveToPlayer();
                 StartCoroutine(StateCooldown(stats.chaseTimer, StateMachine.Idle));
+                break;
+            case StateMachine.Dead:
+                Debug.Log($"FSM: Boss is Dead, current state {sM}");
                 break;
 
             default:

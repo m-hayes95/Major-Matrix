@@ -47,22 +47,25 @@ public abstract class BossAI : MonoBehaviour
 
     protected virtual void Update()
     {
-        target = player.transform;
-
-        if (player != null)
+        if (!bossHP.GetIsDead())
         {
-            distanceFromPlayer =
-            Vector2.Distance(transform.position, player.transform.position);
-            Debug.Log($" The boss is {distanceFromPlayer} from the player");
-        }
-        else
-            Debug.LogWarning("Player object not found in BossAI script.");
-        
-        CheckWhichSidePlayerIsOn();
-        
+            target = player.transform;
 
-        Debug.Log($"AZ: Distance Y: {DistanceY()}....... playerY: {player.transform.position.y} - bossY {transform.position.y}");
-        Debug.Log($"BZ: Vector Distance Method = {Vector2.Distance(transform.position, player.transform.position)}");
+            if (player != null)
+            {
+                distanceFromPlayer =
+                Vector2.Distance(transform.position, player.transform.position);
+                Debug.Log($" The boss is {distanceFromPlayer} from the player");
+            }
+            else
+                Debug.LogWarning("Player object not found in BossAI script.");
+
+            CheckWhichSidePlayerIsOn();
+
+
+            Debug.Log($"AZ: Distance Y: {DistanceY()}....... playerY: {player.transform.position.y} - bossY {transform.position.y}");
+            Debug.Log($"BZ: Vector Distance Method = {Vector2.Distance(transform.position, player.transform.position)}");
+        }
     }
 
     private void CheckWhichSidePlayerIsOn()
