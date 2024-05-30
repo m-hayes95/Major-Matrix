@@ -87,17 +87,17 @@ public class PlayerController : MonoBehaviour
         // Variable jump height
         HandleGravity();
         // Check if jump ended early
-        if (!endedJumpEarly && !isGrounded && !input.jumpInputHeld && rb.velocity.y > 0) 
+        if (!endedJumpEarly && !isGrounded && !input.GetJumpInputHeld() && rb.velocity.y > 0) 
             endedJumpEarly = true;
         
         // Jump input
-        if (input.jumpInputPressed || input.jumpInputHeld && canJump)
+        if (input.GetJumpInputPressed() || input.GetJumpInputHeld() && canJump)
         {
             ExecuteJump();
         }
 
         // Coyote time jump - can jump a short time after falling off a platform
-        else if (input.jumpInputPressed || input.jumpInputHeld && coyoteTimeReady)
+        else if (input.GetJumpInputPressed() || input.GetJumpInputHeld() && coyoteTimeReady)
         {
             coyoteTimeReady = false;
             Debug.Log("Coyote time jump executed");

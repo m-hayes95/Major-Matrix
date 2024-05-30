@@ -7,8 +7,8 @@ public class PlayerInput : MonoBehaviour
     private PlayerController controller;
     private PlayerHealth hp;
     private Shoot shoot;
-    public bool jumpInputPressed;
-    public bool jumpInputHeld;
+    private bool jumpInputPressed;
+    private bool jumpInputHeld;
 
     private void Start()
     {
@@ -20,7 +20,6 @@ public class PlayerInput : MonoBehaviour
     private void Update()
     {
         FireWeaponInput();
-        JumpInput();
     }
     private void FireWeaponInput()
     { 
@@ -33,10 +32,13 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
-    private void JumpInput()
+    public bool GetJumpInputPressed()
     {
-        jumpInputPressed = Input.GetButtonDown("Jump");
-        jumpInputHeld = Input.GetButton("Jump");
+        return jumpInputPressed = Input.GetButtonDown("Jump");
+    }
+    public bool GetJumpInputHeld()
+    {
+        return jumpInputHeld = Input.GetButton("Jump");
     }
 
     public Vector2 MovementInputNormalized()
