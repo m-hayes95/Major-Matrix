@@ -10,6 +10,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private UIController uIController;
     private PlayerController playerController;
     private float currentHP;
+    [SerializeField]private int deathCount;
     private UnityEvent OnDeath;
     private bool isDead;
     
@@ -26,16 +27,12 @@ public class PlayerHealth : MonoBehaviour
             OnDeath = new UnityEvent();
         OnDeath.AddListener(PlayerDead);
         isDead = false; 
+        deathCount = 0;
     }
 
     private void Update()
     {
         Debug.Log($"Players current HP = {currentHP}");
-    }
-
-    public float GetPlayersCurrentHP()
-    {
-        return currentHP;
     }
 
     public void DamagePlayer(float damageAmount)
@@ -50,6 +47,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void PlayerDead()
     {
+        deathCount++; 
         isDead = true;
         Debug.Log("Players current HP reached 0, Player Died");
         DeathEffect();
@@ -61,8 +59,7 @@ public class PlayerHealth : MonoBehaviour
     {
         ParticleSystem newEffect = Instantiate(deathEffect, transform.position, Quaternion.identity);
     }
-    public bool GetIsDead()
-    {
-        return isDead;
-    }
+    public float GetPlayersCurrentHP() { return currentHP; }
+    public int GetPlayerDeaths() { return deathCount; }
+    public bool GetIsDead() { return isDead; }
 }

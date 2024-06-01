@@ -8,15 +8,21 @@ public class GameManager : MonoBehaviour
 {
     public delegate void PauseGameAction();
     public static event PauseGameAction OnPaused;
-
+    [SerializeField] private PlayerHealth playerHealth;
+    [SerializeField] private BossHealth bossHealth;
+    [SerializeField] private EndGameMenuStats endGameMenuStats;
     private float encounterTimer;
-
     private bool isGamePaused = false;
-
 
     private void Update()
     {
+        if (!playerHealth.GetIsDead() || !bossHealth.GetIsDead())
         encounterTimer += Time.deltaTime;
+        
+        if (playerHealth.GetIsDead() || bossHealth.GetIsDead())
+        {
+            endGameMenuStats.SaveEncounterTimer(encounterTimer);
+        }
     }
 
     public void PauseGame() 
