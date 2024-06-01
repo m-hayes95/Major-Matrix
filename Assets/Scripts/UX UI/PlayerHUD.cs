@@ -7,10 +7,10 @@ using TMPro;
 public class PlayerHUD : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
-    [SerializeField] private PlayerHealth playerHealth;
-    [SerializeField] private BossHealth bossHealth;
 
     [SerializeField] private TextMeshProUGUI encounterTimer;
+
+    [SerializeField] private Slider bossHP, playerHP;
 
     private void Update()
     {
@@ -21,12 +21,23 @@ public class PlayerHUD : MonoBehaviour
     {
         encounterTimer.text = gameManager.GetEncounterTimer().ToString("00:00");
     }
-    private void DisplayPlayerHealth()
+    public void SetPlayerHealthBar(float currentHealth)
     {
-
+        playerHP.value = currentHealth;
     }
-    private void DisplayBossHealth()
-    {
 
+    public void SetPlayerMaxHealthBar(float maxHealth)
+    {
+        playerHP.maxValue = maxHealth;
+        playerHP.value = maxHealth;
+    }
+    public void SetBossHealthBar(float currentHealth)
+    {
+        bossHP.value = currentHealth;
+    }
+    public void SetBossMaxHealthBar(float maxHealth)
+    {
+        bossHP.maxValue = maxHealth;    
+        bossHP.value = maxHealth;
     }
 }

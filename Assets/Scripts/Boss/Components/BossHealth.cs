@@ -8,6 +8,7 @@ public class BossHealth : BossAI
     [SerializeField] private ParticleSystem deathEffect;
     [SerializeField] private GameManager gameManager;
     [SerializeField] private UIController uIController;
+    [SerializeField] private PlayerHUD playerHUD;
     private float currentHP;
     private UnityEvent OnDeath;
     private bool isDead;
@@ -16,6 +17,7 @@ public class BossHealth : BossAI
     private void Start()
     {
         currentHP = stats.maxHP;
+        playerHUD.SetBossMaxHealthBar(stats.maxHP);
         if (OnDeath == null)
             OnDeath = new UnityEvent();
         OnDeath.AddListener(BossDead);
@@ -33,6 +35,7 @@ public class BossHealth : BossAI
         {
             Debug.Log($"Boss Health: took {damageAmount} - damage, current HP: {currentHP}");
             currentHP -= damageAmount;
+            playerHUD.SetBossHealthBar(currentHP);
             if (currentHP <= 0)
                 OnDeath.Invoke();
         }
@@ -52,7 +55,6 @@ public class BossHealth : BossAI
     {
         ParticleSystem newEffect = Instantiate(deathEffect, transform.position, Quaternion.identity);
     }
-
 
     public bool GetIsDead()
     {

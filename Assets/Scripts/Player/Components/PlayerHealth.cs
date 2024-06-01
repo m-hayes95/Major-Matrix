@@ -8,6 +8,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private ParticleSystem deathEffect;
     [SerializeField] private GameManager gameManager;
     [SerializeField] private UIController uIController;
+    [SerializeField] private PlayerHUD playerHUD;
     private PlayerController playerController;
     private float currentHP;
     [SerializeField]private int deathCount;
@@ -23,11 +24,13 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
         currentHP = playerController.stats.maxHP;
+        playerHUD.SetPlayerMaxHealthBar(currentHP);
         if (OnDeath == null)
             OnDeath = new UnityEvent();
         OnDeath.AddListener(PlayerDead);
         isDead = false; 
         deathCount = 0;
+        
     }
 
     private void Update()
@@ -40,6 +43,7 @@ public class PlayerHealth : MonoBehaviour
         if (currentHP > 0)
         {
             currentHP -= damageAmount;
+            playerHUD.SetPlayerHealthBar(currentHP);
             if (currentHP <= 0) 
                 OnDeath.Invoke();
         }
