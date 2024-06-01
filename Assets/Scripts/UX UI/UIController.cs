@@ -5,8 +5,10 @@ using UnityEngine;
 public class UIController : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu, endGameMenu;
+    [SerializeField] GameObject settingsTab, controlsTab, creditsTab;
     [SerializeField] GameManager gameManager;
     private bool showPauseMenu, showEndGameMenu;
+    private bool isTabsOpen;
     private void OnEnable()
     {
         GameManager.OnPaused += DisplayPauseMenu;
@@ -19,8 +21,7 @@ public class UIController : MonoBehaviour
     {
         ResetAllMenus();
     }
-
-    private void DisplayPauseMenu()
+    public void DisplayPauseMenu()
     {
         showPauseMenu = !showPauseMenu;
         pauseMenu.SetActive(showPauseMenu);
@@ -48,12 +49,25 @@ public class UIController : MonoBehaviour
 
     private void ResetAllMenus()
     {
+        // Close Menus
         showPauseMenu = false;
         pauseMenu.SetActive(false);
         showEndGameMenu = false;
         endGameMenu.SetActive(false);
+        // Close Tabs
+        settingsTab.SetActive(false);
+        controlsTab.SetActive(false);
+        creditsTab.SetActive(false);
     }
 
-
+    public void CloseOpenTabs()
+    {
+        isTabsOpen = false; 
+        settingsTab.SetActive(false);
+        controlsTab.SetActive(false);
+        creditsTab.SetActive(false);
+    }
+    public void SetIsTabsOpen(bool b) { isTabsOpen = b; }
+    public bool GetIsTabsOpen() { return isTabsOpen; }
     
 }

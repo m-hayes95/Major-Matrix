@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
-    [SerializeField] GameManager gameManager;
+    [SerializeField] private GameManager gameManager;
+    [SerializeField] private UIController uIController;
     private PlayerController controller;
     private PlayerHealth hp;
     private Shoot shoot;
@@ -38,7 +39,13 @@ public class PlayerInput : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            gameManager.PauseGame();
+            if(!uIController.GetIsTabsOpen()) gameManager.PauseGame();
+            else
+            {
+                uIController.DisplayPauseMenu();
+                uIController.CloseOpenTabs();
+            }
+                
         }
     }
 
