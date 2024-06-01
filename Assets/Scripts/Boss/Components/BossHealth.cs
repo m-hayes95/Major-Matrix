@@ -6,6 +6,8 @@ public class BossHealth : BossAI
 {
     [SerializeField] private GameObject bossVisuals;
     [SerializeField] private ParticleSystem deathEffect;
+    [SerializeField] private GameManager gameManager;
+    [SerializeField] private UIController uIController;
     private float currentHP;
     private UnityEvent OnDeath;
     private bool isDead;
@@ -43,6 +45,7 @@ public class BossHealth : BossAI
         Debug.Log("Boss Health: current HP reached 0, Boss Died");
         DeathEffect();
         bossVisuals.SetActive(false);
+        StartCoroutine(uIController.DisplayEndGameMenu(3f));
     }
 
     private void DeathEffect()
