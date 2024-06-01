@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
+    [SerializeField] GameManager gameManager;
     private PlayerController controller;
     private PlayerHealth hp;
     private Shoot shoot;
@@ -20,6 +21,7 @@ public class PlayerInput : MonoBehaviour
     private void Update()
     {
         FireWeaponInput();
+        PauseInput();
     }
     private void FireWeaponInput()
     { 
@@ -29,6 +31,14 @@ public class PlayerInput : MonoBehaviour
             {
                 shoot.FireWeaponPlayer(controller.stats.shotVelocity);
             }
+        }
+    }
+
+    private void PauseInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            gameManager.PauseGame();
         }
     }
 
