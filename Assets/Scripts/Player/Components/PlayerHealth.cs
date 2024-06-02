@@ -9,6 +9,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private GameManager gameManager;
     [SerializeField] private UIController uIController;
     [SerializeField] private PlayerHUD playerHUD;
+    [SerializeField] private AudioSource hitSound, deathSound;
     private PlayerController playerController;
     private float currentHP;
     [SerializeField]private int deathCount;
@@ -43,6 +44,7 @@ public class PlayerHealth : MonoBehaviour
         if (currentHP > 0)
         {
             currentHP -= damageAmount;
+            hitSound.Play();
             playerHUD.SetPlayerHealthBar(currentHP);
             if (currentHP <= 0) 
                 OnDeath.Invoke();
@@ -51,7 +53,8 @@ public class PlayerHealth : MonoBehaviour
 
     private void PlayerDead()
     {
-        deathCount++; 
+        deathCount++;
+        deathSound.Play();
         isDead = true;
         Debug.Log("Players current HP reached 0, Player Died");
         DeathEffect();

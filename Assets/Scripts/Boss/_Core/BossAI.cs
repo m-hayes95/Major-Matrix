@@ -148,15 +148,17 @@ public abstract class BossAI : MonoBehaviour
             // Play animation for attack
         }
     }
-    protected void NormalCloseAttack()
+    protected void NormalCloseAttack(AudioSource attackSound)
     {
         // Attack the player if they get too close
         if (canAttack && playerHP)
         {
+            attackSound.Play();
             Debug.Log($"{gameObject.name} attacked {player.name} with a normal close attack - {stats.normalAttackDamage} HP");
             canAttack = false;
             playerHP.DamagePlayer(stats.normalAttackDamage);
             StartCoroutine(ResetAttack(stats.resetAttackTimer));
+
             // Play animation for attack
         }
     }

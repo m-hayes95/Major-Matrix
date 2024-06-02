@@ -6,6 +6,7 @@ public class Shoot : MonoBehaviour
     private GameObject bullet;
     [SerializeField, Tooltip("Add the spawn point transform, where the bullet will spawn from, to this field")] 
     private Transform spawnPoint;
+    [SerializeField] private AudioSource bulletSound;
     private Transform newTarget;
     private GameObject newBullet;
 
@@ -23,6 +24,7 @@ public class Shoot : MonoBehaviour
 
     private void InstantiateNewBullet()
     {
+        bulletSound.Play();
         newBullet = Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
     }
     

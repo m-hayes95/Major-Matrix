@@ -6,8 +6,9 @@ using UnityEngine.UIElements;
 
 public class SpeicalAttacks : BossAI
 {
-    [SerializeField] GameObject specialAttackGameObject;
-    [SerializeField] Transform highAttackPosistion;
+    [SerializeField] private GameObject specialAttackGameObject;
+    //[SerializeField] Transform highAttackPosistion
+    [SerializeField] private AudioSource lowAttackSound, highAttackSound;
     private Vector3 leftPositionLow, rightPositionLow;
     private Vector3 leftPositionHigh, rightPositionHigh;
     public UnityEvent OnAttackFinished;
@@ -50,11 +51,13 @@ public class SpeicalAttacks : BossAI
         if (lowOrHigh == 0) // Low Special Attack
         {
             spawnPosition = leftPositionLow += new Vector3(-stats.spacingX, stats.offsetY, 0);
+            lowAttackSound.Play();
         }
         else if (lowOrHigh == 1) // High Special Attack
         { 
             spawnPosition = leftPositionHigh += new Vector3(-stats.spacingX, stats.offsetY, 0);
             scale = new Vector3(1, -1, 1);
+            highAttackSound.Play();
         }
 
         InstatiateNewAttack(spawnPosition, scale, lowOrHigh);
@@ -67,11 +70,13 @@ public class SpeicalAttacks : BossAI
         if (lowOrHigh == 0) // Low Special Attack
         {
             spawnPosition = rightPositionLow += new Vector3(stats.spacingX, stats.offsetY, 0);
+            lowAttackSound.Play();
         }
         else if (lowOrHigh == 1) // High Special Attack
         {
             spawnPosition = rightPositionHigh += new Vector3(stats.spacingX, stats.offsetY, 0);
             scale = new Vector3(1, -1, 1);
+            highAttackSound.Play(); 
         };
 
         InstatiateNewAttack(spawnPosition, scale, lowOrHigh);

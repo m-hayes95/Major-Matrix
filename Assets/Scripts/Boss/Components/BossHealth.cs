@@ -9,6 +9,7 @@ public class BossHealth : BossAI
     [SerializeField] private GameManager gameManager;
     [SerializeField] private UIController uIController;
     [SerializeField] private PlayerHUD playerHUD;
+    [SerializeField] private AudioSource hitSound, sheildHitSound, deathSound;
     private float currentHP;
     private UnityEvent OnDeath;
     private bool isDead;
@@ -35,15 +36,21 @@ public class BossHealth : BossAI
         {
             Debug.Log($"Boss Health: took {damageAmount} - damage, current HP: {currentHP}");
             currentHP -= damageAmount;
+            hitSound.Play();
             playerHUD.SetBossHealthBar(currentHP);
             if (currentHP <= 0)
                 OnDeath.Invoke();
         }
-        if (shield.GetShieldStatus())Debug.Log($"Shield is up, boss took 0  damage");
+        if (shield.GetShieldStatus())
+        {
+            sheildHitSound.Play();
+            Debug.Log($"Shield is up, boss took 0  damage");
+        }
     }
 
     private void BossDead()
     {
+        deathSound.Play();
         isDead = true;
         Debug.Log("Boss Health: current HP reached 0, Boss Died");
         DeathEffect();
