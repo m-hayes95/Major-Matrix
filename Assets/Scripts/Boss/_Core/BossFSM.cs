@@ -7,6 +7,7 @@ public class BossFSM : BossAI
     private enum StateMachine 
     { Idle, RangeAttack, CloseAttack, SpecialLowAttack, SpecialHighAttack, Shield, ChasePlayer, Dead };
     [SerializeField] private StateMachine sM;
+    [SerializeField] private AudioSource closeRangeAttackSound;
     private bool canShield = true;
     private void Start()
     {
@@ -56,7 +57,7 @@ public class BossFSM : BossAI
                 sM = StateMachine.Idle;
                 break;
             case StateMachine.CloseAttack:
-                NormalCloseAttack();
+                NormalCloseAttack(closeRangeAttackSound);
                 sM = StateMachine.Idle;
                 break;
             case StateMachine.SpecialLowAttack:
