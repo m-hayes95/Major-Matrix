@@ -55,11 +55,6 @@ public class PlayerInput : MonoBehaviour
     {
         isGamePaused = !isGamePaused;
     }
-    public void SetInputIsGamePaused()
-    {
-        // used for menu button events
-        isGamePaused = !isGamePaused;
-    }
 
     public bool GetJumpInputPressed()
     {

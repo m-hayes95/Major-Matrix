@@ -75,11 +75,6 @@ public abstract class BossAI : MonoBehaviour
     {
         isGamePaused = !isGamePaused;
     }
-    public  void SetBossAIIsGamePaused()
-    {
-        // used for menu button events
-        isGamePaused = !isGamePaused;
-    }
 
     private void CheckWhichSidePlayerIsOn()
     {
