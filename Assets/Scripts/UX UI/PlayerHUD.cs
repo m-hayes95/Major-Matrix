@@ -11,7 +11,12 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] private TextMeshProUGUI encounterTimer;
 
     [SerializeField] private Slider bossHP, playerHP;
+    [SerializeField] private GameObject playerHUD;
 
+    private bool isPlayerHUDOn = true;
+
+    private void OnEnable() { GameManager.OnPaused += DisplayPlayerHUD; } 
+    private void OnDisable() { GameManager.OnPaused -= DisplayPlayerHUD; } 
     private void Update()
     {
         DisplayPlayEncounterTimer();
@@ -40,4 +45,10 @@ public class PlayerHUD : MonoBehaviour
         bossHP.maxValue = maxHealth;    
         bossHP.value = maxHealth;
     }
+    private void DisplayPlayerHUD()
+    {
+        isPlayerHUDOn = !isPlayerHUDOn;
+        playerHUD.SetActive(isPlayerHUDOn);
+    }
+    
 }

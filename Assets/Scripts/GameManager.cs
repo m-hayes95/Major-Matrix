@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private BossHealth bossHealth;
     [SerializeField] private EndGameMenuStats endGameMenuStats;
     private float encounterTimer;
-    private bool isGamePaused = false;
+    [SerializeField] private bool isGamePaused = false;
 
     private void Update()
     {
@@ -36,7 +36,11 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(seconds);
         SceneManager.LoadScene(sceneIndex);
     }
-
+    public void ManuallySetIsGamePaused()
+    {
+        // Used with UI events on resume game click
+        isGamePaused = !isGamePaused;
+    }
     public bool GetIsGamePaused() { return isGamePaused; }
     public float GetEncounterTimer() {  return encounterTimer; }
 }

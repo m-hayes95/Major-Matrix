@@ -29,7 +29,10 @@ public abstract class BossAI : MonoBehaviour
     protected bool canChase = true;
     protected bool usingSpecialAttack = false;
     private bool facingLeft = true;
+    protected bool isGamePaused = false;
 
+    private void OnEnable() { GameManager.OnPaused += UpdateIsGamePaused; }
+    private void OnDisable() { GameManager.OnPaused -= UpdateIsGamePaused; }
     private void Awake()
     {
         stats = GetComponent<BossStatsComponent>().bossStats;
@@ -47,7 +50,7 @@ public abstract class BossAI : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (!bossHP.GetIsDead())
+        if (!bossHP.GetIsDead() && !isGamePaused)   
         {
             target = player.transform;
 
@@ -66,6 +69,16 @@ public abstract class BossAI : MonoBehaviour
             Debug.Log($"AZ: Distance Y: {DistanceY()}....... playerY: {player.transform.position.y} - bossY {transform.position.y}");
             Debug.Log($"BZ: Vector Distance Method = {Vector2.Distance(transform.position, player.transform.position)}");
         }
+    }
+
+    private void UpdateIsGamePaused()
+    {
+        isGamePaused = !isGamePaused;
+    }
+    public  void SetBossAIIsGamePaused()
+    {
+        // used for menu button events
+        isGamePaused = !isGamePaused;
     }
 
     private void CheckWhichSidePlayerIsOn()

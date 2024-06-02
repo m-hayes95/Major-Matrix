@@ -18,10 +18,11 @@ public class BossFSM : BossAI
         base.Update();
         
         Debug.Log($"Boss State Machine Current State: {sM}");
+        if (isGamePaused) return; // Disable state machine if game is paused
         switch (sM)
         {
             case StateMachine.Idle:
-
+                
                 if (bossHP.GetIsDead()) sM = StateMachine.Dead;
 
                 if (!shield.GetShieldStatus() && shield.GetCurrentShieldsAmount() > 0 && canShield && 
