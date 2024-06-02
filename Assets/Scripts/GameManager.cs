@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         if (!playerHealth.GetIsDead() || !bossHealth.GetIsDead())
-        encounterTimer += Time.deltaTime;
+        if (!isGamePaused) encounterTimer += Time.deltaTime;
         
         if (playerHealth.GetIsDead() || bossHealth.GetIsDead())
         {
