@@ -25,7 +25,7 @@ public abstract class BossAI : MonoBehaviour
     private Transform target;
 
     // Do once
-    protected bool canAttack = true;
+    [SerializeField]protected bool canAttack = true;
     protected bool canChase = true;
     protected bool usingSpecialAttack = false;
     private bool facingLeft = true;
