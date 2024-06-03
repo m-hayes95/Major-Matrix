@@ -105,17 +105,19 @@ public abstract class BossAI : MonoBehaviour
     protected void MoveToPlayer()
     {
         // Move the boss character when the player is in the safe zone
-        canChase = false;
+        //anChase = false;
         if (player != null)
         {
-            Vector2 moveDir = new Vector2(transform.position.x - player.transform.position.x, 0);
-            transform.Translate(moveDir * stats.moveSpeed * Time.deltaTime);
+            Vector2 playerXPos = new Vector2(player.transform.position.x, transform.position.y);
+            transform.position = 
+                Vector2.MoveTowards(transform.position, playerXPos, stats.moveSpeed * Time.deltaTime);
+            
         }
         else
         {
             Debug.LogWarning("Player is not assigned!");
         }
-        StartCoroutine(ChaseCooldown(stats.chaseCooldown));
+        //StartCoroutine(ChaseCooldown(stats.chaseCooldown));
         
     }
 

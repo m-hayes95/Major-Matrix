@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class BossFSM : BossAI
 {
@@ -59,7 +58,7 @@ public class BossFSM : BossAI
                 if (distanceFromPlayer < stats.closeRangeAttackThreshold && canAttack) 
                     sM = StateMachine.CloseAttack;
                 //Chase
-                if (canChase && distanceFromPlayer > stats.closeRangeAttackThreshold &&
+                if (distanceFromPlayer > stats.closeRangeAttackThreshold &&
                  distanceFromPlayer < stats.longRangeAttackThreshold) 
                     sM = StateMachine.ChasePlayer;
                     break;
@@ -98,7 +97,7 @@ public class BossFSM : BossAI
             case StateMachine.ChasePlayer:
                 Debug.Log($"Boss can chase player: {canChase}");
                 MoveToPlayer();
-                StartCoroutine(StateCooldown(stats.chaseTimer, StateMachine.Idle));
+                sM = StateMachine.Idle;
                 break;
 
             case StateMachine.Dead:

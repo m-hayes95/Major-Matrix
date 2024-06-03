@@ -28,7 +28,7 @@ MonoBehaviour:
   shieldTimer: 3
   shieldCooldownTime: 9.6
   chaseTimer: 2
-  chaseCooldown: 10.6
+  chaseCooldown: 3
   numberOfAttacks: 6
   offsetY: -0.38
   spacingX: 2.03
