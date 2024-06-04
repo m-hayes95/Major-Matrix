@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     private RaycastHit2D ceilingHit;
     private bool isGrounded;
     private bool isCeilingHit = false;
+    private bool isDamgaedFromCollision = false;
     // Set initial stat values
     private float initialGravityScale;
     private float initialMoveSpeed; 
@@ -204,6 +205,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log($"Ceiling hit: {ceilingHit} with {ceilingHit.collider.gameObject.name}");
         }
     }
+   
     private IEnumerator CoyoteTimeTimer()
     {
         yield return new WaitForSeconds(stats.coyoteTimeThreshold);

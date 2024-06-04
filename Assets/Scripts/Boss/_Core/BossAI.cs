@@ -24,6 +24,9 @@ public abstract class BossAI : MonoBehaviour
     // Shooting Direction
     private Transform target;
 
+    // Animation
+    protected Animator animator;
+
     // Do once
     [SerializeField]protected bool canAttack = true;
     protected bool canChase = true;
@@ -46,10 +49,12 @@ public abstract class BossAI : MonoBehaviour
         if (specialAttacks.OnAttackFinished == null)
             specialAttacks.OnAttackFinished = new UnityEvent();
         specialAttacks.OnAttackFinished.AddListener(ResetSpecialAttackBool);
+        animator = GetComponent<Animator>();
     }
 
     protected virtual void Update()
     {
+        
         if (!bossHP.GetIsDead() && !isGamePaused)   
         {
             target = player.transform;
@@ -140,7 +145,7 @@ public abstract class BossAI : MonoBehaviour
     protected void NormalRangeAttack()
     {
         // Attack the player if they cross a certain distance
-        if (canAttack && !usingSpecialAttack)
+        if (canAttack && !usingSpecialAttack && !playerHP.GetIsDead())
         {
             shoot.FireWeaponBoss(target, stats.shotFoce);
             Debug.Log($"{gameObject.name} attacked {player.name} with a normal ranged attack - {stats.normalAttackDamage} HP");
@@ -153,22 +158,25 @@ public abstract class BossAI : MonoBehaviour
     protected void NormalCloseAttack(AudioSource attackSound)
     {
         // Attack the player if they get too close
-        if (canAttack && playerHP)
+        if (canAttack && playerHP && !playerHP.GetIsDead())
         {
+            animator.SetBool("IsUsingMeleeAttack", true);
             attackSound.Play();
             Debug.Log($"{gameObject.name} attacked {player.name} with a normal close attack - {stats.normalAttackDamage} HP");
             canAttack = false;
             playerHP.DamagePlayer(stats.normalAttackDamage);
+
             StartCoroutine(ResetAttack(stats.resetAttackTimer));
 
             // Play animation for attack
         }
+        
     }
 
     protected void SpecialLowAttack()
     {
         // Cross Screen attack from the ground
-        if (canAttack && !usingSpecialAttack)
+        if (canAttack && !usingSpecialAttack && !playerHP.GetIsDead())
         {
             usingSpecialAttack = true;
             specialAttacks.CallSpecialAttackLowOrHigh(lowSpecialAttack);
@@ -181,7 +189,7 @@ public abstract class BossAI : MonoBehaviour
     protected void SpecialHighAttack()
     {
         // Cross screen attack from the ceiling
-        if (canAttack && !usingSpecialAttack)
+        if (canAttack && !usingSpecialAttack && !playerHP.GetIsDead())
         {
             usingSpecialAttack = true;
             specialAttacks.CallSpecialAttackLowOrHigh(highSpecialAttack);
@@ -204,6 +212,7 @@ public abstract class BossAI : MonoBehaviour
     {
         yield return new WaitForSeconds( resetTimer );
         Debug.Log("Enemy attack reset");
+        animator.SetBool("IsUsingMeleeAttack", false);
         canAttack = !canAttack;
     }
 

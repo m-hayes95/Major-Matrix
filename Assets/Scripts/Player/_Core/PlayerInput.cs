@@ -12,6 +12,7 @@ public class PlayerInput : MonoBehaviour
     private bool jumpInputPressed;
     private bool jumpInputHeld;
     private bool isGamePaused = false;
+    private bool weaponPressed = false;
 
     private void OnEnable() { GameManager.OnPaused += UpdateIsGamePaused; }
     private void OnDisable() { GameManager.OnPaused -= UpdateIsGamePaused; }
@@ -29,13 +30,21 @@ public class PlayerInput : MonoBehaviour
     }
     private void FireWeaponInput()
     { 
-        if (controller != null && !hp.GetIsDead() && !isGamePaused)
+        if (controller != null && !hp.GetIsDead() && !isGamePaused && !weaponPressed)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButton(0) || Input.GetKey(KeyCode.W))
             {
+                weaponPressed = true;
                 shoot.FireWeaponPlayer(controller.stats.shotVelocity);
+                StartCoroutine(ShotDelay());
             }
         }
+    }
+
+    private IEnumerator ShotDelay()
+    {
+        yield return new WaitForSeconds(.5f);
+        weaponPressed = false;
     }
 
     private void PauseInput()

@@ -24,6 +24,7 @@ public class BossFSM : BossAI
         switch (sM)
         {
             case StateMachine.Idle:
+                
                 if (bossHP.GetIsDead()) sM = StateMachine.Dead;
                 //Shield
                 if (!shield.GetShieldStatus() && shield.GetCurrentShieldsAmount() > 0 && canShield && 
@@ -71,6 +72,7 @@ public class BossFSM : BossAI
                 break;
 
             case StateMachine.CloseAttack:
+                
                 NormalCloseAttack(closeRangeAttackSound);
                 sM = StateMachine.Idle;
                 break;
