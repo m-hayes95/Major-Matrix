@@ -23,8 +23,8 @@ public class SpeicalAttacks : BossAI
         leftPositionLow = transform.position + Vector3.down * stats.offsetY;
         rightPositionLow = transform.position + Vector3.down * stats.offsetY;
         // Set vector positions for the first attack (high special attack)
-        leftPositionHigh = transform.position + Vector3.up * 10f;
-        rightPositionHigh = transform.position + Vector3.up * 10f;
+        leftPositionHigh = transform.position + Vector3.up * stats.spawnHeight;
+        rightPositionHigh = transform.position + Vector3.up * stats.spawnHeight;
     }
     public void CallSpecialAttackLowOrHigh(int lowOrHigh)
     {
@@ -110,7 +110,7 @@ public class SpeicalAttacks : BossAI
         // Reset Positions of initial vectors
         leftPositionLow = transform.position + Vector3.down * stats.offsetY;
         rightPositionLow = transform.position + Vector3.down * stats.offsetY;
-        leftPositionHigh = transform.position + Vector3.up * 10f;
-        rightPositionHigh = transform.position + Vector3.up * 10f;
+        leftPositionHigh = transform.position + Vector3.up * stats.spawnHeight;
+        rightPositionHigh = transform.position + Vector3.up * stats.spawnHeight;
     }
 }

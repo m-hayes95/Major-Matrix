@@ -60,7 +60,7 @@ public class BossStatsScriptableObject : ScriptableObject
     [Header("High Special Attack Modifiers")]
     [Range(0f, 10f), Tooltip("How much gravity is applied to the falling high special attacks.")]
     public float highSpecialAttackGravityScale;
-    [Range(0f, 15f), Tooltip("How high up the high special attack will spawn.")]
+    [Range(0f, 20f), Tooltip("How high up the high special attack will spawn.")]
     public float spawnHeight;
 }
 

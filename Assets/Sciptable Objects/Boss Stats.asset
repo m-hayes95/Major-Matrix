@@ -20,7 +20,7 @@ MonoBehaviour:
   shotFoce: 20
   closeRangeAttackThreshold: 3
   longRangeAttackThreshold: 8
-  specialHighAttackMinY: 0.6
+  specialHighAttackMinY: 3.1
   maxHPtoAllowShield: 50
   chanceToUseSpecialAttack: 0.2
   chanceToShield: 0.1
@@ -29,9 +29,9 @@ MonoBehaviour:
   shieldCooldownTime: 9.6
   chaseTimer: 2
   chaseCooldown: 3
-  numberOfAttacks: 6
+  numberOfAttacks: 5
   offsetY: -0.38
-  spacingX: 2.03
+  spacingX: 3
   timeBetweenAttacks: 0.5
   highSpecialAttackGravityScale: 5
-  spawnHeight: 10
+  spawnHeight: 20

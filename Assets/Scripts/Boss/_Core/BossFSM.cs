@@ -33,11 +33,16 @@ public class BossFSM : BossAI
                 // Range / Special Attacks
                 if (distanceFromPlayer > stats.longRangeAttackThreshold && canAttack && !doOnce)
                 {
-                    
-                    // Randomise if boss should use a special or normal attack
-                    if (!RandomChance(stats.chanceToUseSpecialAttack)) sM = StateMachine.RangeAttack;
+                    float increaseOdds = stats.chanceToUseSpecialAttack * 3;
+                    float normalOdds = stats.chanceToUseSpecialAttack;
+                    float chanceModifier;
 
-                    else if (RandomChance(stats.chanceToUseSpecialAttack) && DistanceY() >= stats.specialHighAttackMinY)
+                    if (DistanceY() >= stats.specialHighAttackMinY + 3) chanceModifier = increaseOdds;
+                    else chanceModifier = normalOdds;
+                    // Randomise if boss should use a special or normal attack
+                    if (!RandomChance(chanceModifier)) sM = StateMachine.RangeAttack;
+
+                    else if (RandomChance(chanceModifier) && DistanceY() >= stats.specialHighAttackMinY)
                     {
                         doOnce = true;
                         sM = StateMachine.SpecialHighAttack;
@@ -45,7 +50,7 @@ public class BossFSM : BossAI
                         $"Test 123 Used High Sp Atk Random value: {RandomChance(stats.chanceToUseSpecialAttack)} DistanceY: {DistanceY()} >= {stats.specialHighAttackMinY}"
                         );
                     }
-                    else if (RandomChance(stats.chanceToUseSpecialAttack) && DistanceY() < stats.specialHighAttackMinY)
+                    else if (RandomChance(chanceModifier) && DistanceY() < stats.specialHighAttackMinY)
                     {
                         doOnce = true;
                         sM = StateMachine.SpecialLowAttack;

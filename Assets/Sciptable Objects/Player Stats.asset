@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 100
   moveSpeed: 6.18
-  jumpPower: 12
+  jumpPower: 15
   weaponPower: 5
   shotVelocity: 8
   maxJumpThreshold: 3.5
@@ -28,8 +28,4 @@ MonoBehaviour:
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 576
-  collisionDamageLayerMask:
-    serializedVersion: 2
-    m_Bits: 1024
-  collisionDamageToPlayer: 5
   collisionDistanceAcceptanceRadius: 0.168
