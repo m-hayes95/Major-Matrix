@@ -1,7 +1,7 @@
 using UnityEngine;
 namespace BehaviourTree
 {
-    public abstract class BTTree : MonoBehaviour
+    public abstract class BTree : MonoBehaviour
     {
         private BTNode root = null;
         protected void Start()

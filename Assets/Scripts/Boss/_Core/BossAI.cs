@@ -1,7 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
-
 public abstract class BossAI : MonoBehaviour
 {
     //Boss stats
