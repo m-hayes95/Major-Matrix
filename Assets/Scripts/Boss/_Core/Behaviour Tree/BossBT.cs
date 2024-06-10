@@ -5,20 +5,28 @@ using System.Collections.Generic;
 public class BossBT : BTree
 {
     [SerializeField] float speed, distanceThreshold, shotForce;
-    [SerializeField] GameObject player;
-    [SerializeField] Transform bossPos;
+    [SerializeField] Transform player;
+    [SerializeField] GameObject target;
     [SerializeField] Shoot shoot;
-
+    [SerializeField] ChasePlayer chasePlayer;
+    [SerializeField] float bossFOV;
+    [SerializeField] LayerMask targetLayer;
+ 
     protected override BTNode SetupTree()
     {
         BTNode root = new BTSelector(new List<BTNode>
         {
             new BTSequence(new List<BTNode>
             {
-                new CheckDistance(bossPos, player.transform, distanceThreshold),
-                new TaskChasePlayer(player, bossPos, speed)
+                new CheckHasTarget(transform, bossFOV, targetLayer),
+                new BTSequence(new List<BTNode>
+                {
+                    new CheckDistance(transform, distanceThreshold),
+                    new TaskChasePlayer(chasePlayer, transform, speed)
+                }),
             }),
-            new TaskRangeAttackNormal(player.transform, shoot, shotForce)
+            new TaskIdle()
+
         });
         return root;
     }

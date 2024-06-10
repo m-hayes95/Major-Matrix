@@ -5,23 +5,22 @@ using UnityEngine;
 
 public class TaskChasePlayer : BTNode
 {
-
-    private GameObject target;
+    private ChasePlayer chasePlayer;
     private Transform currentPos;
     private float moveSpeed;
-    public TaskChasePlayer(GameObject targetGameObject, Transform selfPosition, float speed)
+    public TaskChasePlayer(ChasePlayer chasePlayer, Transform currentPos, float speed)
     {
-        target = targetGameObject;
-        currentPos = selfPosition;
+        //this.targetPos = targetPos;
+        this.currentPos = currentPos;
         moveSpeed = speed;
+        this.chasePlayer = chasePlayer;
     }
 
     public override NodeState Evaluate()
     {
-        // call ai move to function
-        Vector2 playerXPos = new Vector2(target.transform.position.x, currentPos.position.y);
-        currentPos.position =
-            Vector2.MoveTowards(currentPos.position, playerXPos, moveSpeed * Time.deltaTime);
+        Transform target = (Transform)GetData("Target");
+        chasePlayer.Chase(target, currentPos, moveSpeed);
+        
         state = NodeState.RUNNING;
         Debug.Log($"Task case player state = {state}");
         return state;

@@ -7,14 +7,14 @@ public class CheckDistance : BTNode
 {
     private Transform boss, player;
     private float distanceThres;
-    public CheckDistance(Transform bossPos, Transform playerPos, float distanceThreshold)
+    public CheckDistance(Transform bossPos, float distanceThreshold)
     {
         boss = bossPos;
-        player = playerPos;
         distanceThres = distanceThreshold;
     }
     public override NodeState Evaluate()
     {
+        player = (Transform)GetData("Target");
         float distance = 
                 Vector2.Distance(boss.position, player.transform.position);
         if (distance > distanceThres) state = NodeState.SUCCESS;

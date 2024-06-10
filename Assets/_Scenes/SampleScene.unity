@@ -7684,29 +7684,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3840645956435967475, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
-      propertyPath: shoot
-      value: 
-      objectReference: {fileID: 1694224509}
-    - target: {fileID: 3840645956435967475, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
-      propertyPath: speed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3840645956435967475, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 828123611}
+      objectReference: {fileID: 1241999170}
     - target: {fileID: 3840645956435967475, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
-      propertyPath: bossPos
+      propertyPath: target
       value: 
-      objectReference: {fileID: 1694224505}
-    - target: {fileID: 3840645956435967475, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
-      propertyPath: shotForce
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3840645956435967475, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
-      propertyPath: distanceThreshold
-      value: 10
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 828123611}
     - target: {fileID: 4926138177142674149, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
       propertyPath: bulletSound
       value: 
@@ -7753,17 +7737,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2400908464340835788, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
   m_PrefabInstance: {fileID: 1694224504}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1694224509 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4926138177142674149, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
-  m_PrefabInstance: {fileID: 1694224504}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 538f2e9179629c245848003626330d52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1694224511 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5124180400556533231, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
