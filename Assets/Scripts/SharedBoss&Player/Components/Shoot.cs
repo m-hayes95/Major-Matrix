@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Shoot : MonoBehaviour
@@ -9,12 +10,24 @@ public class Shoot : MonoBehaviour
     [SerializeField] private AudioSource bulletSound;
     private Transform newTarget;
     private GameObject newBullet;
+    private bool canAttack = true;
 
     public void FireWeaponBoss(Transform target, float velocity)
     {
-        InstantiateNewBullet();
-        newTarget = target;
-        SetVelocityAndDir(velocity);
+        if (canAttack)
+        {
+            canAttack = false;
+            InstantiateNewBullet();
+            newTarget = target;
+            SetVelocityAndDir(velocity);
+            StartCoroutine(ResetAttack());
+        }
+        
+    }
+    private IEnumerator ResetAttack()
+    {
+        yield return new WaitForSeconds(.5f);
+        canAttack = true; 
     }
     public void FireWeaponPlayer(float velocity)
     {

@@ -4,11 +4,23 @@ using System.Collections.Generic;
 
 public class BossBT : BTree
 {
+    [SerializeField] float speed, distanceThreshold, shotForce;
+    [SerializeField] GameObject player;
+    [SerializeField] Transform bossPos;
+    [SerializeField] Shoot shoot;
+
     protected override BTNode SetupTree()
     {
-        throw new System.NotImplementedException();
-        // Add sequencer and check for player distance
-            // if player is within distance, melee attack player, if not then shoot at the player
+        BTNode root = new BTSelector(new List<BTNode>
+        {
+            new BTSequence(new List<BTNode>
+            {
+                new CheckDistance(bossPos, player.transform, distanceThreshold),
+                new TaskChasePlayer(player, bossPos, speed)
+            }),
+            new TaskRangeAttackNormal(player.transform, shoot, shotForce)
+        });
+        return root;
     }
 }
 
