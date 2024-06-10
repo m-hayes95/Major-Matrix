@@ -211,7 +211,7 @@ public class PlayerController : MonoBehaviour
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<GroundTag>())
+        if (collision.gameObject.GetComponent<GroundTag>() && gameObject !=null)
         {
             // Does not work if placed under collision - Maybe change to an event called when bool changes
             Debug.Log($"Coyote time timer started");

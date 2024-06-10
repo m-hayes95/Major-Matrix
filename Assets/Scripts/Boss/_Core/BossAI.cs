@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 public abstract class BossAI : MonoBehaviour
 {
     //Boss stats
@@ -213,7 +214,7 @@ public abstract class BossAI : MonoBehaviour
         animator.SetBool("IsUsingMeleeAttack", false);
         canAttack = !canAttack;
     }
-
+    /*
     private void OnDrawGizmos()
     {
         // Close attack range
@@ -229,5 +230,5 @@ public abstract class BossAI : MonoBehaviour
             new Vector3(20, transform.position.y + stats.specialHighAttackMinY, 0)
             );
     }
-
+    */
 }
