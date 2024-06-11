@@ -10,7 +10,7 @@ public class BossHealth : BossAI
     [SerializeField] private UIController uIController;
     [SerializeField] private PlayerHUD playerHUD;
     [SerializeField] private AudioSource hitSound, sheildHitSound, deathSound;
-    private float currentHP;
+    [SerializeField] private float currentHP; // Remove after debugging
     private UnityEvent OnDeath;
     private bool isDead;
     

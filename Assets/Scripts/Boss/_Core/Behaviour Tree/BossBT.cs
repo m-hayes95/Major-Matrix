@@ -4,13 +4,17 @@ using System.Collections.Generic;
 
 public class BossBT : BTree
 {
-    [SerializeField] float speed, distanceThreshold, shotForce;
+    [SerializeField] float speed, distanceThreshold, shotForce, dangerThreshold;
     [SerializeField] Transform player;
     [SerializeField] GameObject target;
-    [SerializeField] Shoot shoot;
-    [SerializeField] ChasePlayer chasePlayer;
     [SerializeField] float bossFOV;
     [SerializeField] LayerMask targetLayer;
+    // Script Components
+    [SerializeField] Shoot shoot;
+    [SerializeField] ChasePlayer chasePlayer;
+    [SerializeField] BossHealth health;
+    [SerializeField] Shield shield;
+
  
     protected override BTNode SetupTree()
     {
@@ -24,12 +28,12 @@ public class BossBT : BTree
                 new BTSelector(new List<BTNode>
                 {
                     // Defend with shield
-                    //new BTSequence(new List<BTNode>
-                    //{
-                        // Check Has low health
-                        // Check Can shield
-                        // Task Shield
-                    //}),
+                    new BTSequence(new List<BTNode>
+                    {
+                        new CheckCurrentHealth(health, dangerThreshold),
+                        new CheckCanShield(shield),
+                        new TaskShield(shield),
+                    }),
                     // Chase the player
                     new BTSequence(new List<BTNode>
                     {
