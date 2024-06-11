@@ -21,11 +21,6 @@ public class Shield : MonoBehaviour
         currentShields = stats.maxShields;
     }
 
-    private void Update()
-    {
-        Debug.Log($"Current shields left: {currentShields}");
-    }
-
     public bool GetShieldStatus()  {  return isShielded; } 
     public bool GetCanShield()  {  return canShield; } 
     public int GetCurrentShieldsAmount()  {  return currentShields; } 
@@ -45,7 +40,7 @@ public class Shield : MonoBehaviour
     private IEnumerator ShieldTimer(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        Debug.Log("Shield reset");
+        //Debug.Log("Shield reset");
         isShielded = !isShielded;
         shieldVisual.SetActive(false);
         StartCoroutine(ShieldCooldownTimer());

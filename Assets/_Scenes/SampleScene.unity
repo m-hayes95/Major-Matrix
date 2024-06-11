@@ -6067,6 +6067,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1266400465 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5865844379600711558, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
+  m_PrefabInstance: {fileID: 1694224504}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1274550882
 GameObject:
   m_ObjectHideFlags: 0
@@ -7708,6 +7713,14 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3840645956435967475, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
+      propertyPath: meleeAttack
+      value: 
+      objectReference: {fileID: 1694224520}
+    - target: {fileID: 3840645956435967475, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
+      propertyPath: attackCooldown
+      value: 
+      objectReference: {fileID: 1694224528}
+    - target: {fileID: 3840645956435967475, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
       propertyPath: dangerThreshold
       value: 70
       objectReference: {fileID: 0}
@@ -7715,10 +7728,22 @@ PrefabInstance:
       propertyPath: distanceThreshold
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 3840645956435967475, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
+      propertyPath: chaseDistanceThreshold
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3840645956435967475, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
+      propertyPath: meleeDistanceThreshold
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4926138177142674149, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
       propertyPath: bulletSound
       value: 
       objectReference: {fileID: 1072154462}
+    - target: {fileID: 4926138177142674149, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
+      propertyPath: attackCooldown
+      value: 
+      objectReference: {fileID: 1694224528}
     - target: {fileID: 5124180400556533231, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
       propertyPath: hitSound
       value: 
@@ -7754,7 +7779,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5865844379600711558, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1694224520}
+    - targetCorrespondingSourceObject: {fileID: 5865844379600711558, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1694224528}
   m_SourcePrefab: {fileID: 100100000, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
 --- !u!4 &1694224505 stripped
 Transform:
@@ -7766,7 +7797,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5124180400556533231, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
   m_PrefabInstance: {fileID: 1694224504}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1266400465}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d032b93645f1e464c8d4790ca0d861b1, type: 3}
@@ -7777,10 +7808,36 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2370000192072045393, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
   m_PrefabInstance: {fileID: 1694224504}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1266400465}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 24472bc730a7fa64b9f5889f687fe46f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1694224520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1266400465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24588202318c17e4fa6d56c32210b890, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHP: {fileID: 1241999175}
+  meleeAttackSound: {fileID: 513878674}
+--- !u!114 &1694224528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1266400465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0983bddfdaa6ef448b2f51c7dad3efbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!43 &1749936338

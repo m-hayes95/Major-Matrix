@@ -27,7 +27,7 @@ public class CheckHasTarget : BTNode
             if (collider2Ds.Length > 0)
             {
                 parent.parent.SetData(TARGET, collider2Ds[0].transform);
-                Debug.Log($"Boss In Combat with {collider2Ds[0].gameObject.name}");
+                //Debug.Log($"Boss In Combat with {collider2Ds[0].gameObject.name}");
                 state = NodeState.SUCCESS;
                 return state;
             }

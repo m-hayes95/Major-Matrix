@@ -34,11 +34,6 @@ public class PlayerHealth : MonoBehaviour
         
     }
 
-    private void Update()
-    {
-        Debug.Log($"Players current HP = {currentHP}");
-    }
-
     public void DamagePlayer(float damageAmount)
     {
         if (currentHP > 0)

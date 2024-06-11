@@ -34,7 +34,7 @@ public class BossHealth : BossAI
     {
         if (!shield.GetShieldStatus() && currentHP > 0)
         {
-            Debug.Log($"Boss Health: took {damageAmount} - damage, current HP: {currentHP}");
+            //Debug.Log($"Boss Health: took {damageAmount} - damage, current HP: {currentHP}");
             currentHP -= damageAmount;
             hitSound.Play();
             playerHUD.SetBossHealthBar(currentHP);
@@ -44,7 +44,7 @@ public class BossHealth : BossAI
         if (shield.GetShieldStatus())
         {
             sheildHitSound.Play();
-            Debug.Log($"Shield is up, boss took 0  damage");
+            //Debug.Log($"Shield is up, boss took 0  damage");
         }
     }
 

@@ -47,12 +47,6 @@ public class PlayerController : MonoBehaviour
         initialMoveSpeed = stats.moveSpeed;
         initialJumpPower = stats.jumpPower;
     }
-    private void Update()
-    {
-        Debug.Log("Gravity scale = " + rb.gravityScale);
-        //Debug.Log("Y pos = " + transform.position.y);
-        Debug.Log($"Current Jump power {stats.jumpPower}, Initial Jump power {initialJumpPower}");
-    }
 
     private void FixedUpdate()
     {
@@ -98,7 +92,7 @@ public class PlayerController : MonoBehaviour
         else if (input.GetJumpInputPressed() || input.GetJumpInputHeld() && coyoteTimeReady)
         {
             coyoteTimeReady = false;
-            Debug.Log("Coyote time jump executed");
+            //Debug.Log("Coyote time jump executed");
             ExecuteJump();
         }
 
@@ -134,7 +128,7 @@ public class PlayerController : MonoBehaviour
     {
         // Apply anti gravity and speed bost at the apex of the jump for greater control
         apexJumpTimer += Time.deltaTime;
-        Debug.Log($"Apply apex threshold modifiers. Elapsed Time: {apexJumpTimer}");
+        //Debug.Log($"Apply apex threshold modifiers. Elapsed Time: {apexJumpTimer}");
         if (apexJumpTimer < stats.apexJumpBoostDuration)
         {
             if (!applyApexJumpBoost)
@@ -149,7 +143,7 @@ public class PlayerController : MonoBehaviour
     private IEnumerator ResetApexJumpTimer(float timer)
     {
         yield return new WaitForSeconds(timer);
-        Debug.Log("Reset apex threshold modifiers");
+        //Debug.Log("Reset apex threshold modifiers");
         stats.moveSpeed = initialMoveSpeed;
         rb.gravityScale = initialGravityScale;
         apexJumpTimer = 0;
@@ -163,12 +157,12 @@ public class PlayerController : MonoBehaviour
             collider.bounds.center, collider.size, angle, Vector2.down, maxDistance , stats.groundLayerMask
             );
         float distance = distanceChecker.distance;
-        Debug.Log($"Players distance from floor: {distance}");
+        //Debug.Log($"Players distance from floor: {distance}");
         return distance;
     }
     private void CollisionChecks()
     {
-        Debug.Log($"Is player grounded: {isGrounded}");
+        //Debug.Log($"Is player grounded: {isGrounded}");
         float angle = 0;
         float distance = .2f;
         groundHit = Physics2D.BoxCast(
@@ -182,7 +176,7 @@ public class PlayerController : MonoBehaviour
             isGrounded = true;
             isCeilingHit = false;
             stats.jumpPower = initialJumpPower;
-            Debug.Log($"Ground hit: {groundHit} with {groundHit.collider.gameObject.name}");
+            //Debug.Log($"Ground hit: {groundHit} with {groundHit.collider.gameObject.name}");
             endedJumpEarly = false;
             canJump = true;
             applyApexJumpBoost = false;
@@ -199,14 +193,14 @@ public class PlayerController : MonoBehaviour
         {
             isCeilingHit = true;
             stats.jumpPower = 0f;
-            Debug.Log($"Ceiling hit: {ceilingHit} with {ceilingHit.collider.gameObject.name}");
+            //Debug.Log($"Ceiling hit: {ceilingHit} with {ceilingHit.collider.gameObject.name}");
         }
     }
    
     private IEnumerator CoyoteTimeTimer()
     {
         yield return new WaitForSeconds(stats.coyoteTimeThreshold);
-        Debug.Log($"Coyote time is ready: {coyoteTimeReady}, Time taken {stats.coyoteTimeThreshold}s");
+        //Debug.Log($"Coyote time is ready: {coyoteTimeReady}, Time taken {stats.coyoteTimeThreshold}s");
         if (!isGrounded) coyoteTimeReady = false;
     }
     private void OnCollisionExit2D(Collision2D collision)
@@ -214,7 +208,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.GetComponent<GroundTag>() && gameObject !=null)
         {
             // Does not work if placed under collision - Maybe change to an event called when bool changes
-            Debug.Log($"Coyote time timer started");
+            //Debug.Log($"Coyote time timer started");
             StartCoroutine(CoyoteTimeTimer());
         }
     }

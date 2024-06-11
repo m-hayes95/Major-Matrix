@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class BossBT : BTree
 {
-    [SerializeField] float speed, distanceThreshold, shotForce, dangerThreshold;
+    [SerializeField] float speed, chaseDistanceThreshold, shotForce, dangerThreshold, meleeDistanceThreshold;
     [SerializeField] Transform player;
     [SerializeField] GameObject target;
     [SerializeField] float bossFOV;
@@ -14,8 +14,15 @@ public class BossBT : BTree
     [SerializeField] ChasePlayer chasePlayer;
     [SerializeField] BossHealth health;
     [SerializeField] Shield shield;
+    [SerializeField] MeleeAttack meleeAttack;
+    [SerializeField] AttackCooldown attackCooldown;
+    private BossStatsScriptableObject stats;
 
- 
+    private void Awake()
+    {
+        stats = GetComponent<BossStatsComponent>().bossStats;
+    }
+
     protected override BTNode SetupTree()
     {
         BTNode root = new BTSelector(new List<BTNode>
@@ -37,35 +44,45 @@ public class BossBT : BTree
                     // Chase the player
                     new BTSequence(new List<BTNode>
                     {
-                        new CheckDistance(transform, distanceThreshold),
+                        new CheckDistance(transform, chaseDistanceThreshold),
                         new TaskChasePlayer(chasePlayer, transform, speed),
                     }),
+                    
                     // Attack the player
-                    new BTSelector(new List<BTNode>
+                    new BTSequence(new List<BTNode>
                     {
-                        // Close Range Attack
-                        new BTSequence(new List<BTNode> 
-                        {
-                            // Check in melee range
-                            // Use melee attack
-                        }),
-                        // Long Range Attack
-                        new BTSelector(new List<BTNode> 
-                        {
+                        // First Check the boss can attack before trying, then select an attack to use
+                        new CheckCanAttack(attackCooldown),
+                        new BTSelector(new List<BTNode>
+                    {
+                            // Close Range Attack
                             new BTSequence(new List<BTNode>
-                            { 
+                            {
+                            new CheckInMeleeRange(transform, meleeDistanceThreshold),
+                            new TaskMeleeAttack(meleeAttack),
+                            }),
+                            // Long Range Attack
+                            //new BTSelector(new List<BTNode> 
+                            //{
+                            //new BTSequence(new List<BTNode>
+                            //{ 
                                 // Check can use special Attack
                                 // Select Special Attack
-                                new BTSelector(new List<BTNode>
-                                { 
+                                //new BTSelector(new List<BTNode>
+                                //{ 
                                     // Task High Special Attack
                                     // Task Low Special Attack
-                                })
-                            }),
+                                //})
+                            //}),
                             // Normal range attack
-                            new TaskRangeAttackNormal(shoot, shotForce),
-                        }),
+                            
+                            //}),
+                            new TaskRangeAttackNormal(shoot, shotForce, stats.resetAttackTimer),
                     }),
+                    }),
+
+
+                    
                 }),
             }),
             new TaskIdle(),

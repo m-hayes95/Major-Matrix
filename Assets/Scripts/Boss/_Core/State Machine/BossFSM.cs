@@ -78,7 +78,7 @@ public class BossFSM : BossAI
 
             case StateMachine.CloseAttack:
                 
-                NormalCloseAttack(closeRangeAttackSound);
+                //NormalCloseAttack(closeRangeAttackSound);
                 sM = StateMachine.Idle;
                 break;
 
