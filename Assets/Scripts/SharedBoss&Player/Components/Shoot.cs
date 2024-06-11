@@ -26,7 +26,7 @@ public class Shoot : MonoBehaviour
     }
     private IEnumerator ResetAttack()
     {
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.8f);
         canAttack = true; 
     }
     public void FireWeaponPlayer(float velocity)

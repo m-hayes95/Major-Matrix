@@ -7691,6 +7691,18 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 828123611}
+    - target: {fileID: 3840645956435967475, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
+      propertyPath: bossFOV
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3840645956435967475, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
+      propertyPath: shotForce
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3840645956435967475, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
+      propertyPath: distanceThreshold
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4926138177142674149, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
       propertyPath: bulletSound
       value: 
