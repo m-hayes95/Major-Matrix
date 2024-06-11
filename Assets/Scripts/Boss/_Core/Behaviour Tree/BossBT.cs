@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class BossBT : BTree
 {
     [SerializeField] float speed, chaseDistanceThreshold, shotForce, dangerThreshold, meleeDistanceThreshold;
+    [SerializeField] float percentIncrease, specialAttackPercentThresold;
     [SerializeField] Transform player;
     [SerializeField] GameObject target;
     [SerializeField] float bossFOV;
@@ -16,6 +17,7 @@ public class BossBT : BTree
     [SerializeField] Shield shield;
     [SerializeField] MeleeAttack meleeAttack;
     [SerializeField] AttackCooldown attackCooldown;
+    [SerializeField] RandomChance randomChance;
     private BossStatsScriptableObject stats;
 
     private void Awake()
@@ -55,28 +57,19 @@ public class BossBT : BTree
                         new CheckCanAttack(attackCooldown),
                         new BTSelector(new List<BTNode>
                     {
-                            // Close Range Attack
+                            // Chosse close range Melee Attack
                             new BTSequence(new List<BTNode>
                             {
                             new CheckInMeleeRange(transform, meleeDistanceThreshold),
                             new TaskMeleeAttack(meleeAttack),
                             }),
-                            // Long Range Attack
-                            //new BTSelector(new List<BTNode> 
-                            //{
-                            //new BTSequence(new List<BTNode>
-                            //{ 
-                                // Check can use special Attack
-                                // Select Special Attack
-                                //new BTSelector(new List<BTNode>
-                                //{ 
-                                    // Task High Special Attack
-                                    // Task Low Special Attack
-                                //})
-                            //}),
-                            // Normal range attack
-                            
-                            //}),
+                            // Choose Special Attack
+                            new BTSequence(new List<BTNode>
+                            { 
+                                // new CheckUseSpecialAttacks(randomChance, percentIncrease, specialAttackPercentThresold),
+                                // Selector
+                            }),
+                            // Choose Long Range Normal Attack
                             new TaskRangeAttackNormal(shoot, shotForce, stats.resetAttackTimer),
                     }),
                     }),
