@@ -43,9 +43,28 @@ public class BossBT : BTree
                     // Attack the player
                     new BTSelector(new List<BTNode>
                     {
-                        // In melee Range -> Melee Attack
-                        // Use special Attack -> Sel -> Check Distance Y -> Low Attack / High Attack
-                        new TaskRangeAttackNormal(shoot, shotForce),
+                        // Close Range Attack
+                        new BTSequence(new List<BTNode> 
+                        {
+                            // Check in melee range
+                            // Use melee attack
+                        }),
+                        // Long Range Attack
+                        new BTSelector(new List<BTNode> 
+                        {
+                            new BTSequence(new List<BTNode>
+                            { 
+                                // Check can use special Attack
+                                // Select Special Attack
+                                new BTSelector(new List<BTNode>
+                                { 
+                                    // Task High Special Attack
+                                    // Task Low Special Attack
+                                })
+                            }),
+                            // Normal range attack
+                            new TaskRangeAttackNormal(shoot, shotForce),
+                        }),
                     }),
                 }),
             }),
