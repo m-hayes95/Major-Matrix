@@ -14,17 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 4.1
   maxHP: 100
-  normalAttackDamage: 10
-  specialAttackDamage: 20
+  normalAttackDamage: 0
+  specialAttackDamage: 0
   maxShields: 3
   shotFoce: 20
   closeRangeAttackThreshold: 3
   longRangeAttackThreshold: 8
   specialHighAttackMinY: 3.1
   maxHPtoAllowShield: 50
-  chanceToUseSpecialAttack: 0.2
+  chanceToUseSpecialAttack: 20
   chanceToShield: 0.1
-  resetAttackTimer: 1
+  resetNormalAttackTimer: 1
+  resetSpecialAttackTimer: 7.4
   shieldTimer: 3
   shieldCooldownTime: 9.6
   chaseTimer: 2

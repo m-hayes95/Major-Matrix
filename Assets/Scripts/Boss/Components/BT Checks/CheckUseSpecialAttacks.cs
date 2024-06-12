@@ -14,16 +14,16 @@ public class CheckUseSpecialAttacks : BTNode
     }
     public override NodeState Evaluate()
     {
-        if (randomChance.ApplyRandomChanceOutOf100Percent(
-            randomChancePercentIncrease) > specialAttackPercentThreshold
-            )
+        float rand = randomChance.ApplyRandomChanceOutOf100Percent(
+            randomChancePercentIncrease);
+        if (rand <= specialAttackPercentThreshold)
         {
             state = NodeState.SUCCESS;
-            Debug.Log($"Check Use Special Attack state = {state}");
+            Debug.Log($"Check Use Special Attack state = {state}, the rand value = {rand} ");
             return state;
         }
         state = NodeState.FAILURE;
-        Debug.Log($"Check Use Special Attack state = {state}");
+        Debug.Log($"Check Use Special Attack state = {state}, the rand value = {rand} ");
         return state;
     }
 }

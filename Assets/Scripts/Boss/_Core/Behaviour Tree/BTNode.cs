@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 namespace BehaviourTree
 {
     // Possible states for each node of the BT
@@ -68,6 +69,11 @@ namespace BehaviourTree
                 node = node.parent;
             }
             return false;
+        }
+
+        public Dictionary<string, object> GetBlackboardData()
+        {
+            return dataContext;
         }
     }
 }

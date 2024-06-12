@@ -14,7 +14,7 @@ public abstract class BossAI : MonoBehaviour
 
     private PlayerHealth playerHP;
     private Shoot shoot;
-    private SpeicalAttacks specialAttacks;
+    private SpecialAttacks specialAttacks;
 
     // Special Attack Selector
     private int lowSpecialAttack = 0;
@@ -43,7 +43,7 @@ public abstract class BossAI : MonoBehaviour
         bossHP = GetComponent<BossHealth>();
         shield = GetComponent<Shield>();
         shoot = GetComponent<Shoot>();
-        specialAttacks = GetComponent<SpeicalAttacks>();
+        specialAttacks = GetComponent<SpecialAttacks>();
         // Dont allow interuptions for special attacks
         if (specialAttacks.OnAttackFinished == null)
             specialAttacks.OnAttackFinished = new UnityEvent();
@@ -146,7 +146,7 @@ public abstract class BossAI : MonoBehaviour
             //Debug.Log($"{gameObject.name} attacked {player.name} with a normal ranged attack - {stats.normalAttackDamage} HP");
             canAttack = false;
             //playerHP.DamagePlayer(stats.normalAttackDamage);
-            StartCoroutine(ResetAttack(stats.resetAttackTimer));
+            StartCoroutine(ResetAttack(stats.resetNormalAttackTimer));
             // Play animation for attack
         }
     }
@@ -161,7 +161,7 @@ public abstract class BossAI : MonoBehaviour
             specialAttacks.CallSpecialAttackLowOrHigh(lowSpecialAttack);
             //Debug.Log($"{gameObject.name} attacked {player.name} with a special low attack - {stats.specialAttackDamage} HP");
             canAttack = false;
-            StartCoroutine (ResetAttack(stats.resetAttackTimer));
+            StartCoroutine (ResetAttack(stats.resetSpecialAttackTimer));
             // Play animation for attack
         }
     }
@@ -174,7 +174,7 @@ public abstract class BossAI : MonoBehaviour
             specialAttacks.CallSpecialAttackLowOrHigh(highSpecialAttack);
             //Debug.Log($"{gameObject.name} attacked {player.name} with a special high attack - {stats.specialAttackDamage} HP");
             canAttack = false;
-            StartCoroutine(ResetAttack(stats.resetAttackTimer));
+            StartCoroutine(ResetAttack(stats.resetSpecialAttackTimer));
         }
         // Play animation for attack
     }

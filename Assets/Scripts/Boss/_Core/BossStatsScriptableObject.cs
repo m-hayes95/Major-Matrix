@@ -28,14 +28,16 @@ public class BossStatsScriptableObject : ScriptableObject
     public float maxHPtoAllowShield;
 
     [Header("Chances")]
-    [Range(0f, 1f), Tooltip("Select the chance of a special attack occuring over a normal attack when the players distance meets the longRangeAttackThreshold (0 = no chance, 0.1 = 1/10 chance, 0.8 = 8/10 chance, so on...)")]
+    [Range(0f, 100f), Tooltip("Select the chance of a special attack occuring over a normal attack when the players distance meets the longRangeAttackThreshold (0 to 100% chance).")]
     public float chanceToUseSpecialAttack;
     [Range(0f, 1f), Tooltip("Set the chance the enemy will shield at the set maxHPtoAllowShield threshold")]
     public float chanceToShield;
 
     [Header("Timers")]
-    [Range(0f, 10f), Tooltip("Set the amount of time in seconds for the reset attack timer.")]
-    public float resetAttackTimer;
+    [Range(0f, 10f), Tooltip("Set the amount of time in seconds for the reset melee and normal range attack timer.")]
+    public float resetNormalAttackTimer;
+    [Range(0f, 10f), Tooltip("Set the amount of time in seconds for the reset special attack timers.")]
+    public float resetSpecialAttackTimer;
     [Range(0f, 10f), Tooltip("Set the amount of time in seconds for the shield duration.")]
     public float shieldTimer;
 

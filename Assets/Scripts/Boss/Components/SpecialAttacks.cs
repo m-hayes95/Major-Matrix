@@ -1,19 +1,28 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UIElements;
 
-public class SpeicalAttacks : BossAI
+[RequireComponent(typeof(AttackCooldown))]
+public class SpecialAttacks : MonoBehaviour
 {
     [SerializeField] private GameObject specialAttackGameObject;
     //[SerializeField] Transform highAttackPosistion
     [SerializeField] private AudioSource lowAttackSound, highAttackSound;
+    private BossStatsScriptableObject stats;
     private Vector3 leftPositionLow, rightPositionLow;
     private Vector3 leftPositionHigh, rightPositionHigh;
     public UnityEvent OnAttackFinished;
     private List<GameObject> attacks;
+    private bool canAttack = true;
+    private void OnEnable() { AttackCooldown.OnAttackReset += ResetAttackBool; }
+    private void OnDisable() { AttackCooldown.OnAttackReset -= ResetAttackBool; }
 
+    private void Awake()
+    {
+        stats = GetComponent<BossStatsComponent>().bossStats;
+    }
     private void Start()
     {
         if (OnAttackFinished == null)
@@ -26,11 +35,20 @@ public class SpeicalAttacks : BossAI
         leftPositionHigh = transform.position + Vector3.up * stats.spawnHeight;
         rightPositionHigh = transform.position + Vector3.up * stats.spawnHeight;
     }
+    private void ResetAttackBool()
+    {
+        canAttack = true;
+    }
     public void CallSpecialAttackLowOrHigh(int lowOrHigh)
     {
-        if (lowOrHigh != 0 || lowOrHigh != 1) 
-            Debug.LogWarning($"The current arguent: {lowOrHigh} is not valid. The attack for the call speical attack low or high method requies a 0 (low attack) or 1 (high attack).");
-        StartCoroutine(ExecuteSpecialAttack(lowOrHigh));
+        if (canAttack)
+        {
+            canAttack = false;
+            Mathf.Clamp(lowOrHigh, 0, 1);
+            if (lowOrHigh != 0 || lowOrHigh != 1)
+                Debug.LogWarning($"The current arguent: {lowOrHigh} is not valid. The attack for the call speical attack low or high method requies a 0 (low attack) or 1 (high attack).");
+            StartCoroutine(ExecuteSpecialAttack(lowOrHigh));
+        }
     }
     private  IEnumerator ExecuteSpecialAttack(int lowOrHigh)
     {

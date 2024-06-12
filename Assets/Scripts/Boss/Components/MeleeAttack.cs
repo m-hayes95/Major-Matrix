@@ -10,7 +10,6 @@ public class MeleeAttack : MonoBehaviour
     [SerializeField] private PlayerHealth playerHP;
     [SerializeField] private AudioSource meleeAttackSound;
     private AttackCooldown attackCooldown;
-    private BossStatsScriptableObject stats;
     private Animator animator;
  
     private bool canAttack;
@@ -18,14 +17,13 @@ public class MeleeAttack : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        stats = GetComponent<BossStatsComponent>().bossStats;
         attackCooldown = GetComponent<AttackCooldown>();
     }
     private void OnEnable()
     {
         AttackCooldown.OnAttackReset += ResetAttackValues;
     }
-    public void UseMeleeAttack()
+    public void UseMeleeAttack(float damageAmount, float meleeAttackCooldownTimer)
     {
         // Attack the player if they get too close
         if (canAttack && playerHP && !playerHP.GetIsDead())
@@ -33,8 +31,8 @@ public class MeleeAttack : MonoBehaviour
             animator.SetBool("IsUsingMeleeAttack", true);
             meleeAttackSound.Play();
             canAttack = false;
-            playerHP.DamagePlayer(stats.normalAttackDamage);
-            attackCooldown.ResetAttack(stats.resetAttackTimer);
+            playerHP.DamagePlayer(damageAmount);
+            attackCooldown.ResetAttack(meleeAttackCooldownTimer);
         }
     }
 
