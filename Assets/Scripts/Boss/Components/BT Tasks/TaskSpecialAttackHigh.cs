@@ -1,18 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using BehaviourTree;
 
-public class TaskSpecialAttackHigh : MonoBehaviour
+public class TaskSpecialAttackHigh : BTNode
 {
-    // Start is called before the first frame update
-    void Start()
+    private int highAttackIndex = 1;
+    private SpecialAttacks spAtk;
+    private bool notInAttack;
+    public TaskSpecialAttackHigh(SpecialAttacks specialAttacks)
     {
-        
+        spAtk = specialAttacks;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override NodeState Evaluate()
     {
-        
+        notInAttack = (bool)GetData("Can Attack");
+        if (notInAttack)
+        {
+            spAtk.CallSpecialAttackLowOrHigh(highAttackIndex);
+            state = NodeState.RUNNING;
+            Debug.Log($"Task Use Special Attack High state = {state}");
+            return state;
+        }
+        state = NodeState.FAILURE;
+        Debug.Log($"Task Use Special Attack High state = {state}");
+        return state;
     }
 }

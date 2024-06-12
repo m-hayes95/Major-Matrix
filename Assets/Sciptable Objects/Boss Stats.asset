@@ -22,7 +22,7 @@ MonoBehaviour:
   longRangeAttackThreshold: 8
   specialHighAttackMinY: 3.1
   maxHPtoAllowShield: 50
-  chanceToUseSpecialAttack: 20
+  chanceToUseSpecialAttack: 10
   chanceToShield: 0.1
   resetNormalAttackTimer: 1
   resetSpecialAttackTimer: 7.4

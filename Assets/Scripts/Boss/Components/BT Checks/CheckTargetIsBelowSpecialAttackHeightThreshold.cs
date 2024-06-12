@@ -30,8 +30,11 @@ public class CheckTargetIsBelowSpecialAttackHeightThreshold : BTNode
             Debug.Log($"Check Target Y Distance state = {state}");
             return state;
         }
-        state = NodeState.FAILURE;
-        Debug.Log($"Check Target Y Distance state = {state}");
-        return state;
+        else 
+        {
+            state = NodeState.FAILURE;
+            Debug.Log($"Check Target Y Distance state = {state}");
+            return state;
+        }
     }
 }

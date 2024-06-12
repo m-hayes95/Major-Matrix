@@ -1,6 +1,8 @@
 using UnityEngine;
 using BehaviourTree;
 using System.Collections.Generic;
+using System;
+using UnityEditor.Experimental.GraphView;
 
 public class BossBT : BTree
 {
@@ -76,12 +78,6 @@ public class BossBT : BTree
                                 // Choose to use special high or low attack
                                 new BTSelector(new List<BTNode>
                                 { 
-                                    // use special high attack
-                                    //new BTSequence(new List<BTNode>
-                                    //{
-                                        // Check should attack high
-                                        // Task High
-                                    //}),
                                     // use special low attack
                                     new BTSequence(new List<BTNode>
                                     {
@@ -89,6 +85,17 @@ public class BossBT : BTree
                                             transform, distanceToTargetY, stats.specialHighAttackMinY
                                             ),
                                         new TaskSpecialAttackLow(specialAttacks),
+                                    }),
+                                    // use special high attack
+                                    new BTSequence(new List<BTNode>
+                                    {
+                                        new BTInverter(new List<BTNode>()
+                                        {
+                                            new CheckTargetIsBelowSpecialAttackHeightThreshold(
+                                            transform, distanceToTargetY, stats.specialHighAttackMinY
+                                            ),
+                                        }),
+                                        new TaskSpecialAttackHigh(specialAttacks),
                                     }),
                                 }),
                             }),
