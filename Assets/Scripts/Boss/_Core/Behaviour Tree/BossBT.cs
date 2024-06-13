@@ -40,6 +40,7 @@ public class BossBT : BTree
     // Behaviour Tree
     protected override BTNode SetupTree()
     {
+        // Look at the player
         CheckTargetsSide();
 
         BTNode root = new BTSelector(new List<BTNode>
@@ -114,8 +115,6 @@ public class BossBT : BTree
                                 new CheckNotInSpecialAttack(specialAttacks),
                                 new TaskRangeAttackNormal(shoot, stats.shotFoce, stats.resetNormalAttackTimer),
                             }),
-                            
-                            
                         }),
                     }),
                 }),
@@ -126,6 +125,7 @@ public class BossBT : BTree
     }
     private void CheckTargetsSide()
     {
+        // Check which side the player is on
         float xDistanceFromTarget = transform.position.x - target.transform.position.x;
         if (!facingLeft && xDistanceFromTarget > 0)
         {

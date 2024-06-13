@@ -351,10 +351,15 @@ GameObject:
   - component: {fileID: 5045312288116761990}
   - component: {fileID: 6401279731778889121}
   - component: {fileID: 5374508136914483885}
+  - component: {fileID: 4455931626858198668}
   - component: {fileID: 2326548603049319845}
   - component: {fileID: 5167563716821035803}
+  - component: {fileID: 6002811899094001274}
   - component: {fileID: 2524296036211174063}
   - component: {fileID: 1437265639079168109}
+  - component: {fileID: 7710385609828776237}
+  - component: {fileID: 2208527890202707913}
+  - component: {fileID: 6346187429867278522}
   - component: {fileID: 4221417097767430099}
   m_Layer: 10
   m_Name: Boss Base
@@ -439,6 +444,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossStats: {fileID: 11400000, guid: 12f17780ed1098b4e8159c01f0f5ae70, type: 2}
+--- !u!114 &4455931626858198668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3905354449166342092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96133aa3917504b45a04405bf411ab12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2326548603049319845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -460,6 +477,7 @@ MonoBehaviour:
   hitSound: {fileID: 0}
   sheildHitSound: {fileID: 0}
   deathSound: {fileID: 0}
+  currentHP: 0
 --- !u!114 &5167563716821035803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -473,6 +491,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shieldVisual: {fileID: 6731709928268646155}
+--- !u!114 &6002811899094001274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3905354449166342092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24588202318c17e4fa6d56c32210b890, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHP: {fileID: 0}
+  meleeAttackSound: {fileID: 0}
 --- !u!114 &2524296036211174063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -488,6 +520,7 @@ MonoBehaviour:
   bullet: {fileID: 8593140917964682911, guid: 0db2caf4dd956d0438ab99d44cb9f924, type: 3}
   spawnPoint: {fileID: 1576500888767334665}
   bulletSound: {fileID: 0}
+  attackCooldown: {fileID: 0}
 --- !u!114 &1437265639079168109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -500,13 +533,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7190a18b5ec1cd24897b14dc5b3a6555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canAttack: 1
   specialAttackGameObject: {fileID: 6375700386247670218, guid: 7bcfd5b3cd418284281db8337cd286d7, type: 3}
   lowAttackSound: {fileID: 0}
   highAttackSound: {fileID: 0}
   OnAttackFinished:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7710385609828776237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3905354449166342092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0983bddfdaa6ef448b2f51c7dad3efbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2208527890202707913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3905354449166342092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21779e8622beb4b4a800b0f0d1887ccf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6346187429867278522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3905354449166342092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 365eca849a0d1f843b919644052262d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &4221417097767430099
 Animator:
   serializedVersion: 5

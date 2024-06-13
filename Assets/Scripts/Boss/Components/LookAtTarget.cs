@@ -1,14 +1,45 @@
-using System.Runtime.CompilerServices;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class LookAtTarget : MonoBehaviour
 {
-    [SerializeField] Transform targetTransform;
-    private bool facingLeft = true;
-    private void Look()
+    [SerializeField]private bool facingLeft = true;
+    private enum StateMachine  { left, right }
+    [SerializeField]private StateMachine m_Machine;
+    /*
+    public void LookAt(Transform thisTransform, Transform targetTransform)
     {   
-        Debug.Log("hjwjfij");
-        float xDistanceFromTarget = transform.position.x - targetTransform.position.x;
+        //float xDistanceFromTarget = thisTransform.position.x - targetTransform.position.x;
+        //if (thisTransform.position.x < targetTransform.position.x)
+        Debug.Log($"Target {targetTransform.position.x} ");
+        if (thisTransform.position.x > targetTransform.position.x)
+        {
+            facingLeft = true;
+        }
+        if (thisTransform.position.x < targetTransform.position.x)
+        {
+            facingLeft = false;
+        }
+        if (facingLeft) m_Machine = StateMachine.left;
+        else m_Machine = StateMachine.right;
+        switch (m_Machine)
+        {
+            case StateMachine.left:
+                
+                transform.Rotate(0f, -180f, 0f);
+                break;
+            case StateMachine.right:
+                transform.Rotate(0f, 0f, 0f);
+                break;
+        }
+        
+
+    }
+    */
+    public void LookAt(Transform thisTransform, Transform targetTransform)
+    {
+        // Check which side the player is on
+        float xDistanceFromTarget = thisTransform.position.x - targetTransform.transform.position.x;
         if (!facingLeft && xDistanceFromTarget > 0)
         {
             FacePlayer();
