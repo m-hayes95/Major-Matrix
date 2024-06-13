@@ -33,21 +33,18 @@ public class SpecialAttacks : MonoBehaviour
         if (OnAttackFinished == null)
             OnAttackFinished = new UnityEvent();
         OnAttackFinished.AddListener(AttackFinished);
-        // Set vector positions for the first attack (low special attack)
-        leftPositionLow = transform.position + Vector3.down * stats.offsetY;
-        rightPositionLow = transform.position + Vector3.down * stats.offsetY;
-        // Set vector positions for the first attack (high special attack)
-        leftPositionHigh = transform.position + Vector3.up * stats.spawnHeight;
-        rightPositionHigh = transform.position + Vector3.up * stats.spawnHeight;
+        
     }
+    
     private void ResetAttackBool() // can attack gets reset after cooldown
     {
         canAttack = true; 
     }
-    public void CallSpecialAttackLowOrHigh(int lowOrHigh)
+    public void CallSpecialAttackLowOrHigh(int lowOrHigh, Transform currentPosition)
     {
         if (!inSpecialAttack && canAttack)
         {
+            SetStartPositions(currentPosition);
             canAttack = false;
             inSpecialAttack = true;
             Mathf.Clamp(lowOrHigh, 0, 1);
@@ -55,6 +52,15 @@ public class SpecialAttacks : MonoBehaviour
                 Debug.LogWarning($"The current arguent: {lowOrHigh} is not valid. The attack for the call speical attack low or high method requies a 0 (low attack) or 1 (high attack).");
             StartCoroutine(ExecuteSpecialAttack(lowOrHigh));
         }
+    }
+    private void SetStartPositions(Transform transform)
+    {
+        // Set vector positions for the first attack (low special attack)
+        leftPositionLow = transform.position + Vector3.down * stats.offsetY;
+        rightPositionLow = transform.position + Vector3.down * stats.offsetY;
+        // Set vector positions for the first attack (high special attack)
+        leftPositionHigh = transform.position + Vector3.up * stats.spawnHeight;
+        rightPositionHigh = transform.position + Vector3.up * stats.spawnHeight;
     }
     private  IEnumerator ExecuteSpecialAttack(int lowOrHigh)
     {
@@ -133,10 +139,5 @@ public class SpecialAttacks : MonoBehaviour
             attacks[x].SetActive(false);
         }
         Debug.Log("Special Attack List Cleared");
-        // Reset Positions of initial vectors
-        leftPositionLow = transform.position + Vector3.down * stats.offsetY;
-        rightPositionLow = transform.position + Vector3.down * stats.offsetY;
-        leftPositionHigh = transform.position + Vector3.up * stats.spawnHeight;
-        rightPositionHigh = transform.position + Vector3.up * stats.spawnHeight;
     }
 }

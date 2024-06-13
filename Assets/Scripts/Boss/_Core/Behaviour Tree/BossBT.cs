@@ -93,7 +93,7 @@ public class BossBT : BTree
                                         new CheckTargetIsBelowSpecialAttackHeightThreshold(
                                             transform, distanceToTargetY, stats.specialHighAttackMinY
                                             ),
-                                        new TaskSpecialAttackLow(specialAttacks),
+                                        new TaskSpecialAttackLow(specialAttacks, transform),
                                     }),
                                     // use special high attack
                                     new BTSequence(new List<BTNode>
@@ -104,7 +104,7 @@ public class BossBT : BTree
                                             transform, distanceToTargetY, stats.specialHighAttackMinY
                                             ),
                                         }),
-                                        new TaskSpecialAttackHigh(specialAttacks),
+                                        new TaskSpecialAttackHigh(specialAttacks, transform),
                                     }),
                                 }),
                             }),

@@ -158,7 +158,7 @@ public abstract class BossAI : MonoBehaviour
         if (canAttack && !usingSpecialAttack && !playerHP.GetIsDead())
         {
             usingSpecialAttack = true;
-            specialAttacks.CallSpecialAttackLowOrHigh(lowSpecialAttack);
+            //specialAttacks.CallSpecialAttackLowOrHigh(lowSpecialAttack);
             //Debug.Log($"{gameObject.name} attacked {player.name} with a special low attack - {stats.specialAttackDamage} HP");
             canAttack = false;
             StartCoroutine (ResetAttack(stats.resetSpecialAttackTimer));
@@ -171,7 +171,7 @@ public abstract class BossAI : MonoBehaviour
         if (canAttack && !usingSpecialAttack && !playerHP.GetIsDead())
         {
             usingSpecialAttack = true;
-            specialAttacks.CallSpecialAttackLowOrHigh(highSpecialAttack);
+            //specialAttacks.CallSpecialAttackLowOrHigh(highSpecialAttack);
             //Debug.Log($"{gameObject.name} attacked {player.name} with a special high attack - {stats.specialAttackDamage} HP");
             canAttack = false;
             StartCoroutine(ResetAttack(stats.resetSpecialAttackTimer));
