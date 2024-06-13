@@ -19,10 +19,8 @@ public class MeleeAttack : MonoBehaviour
         animator = GetComponent<Animator>();
         attackCooldown = GetComponent<AttackCooldown>();
     }
-    private void OnEnable()
-    {
-        AttackCooldown.OnAttackReset += ResetAttackValues;
-    }
+    private void OnEnable() { AttackCooldown.OnNormalAttackReset += ResetAttackValues; }
+    private void OnDisable () { AttackCooldown.OnNormalAttackReset -= ResetAttackValues; }
     public void UseMeleeAttack(float damageAmount, float meleeAttackCooldownTimer)
     {
         // Attack the player if they get too close
@@ -32,19 +30,12 @@ public class MeleeAttack : MonoBehaviour
             meleeAttackSound.Play();
             canAttack = false;
             playerHP.DamagePlayer(damageAmount);
-            attackCooldown.ResetAttack(meleeAttackCooldownTimer);
+            attackCooldown.ResetNormalAttack(meleeAttackCooldownTimer);
         }
     }
-
     private void ResetAttackValues()
     {
         canAttack = true;
         animator.SetBool("IsUsingMeleeAttack", false);
     }
-
-    private void OnDisable()
-    {
-        AttackCooldown.OnAttackReset -= ResetAttackValues;
-    }
-
 }

@@ -14,11 +14,11 @@ public class Shoot : MonoBehaviour
     private bool canShoot = true;
     private void OnEnable()
     {
-        AttackCooldown.OnAttackReset += ResetCanAttackBool;
+        AttackCooldown.OnNormalAttackReset += ResetCanAttackBool;
     }
     private void OnDisable()
     {
-        AttackCooldown.OnAttackReset -= ResetCanAttackBool;
+        AttackCooldown.OnNormalAttackReset -= ResetCanAttackBool;
     }
 
     public void FireWeaponBoss(Transform target, float velocity, float attackResetTimer)
@@ -29,7 +29,7 @@ public class Shoot : MonoBehaviour
             InstantiateNewBullet();
             newTarget = target;
             SetVelocityAndDir(velocity);
-            attackCooldown.ResetAttack(attackResetTimer);
+            attackCooldown.ResetNormalAttack(attackResetTimer);
         }
     }
     

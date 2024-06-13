@@ -19,11 +19,9 @@ public class CheckTargetIsBelowSpecialAttackHeightThreshold : BTNode
     {
         // Get target data from blackboard and share distance on Y axis
         Transform target = (Transform)GetData("Target");
-        /*
+        //parent.parent.SetData(DISTNACE_Y, distance.GetDistanceY(target, transform));
+        //float distanceY = (float)GetData(DISTNACE_Y);
         
-        parent.parent.SetData(DISTNACE_Y, distance.GetDistanceY(target, transform));
-        float distanceY = (float)GetData(DISTNACE_Y);
-        */
         if (distance.GetDistanceY(target, transform) < distanceThreshold)
         {
             state = NodeState.SUCCESS;

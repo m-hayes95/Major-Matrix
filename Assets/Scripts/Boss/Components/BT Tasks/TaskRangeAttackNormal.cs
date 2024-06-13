@@ -17,17 +17,20 @@ public class TaskRangeAttackNormal : BTNode
 
     public override NodeState Evaluate()
     {
-        notInAttack = (bool)GetData("Can Attack");
+        target = (Transform)GetData("Target");
+        shoot.FireWeaponBoss(target, shotForce, timer);
+        state = NodeState.RUNNING;
+        Debug.Log($"Task Range Attack Normal state = {state}");
+        return state;
+        /*
+        //notInAttack = (bool)GetData("Can Attack");
         if (notInAttack)
         {
-            target = (Transform)GetData("Target");
-            shoot.FireWeaponBoss(target, shotForce, timer);
-            state = NodeState.RUNNING;
-            Debug.Log($"Task Range Attack Normal state = {state}");
-            return state;
+            
         }
         state = NodeState.FAILURE;
         Debug.Log($"Task Range Attack Normal state = {state}");
         return state;
+        */
     }
 }

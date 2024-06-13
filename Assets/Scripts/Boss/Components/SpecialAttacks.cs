@@ -10,19 +10,24 @@ public class SpecialAttacks : MonoBehaviour
     [SerializeField] private GameObject specialAttackGameObject;
     //[SerializeField] Transform highAttackPosistion
     [SerializeField] private AudioSource lowAttackSound, highAttackSound;
+    private AttackCooldown attackCooldown;
     private BossStatsScriptableObject stats;
     private Vector3 leftPositionLow, rightPositionLow;
     private Vector3 leftPositionHigh, rightPositionHigh;
     public UnityEvent OnAttackFinished;
     private List<GameObject> attacks;
+    private bool inSpecialAttack = false;
     private bool canAttack = true;
-    private void OnEnable() { AttackCooldown.OnAttackReset += ResetAttackBool; }
-    private void OnDisable() { AttackCooldown.OnAttackReset -= ResetAttackBool; }
+    private void OnEnable() { AttackCooldown.OnSpecialAttackReset += ResetAttackBool; }
+    private void OnDisable() { AttackCooldown.OnSpecialAttackReset -= ResetAttackBool; }
 
     private void Awake()
     {
         stats = GetComponent<BossStatsComponent>().bossStats;
+        attackCooldown = GetComponent<AttackCooldown>();    
     }
+    public bool GetIsInSpecialAttack() {  return inSpecialAttack; }
+
     private void Start()
     {
         if (OnAttackFinished == null)
@@ -35,15 +40,16 @@ public class SpecialAttacks : MonoBehaviour
         leftPositionHigh = transform.position + Vector3.up * stats.spawnHeight;
         rightPositionHigh = transform.position + Vector3.up * stats.spawnHeight;
     }
-    private void ResetAttackBool()
+    private void ResetAttackBool() // can attack gets reset after cooldown
     {
-        canAttack = true;
+        canAttack = true; 
     }
     public void CallSpecialAttackLowOrHigh(int lowOrHigh)
     {
-        if (canAttack)
+        if (!inSpecialAttack && canAttack)
         {
             canAttack = false;
+            inSpecialAttack = true;
             Mathf.Clamp(lowOrHigh, 0, 1);
             if (lowOrHigh != 0 || lowOrHigh != 1)
                 Debug.LogWarning($"The current arguent: {lowOrHigh} is not valid. The attack for the call speical attack low or high method requies a 0 (low attack) or 1 (high attack).");
@@ -118,6 +124,8 @@ public class SpecialAttacks : MonoBehaviour
 
     private void AttackFinished()
     {
+        inSpecialAttack = false;
+        attackCooldown.ResetSpecialAttack(stats.resetSpecialAttackTimer);
         Debug.Log("Special Attack Finished");
         // Remove new gameobjects from scene
         for (int x = 0; x < attacks.Count; ++x)

@@ -4,20 +4,40 @@ using UnityEngine;
 public class AttackCooldown : MonoBehaviour
 {
     public delegate void AttackReset();
-    public static AttackReset OnAttackReset;
-    private bool canAttack = true;
-    public bool GetCanAttack() { return canAttack; }
+    public static AttackReset OnNormalAttackReset, OnSpecialAttackReset;
+    private bool canNormalAttack, canSpecialAttack;
+    public bool GetCanNormalAttack() { return canNormalAttack; }
+    public bool GetCanSpecialAttack() { return canSpecialAttack; }
 
-    public void ResetAttack(float cooldownTimer)
+    private void Start()
     {
-        canAttack = false;
-        StartCoroutine(ResetAttackCooldown(cooldownTimer));
+        canNormalAttack = true;
+        canSpecialAttack = true;
     }
-    private IEnumerator ResetAttackCooldown(float cooldownTimer)
+    // Normal range and melee attacks
+    public void ResetNormalAttack(float cooldownTimer)
+    {
+        canNormalAttack = false;
+        StartCoroutine(ResetNormalAttackCooldown(cooldownTimer));
+    }
+    private IEnumerator ResetNormalAttackCooldown(float cooldownTimer)
     {
         yield return new WaitForSeconds(cooldownTimer);
-        Debug.Log("Enemy attack reset");
-        canAttack = true;
-        OnAttackReset?.Invoke();
+        Debug.Log("Enemy normal attack reset");
+        canNormalAttack = true;
+        OnNormalAttackReset?.Invoke();
+    }
+    // Special attacks
+    public void ResetSpecialAttack(float cooldownTimer)
+    {
+        canSpecialAttack = false;
+        StartCoroutine(ResetSpecialAttackCooldown(cooldownTimer));
+    }
+    private IEnumerator ResetSpecialAttackCooldown(float cooldownTimer)
+    {
+        yield return new WaitForSeconds(cooldownTimer);
+        Debug.Log("Enemy special attack reset");
+        canSpecialAttack = true;
+        OnSpecialAttackReset?.Invoke();
     }
 }
