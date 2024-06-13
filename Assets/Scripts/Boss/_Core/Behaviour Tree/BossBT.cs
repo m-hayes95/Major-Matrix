@@ -83,7 +83,7 @@ public class BossBT : BTree
                             new BTSequence(new List<BTNode>
                             { 
                                 new CheckCanSpecialAttack(attackCooldown),
-                                new CheckUseSpecialAttacks(randomChance, stats.percentIncrease, stats.chanceToUseSpecialAttack),
+                                new CheckChanceToUseSpecialAttacks(randomChance, stats.percentIncrease, stats.chanceToUseSpecialAttack),
                                 // Choose to use special high or low attack
                                 new BTSelector(new List<BTNode>
                                 { 

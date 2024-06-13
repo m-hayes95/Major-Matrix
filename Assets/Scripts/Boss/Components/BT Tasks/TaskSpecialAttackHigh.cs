@@ -13,6 +13,11 @@ public class TaskSpecialAttackHigh : BTNode
 
     public override NodeState Evaluate()
     {
+        spAtk.CallSpecialAttackLowOrHigh(highAttackIndex);
+        state = NodeState.RUNNING;
+        Debug.Log($"Task Use Special Attack High state = {state}");
+        return state;
+        /*
         notInAttack = (bool)GetData("Can Attack");
         if (notInAttack)
         {
@@ -23,6 +28,6 @@ public class TaskSpecialAttackHigh : BTNode
         }
         state = NodeState.FAILURE;
         Debug.Log($"Task Use Special Attack High state = {state}");
-        return state;
+        return state;*/
     }
 }
