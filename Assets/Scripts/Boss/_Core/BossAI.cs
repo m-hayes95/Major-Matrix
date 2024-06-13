@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
-
 public abstract class BossAI : MonoBehaviour
 {
     //Boss stats
@@ -15,7 +14,7 @@ public abstract class BossAI : MonoBehaviour
 
     private PlayerHealth playerHP;
     private Shoot shoot;
-    private SpeicalAttacks specialAttacks;
+    private SpecialAttacks specialAttacks;
 
     // Special Attack Selector
     private int lowSpecialAttack = 0;
@@ -44,7 +43,7 @@ public abstract class BossAI : MonoBehaviour
         bossHP = GetComponent<BossHealth>();
         shield = GetComponent<Shield>();
         shoot = GetComponent<Shoot>();
-        specialAttacks = GetComponent<SpeicalAttacks>();
+        specialAttacks = GetComponent<SpecialAttacks>();
         // Dont allow interuptions for special attacks
         if (specialAttacks.OnAttackFinished == null)
             specialAttacks.OnAttackFinished = new UnityEvent();
@@ -63,16 +62,12 @@ public abstract class BossAI : MonoBehaviour
             {
                 distanceFromPlayer =
                 Vector2.Distance(transform.position, player.transform.position);
-                Debug.Log($" The boss is {distanceFromPlayer} from the player");
+                //Debug.Log($" The boss is {distanceFromPlayer} from the player");
             }
             else
                 Debug.LogWarning("Player object not found in BossAI script.");
 
             CheckWhichSidePlayerIsOn();
-
-
-            Debug.Log($"AZ: Distance Y: {DistanceY()}....... playerY: {player.transform.position.y} - bossY {transform.position.y}");
-            Debug.Log($"BZ: Vector Distance Method = {Vector2.Distance(transform.position, player.transform.position)}");
         }
     }
 
@@ -104,7 +99,7 @@ public abstract class BossAI : MonoBehaviour
     {
         // Check distance between Y pos for boss and player, boss always 0
         float distanceY = player.transform.position.y - transform.position.y;
-        Debug.Log($"Y distance from player {distanceY}");
+        //Debug.Log($"Y distance from player {distanceY}");
         return distanceY;
     }
     protected void MoveToPlayer()
@@ -138,7 +133,7 @@ public abstract class BossAI : MonoBehaviour
         float rand = Random.value;
         if (rand < chanceModifier) randomChance = true;
         else randomChance = false;
-        Debug.Log($"Random Value is {rand} random chance = {randomChance}");
+        //Debug.Log($"Random Value is {rand} random chance = {randomChance}");
         return randomChance;
     }
 
@@ -147,31 +142,15 @@ public abstract class BossAI : MonoBehaviour
         // Attack the player if they cross a certain distance
         if (canAttack && !usingSpecialAttack && !playerHP.GetIsDead())
         {
-            shoot.FireWeaponBoss(target, stats.shotFoce);
-            Debug.Log($"{gameObject.name} attacked {player.name} with a normal ranged attack - {stats.normalAttackDamage} HP");
+            //shoot.FireWeaponBoss(target, stats.shotFoce);
+            //Debug.Log($"{gameObject.name} attacked {player.name} with a normal ranged attack - {stats.normalAttackDamage} HP");
             canAttack = false;
             //playerHP.DamagePlayer(stats.normalAttackDamage);
-            StartCoroutine(ResetAttack(stats.resetAttackTimer));
+            StartCoroutine(ResetAttack(stats.resetNormalAttackTimer));
             // Play animation for attack
         }
     }
-    protected void NormalCloseAttack(AudioSource attackSound)
-    {
-        // Attack the player if they get too close
-        if (canAttack && playerHP && !playerHP.GetIsDead())
-        {
-            animator.SetBool("IsUsingMeleeAttack", true);
-            attackSound.Play();
-            Debug.Log($"{gameObject.name} attacked {player.name} with a normal close attack - {stats.normalAttackDamage} HP");
-            canAttack = false;
-            playerHP.DamagePlayer(stats.normalAttackDamage);
-
-            StartCoroutine(ResetAttack(stats.resetAttackTimer));
-
-            // Play animation for attack
-        }
-        
-    }
+    
 
     protected void SpecialLowAttack()
     {
@@ -179,10 +158,10 @@ public abstract class BossAI : MonoBehaviour
         if (canAttack && !usingSpecialAttack && !playerHP.GetIsDead())
         {
             usingSpecialAttack = true;
-            specialAttacks.CallSpecialAttackLowOrHigh(lowSpecialAttack);
-            Debug.Log($"{gameObject.name} attacked {player.name} with a special low attack - {stats.specialAttackDamage} HP");
+            //specialAttacks.CallSpecialAttackLowOrHigh(lowSpecialAttack);
+            //Debug.Log($"{gameObject.name} attacked {player.name} with a special low attack - {stats.specialAttackDamage} HP");
             canAttack = false;
-            StartCoroutine (ResetAttack(stats.resetAttackTimer));
+            StartCoroutine (ResetAttack(stats.resetSpecialAttackTimer));
             // Play animation for attack
         }
     }
@@ -192,10 +171,10 @@ public abstract class BossAI : MonoBehaviour
         if (canAttack && !usingSpecialAttack && !playerHP.GetIsDead())
         {
             usingSpecialAttack = true;
-            specialAttacks.CallSpecialAttackLowOrHigh(highSpecialAttack);
-            Debug.Log($"{gameObject.name} attacked {player.name} with a special high attack - {stats.specialAttackDamage} HP");
+            //specialAttacks.CallSpecialAttackLowOrHigh(highSpecialAttack);
+            //Debug.Log($"{gameObject.name} attacked {player.name} with a special high attack - {stats.specialAttackDamage} HP");
             canAttack = false;
-            StartCoroutine(ResetAttack(stats.resetAttackTimer));
+            StartCoroutine(ResetAttack(stats.resetSpecialAttackTimer));
         }
         // Play animation for attack
     }
@@ -211,11 +190,11 @@ public abstract class BossAI : MonoBehaviour
     private IEnumerator ResetAttack(float resetTimer)
     {
         yield return new WaitForSeconds( resetTimer );
-        Debug.Log("Enemy attack reset");
+        //Debug.Log("Enemy attack reset");
         animator.SetBool("IsUsingMeleeAttack", false);
         canAttack = !canAttack;
     }
-
+    /*
     private void OnDrawGizmos()
     {
         // Close attack range
@@ -231,5 +210,5 @@ public abstract class BossAI : MonoBehaviour
             new Vector3(20, transform.position.y + stats.specialHighAttackMinY, 0)
             );
     }
-
+    */
 }

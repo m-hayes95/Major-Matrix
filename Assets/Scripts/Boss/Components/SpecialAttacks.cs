@@ -1,36 +1,66 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UIElements;
 
-public class SpeicalAttacks : BossAI
+[RequireComponent(typeof(AttackCooldown))]
+public class SpecialAttacks : MonoBehaviour
 {
     [SerializeField] private GameObject specialAttackGameObject;
     //[SerializeField] Transform highAttackPosistion
     [SerializeField] private AudioSource lowAttackSound, highAttackSound;
+    private AttackCooldown attackCooldown;
+    private BossStatsScriptableObject stats;
     private Vector3 leftPositionLow, rightPositionLow;
     private Vector3 leftPositionHigh, rightPositionHigh;
     public UnityEvent OnAttackFinished;
     private List<GameObject> attacks;
+    private bool inSpecialAttack = false;
+    private bool canAttack = true;
+    private void OnEnable() { AttackCooldown.OnSpecialAttackReset += ResetAttackBool; }
+    private void OnDisable() { AttackCooldown.OnSpecialAttackReset -= ResetAttackBool; }
+
+    private void Awake()
+    {
+        stats = GetComponent<BossStatsComponent>().bossStats;
+        attackCooldown = GetComponent<AttackCooldown>();    
+    }
+    public bool GetIsInSpecialAttack() {  return inSpecialAttack; }
 
     private void Start()
     {
         if (OnAttackFinished == null)
             OnAttackFinished = new UnityEvent();
         OnAttackFinished.AddListener(AttackFinished);
+        
+    }
+    
+    private void ResetAttackBool() // can attack gets reset after cooldown
+    {
+        canAttack = true; 
+    }
+    public void CallSpecialAttackLowOrHigh(int lowOrHigh, Transform currentPosition)
+    {
+        if (!inSpecialAttack && canAttack)
+        {
+            SetStartPositions(currentPosition);
+            canAttack = false;
+            inSpecialAttack = true;
+            Mathf.Clamp(lowOrHigh, 0, 1);
+            if (lowOrHigh != 0 || lowOrHigh != 1)
+                Debug.LogWarning($"The current arguent: {lowOrHigh} is not valid. The attack for the call speical attack low or high method requies a 0 (low attack) or 1 (high attack).");
+            StartCoroutine(ExecuteSpecialAttack(lowOrHigh));
+        }
+    }
+    private void SetStartPositions(Transform transform)
+    {
         // Set vector positions for the first attack (low special attack)
         leftPositionLow = transform.position + Vector3.down * stats.offsetY;
         rightPositionLow = transform.position + Vector3.down * stats.offsetY;
         // Set vector positions for the first attack (high special attack)
         leftPositionHigh = transform.position + Vector3.up * stats.spawnHeight;
         rightPositionHigh = transform.position + Vector3.up * stats.spawnHeight;
-    }
-    public void CallSpecialAttackLowOrHigh(int lowOrHigh)
-    {
-        if (lowOrHigh != 0 || lowOrHigh != 1) 
-            Debug.LogWarning($"The current arguent: {lowOrHigh} is not valid. The attack for the call speical attack low or high method requies a 0 (low attack) or 1 (high attack).");
-        StartCoroutine(ExecuteSpecialAttack(lowOrHigh));
     }
     private  IEnumerator ExecuteSpecialAttack(int lowOrHigh)
     {
@@ -100,6 +130,8 @@ public class SpeicalAttacks : BossAI
 
     private void AttackFinished()
     {
+        inSpecialAttack = false;
+        attackCooldown.ResetSpecialAttack(stats.resetSpecialAttackTimer);
         Debug.Log("Special Attack Finished");
         // Remove new gameobjects from scene
         for (int x = 0; x < attacks.Count; ++x)
@@ -107,10 +139,5 @@ public class SpeicalAttacks : BossAI
             attacks[x].SetActive(false);
         }
         Debug.Log("Special Attack List Cleared");
-        // Reset Positions of initial vectors
-        leftPositionLow = transform.position + Vector3.down * stats.offsetY;
-        rightPositionLow = transform.position + Vector3.down * stats.offsetY;
-        leftPositionHigh = transform.position + Vector3.up * stats.spawnHeight;
-        rightPositionHigh = transform.position + Vector3.up * stats.spawnHeight;
     }
 }

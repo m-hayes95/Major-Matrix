@@ -28,7 +28,7 @@ public class BossFSM : BossAI
                 if (bossHP.GetIsDead()) sM = StateMachine.Dead;
                 //Shield
                 if (!shield.GetShieldStatus() && shield.GetCurrentShieldsAmount() > 0 && canShield && 
-                    bossHP.GetBossCurrentHP() <= stats.maxHPtoAllowShield && RandomChance(stats.chanceToShield))
+                    bossHP.GetBossCurrentHP() <= stats.dangerThreshold && RandomChance(stats.chanceToShield))
                         sM = StateMachine.Shield;
                 // Range / Special Attacks
                 if (distanceFromPlayer > stats.longRangeAttackThreshold && canAttack && !doOnce)
@@ -61,10 +61,10 @@ public class BossFSM : BossAI
                         
                 }
                 //Close Attacks   
-                if (distanceFromPlayer < stats.closeRangeAttackThreshold && canAttack) 
+                if (distanceFromPlayer < stats.meleeAttackRange && canAttack) 
                     sM = StateMachine.CloseAttack;
                 //Chase
-                if (distanceFromPlayer > stats.closeRangeAttackThreshold &&
+                if (distanceFromPlayer > stats.meleeAttackRange &&
                  distanceFromPlayer < stats.longRangeAttackThreshold) 
                     sM = StateMachine.ChasePlayer;
                     break;
@@ -78,7 +78,7 @@ public class BossFSM : BossAI
 
             case StateMachine.CloseAttack:
                 
-                NormalCloseAttack(closeRangeAttackSound);
+                //NormalCloseAttack(closeRangeAttackSound);
                 sM = StateMachine.Idle;
                 break;
 

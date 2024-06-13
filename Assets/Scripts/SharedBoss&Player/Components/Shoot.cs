@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Shoot : MonoBehaviour
@@ -7,19 +8,39 @@ public class Shoot : MonoBehaviour
     [SerializeField, Tooltip("Add the spawn point transform, where the bullet will spawn from, to this field")] 
     private Transform spawnPoint;
     [SerializeField] private AudioSource bulletSound;
+    [SerializeField] private AttackCooldown attackCooldown;
     private Transform newTarget;
     private GameObject newBullet;
-
-    public void FireWeaponBoss(Transform target, float velocity)
+    private bool canShoot = true;
+    private void OnEnable()
     {
-        InstantiateNewBullet();
-        newTarget = target;
-        SetVelocityAndDir(velocity);
+        AttackCooldown.OnNormalAttackReset += ResetCanAttackBool;
     }
+    private void OnDisable()
+    {
+        AttackCooldown.OnNormalAttackReset -= ResetCanAttackBool;
+    }
+
+    public void FireWeaponBoss(Transform target, float velocity, float attackResetTimer)
+    {
+        if (canShoot)
+        {
+            canShoot = false;
+            InstantiateNewBullet();
+            newTarget = target;
+            SetVelocityAndDir(velocity);
+            attackCooldown.ResetNormalAttack(attackResetTimer);
+        }
+    }
+    
     public void FireWeaponPlayer(float velocity)
     {
         InstantiateNewBullet();
         SetVelocityAndDir(velocity);
+    }
+    private void ResetCanAttackBool()
+    {
+        canShoot = true;
     }
 
     private void InstantiateNewBullet()
@@ -39,12 +60,11 @@ public class Shoot : MonoBehaviour
         else 
         {
             direction = transform.right;
-            Debug.Log($"Player is shooting right: {direction}");
+            //Debug.Log($"Player is shooting right: {direction}");
         }
         newBullet.GetComponent<Rigidbody2D>().velocity = direction.normalized * velocity;
 
     }
-    
 
     private void OnDrawGizmos()
     {

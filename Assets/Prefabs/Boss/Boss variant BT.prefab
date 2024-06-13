@@ -1,0 +1,122 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &7445911763047905354
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3905354449166342092, guid: 51936a5e048ced64887b88e46fd06264, type: 3}
+      propertyPath: m_Name
+      value: Boss variant BT
+      objectReference: {fileID: 0}
+    - target: {fileID: 5045312288116761990, guid: 51936a5e048ced64887b88e46fd06264, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5045312288116761990, guid: 51936a5e048ced64887b88e46fd06264, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 5045312288116761990, guid: 51936a5e048ced64887b88e46fd06264, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5045312288116761990, guid: 51936a5e048ced64887b88e46fd06264, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5045312288116761990, guid: 51936a5e048ced64887b88e46fd06264, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5045312288116761990, guid: 51936a5e048ced64887b88e46fd06264, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5045312288116761990, guid: 51936a5e048ced64887b88e46fd06264, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5045312288116761990, guid: 51936a5e048ced64887b88e46fd06264, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5045312288116761990, guid: 51936a5e048ced64887b88e46fd06264, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 5045312288116761990, guid: 51936a5e048ced64887b88e46fd06264, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3905354449166342092, guid: 51936a5e048ced64887b88e46fd06264, type: 3}
+      insertIndex: 7
+      addedObject: {fileID: 2413821031876384162}
+    - targetCorrespondingSourceObject: {fileID: 3905354449166342092, guid: 51936a5e048ced64887b88e46fd06264, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3840645956435967475}
+  m_SourcePrefab: {fileID: 100100000, guid: 51936a5e048ced64887b88e46fd06264, type: 3}
+--- !u!4 &2400908464340835788 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5045312288116761990, guid: 51936a5e048ced64887b88e46fd06264, type: 3}
+  m_PrefabInstance: {fileID: 7445911763047905354}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4926138177142674149 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2524296036211174063, guid: 51936a5e048ced64887b88e46fd06264, type: 3}
+  m_PrefabInstance: {fileID: 7445911763047905354}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5865844379600711558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 538f2e9179629c245848003626330d52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &5865844379600711558 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3905354449166342092, guid: 51936a5e048ced64887b88e46fd06264, type: 3}
+  m_PrefabInstance: {fileID: 7445911763047905354}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2413821031876384162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5865844379600711558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96133aa3917504b45a04405bf411ab12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3840645956435967475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5865844379600711558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27ed1eb48a9d43445a8bfbc175abfcc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
+  distanceThreshold: 5
+  shotForce: 5
+  player: {fileID: 0}
+  target: {fileID: 0}
+  bossPos: {fileID: 2400908464340835788}
+  shoot: {fileID: 4926138177142674149}
+  chasePlayer: {fileID: 2413821031876384162}
+  bossFOV: 15
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 128
