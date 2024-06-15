@@ -1,8 +1,8 @@
 using System;
 using UnityEngine;
 using UnityEngine.Events;
-
-public class BossHealth : BossAI
+[RequireComponent(typeof(BossStatsComponent), typeof(Shield))]
+public class BossHealth : MonoBehaviour
 {
     [SerializeField] private GameObject bossVisuals;
     [SerializeField] private ParticleSystem deathEffect;
@@ -10,11 +10,17 @@ public class BossHealth : BossAI
     [SerializeField] private UIController uIController;
     [SerializeField] private PlayerHUD playerHUD;
     [SerializeField] private AudioSource hitSound, sheildHitSound, deathSound;
-    [SerializeField] private float currentHP; // Remove after debugging
+    private float currentHP;
+    private BossStatsScriptableObject stats;
+    private Shield shield;
     private UnityEvent OnDeath;
     private bool isDead;
-    
 
+    private void Awake()
+    {
+        stats = GetComponent<BossStatsComponent>().bossStats;
+        shield = GetComponent<Shield>();    
+    }
     private void Start()
     {
         currentHP = stats.maxHP;
