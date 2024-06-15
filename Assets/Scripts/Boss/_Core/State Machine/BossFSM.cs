@@ -7,7 +7,6 @@ public class BossFSM : MonoBehaviour
 
     [SerializeField] private StateMachine sM;
     [SerializeField] private GameObject target;
-    private bool facingLeft = true;
     // Type of Special Attacks
     private int lowAttackIndex = 0;
     private int highAttackIndex = 1;
@@ -22,7 +21,6 @@ public class BossFSM : MonoBehaviour
     private SpecialAttacks specialAttacks;
     private DistanceToTargetY distanceToTargetY;
     private BossStatsScriptableObject stats;
-    private LookAtTarget lookAtTarget;
     
     private void Awake()
     {
@@ -42,13 +40,10 @@ public class BossFSM : MonoBehaviour
         randomChance = GetComponent<RandomChance>();
         specialAttacks = GetComponent<SpecialAttacks>();
         distanceToTargetY = GetComponent<DistanceToTargetY>();
-        lookAtTarget = GetComponent<LookAtTarget>();
     }
 
     private void Update()
     {
-        lookAtTarget.LookAt(transform, target.transform);
-        //CheckTargetsSide();
         switch (sM)
         {
             case StateMachine.Idle:
@@ -67,7 +62,7 @@ public class BossFSM : MonoBehaviour
                 // Normal Attacks && CheckNotInSpecialAttack()
                 if (CheckCanAttack() && CheckNotInSpecialAttack())
                 {
-                    if (CheckCanUseSpecialAttack())
+                    if (CheckCanUseSpecialAttack()) // There is an issue with the boss not doing anything before using a special attack
                     {
                         if (CheckChanceToUseSpecialAttack())
                         {
@@ -201,26 +196,4 @@ public class BossFSM : MonoBehaviour
         }
         return false;
     }
-    /*
-    private void CheckTargetsSide()
-    {
-        // Check which side the player is on
-        float xDistanceFromTarget = transform.position.x - target.transform.position.x;
-        if (!facingLeft && xDistanceFromTarget > 0)
-        {
-            FacePlayer();
-        }
-        if (facingLeft && xDistanceFromTarget < 0)
-        {
-            FacePlayer();
-        }
-    }
-    private void FacePlayer()
-    {
-        // Look towards the player depending on X pos
-        facingLeft = !facingLeft;
-        transform.Rotate(0f, -180f, 0f);
-        Debug.Log("Boss Flipped");
-    }
-    */
 }

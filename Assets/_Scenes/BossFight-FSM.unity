@@ -11007,6 +11007,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   facingLeft: 1
+  targetTransform: {fileID: 1912152817}
   m_Machine: 0
 --- !u!1 &1600802218
 GameObject:
