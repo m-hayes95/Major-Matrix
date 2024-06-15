@@ -1,14 +1,15 @@
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class LookAtTarget : MonoBehaviour
 {
-    [SerializeField] Transform targetTransform;
+    [SerializeField] private Transform targetTransform;
     private bool facingLeft = true;
-    private void Look()
-    {   
-        Debug.Log("hjwjfij");
-        float xDistanceFromTarget = transform.position.x - targetTransform.position.x;
+    // This class is used with the statemachine boss as a component only
+    // When the state machine ai class calls this script in update, it does not work
+    private void Update()
+    {
+        // Check which side the player is on
+        float xDistanceFromTarget = transform.position.x - targetTransform.transform.position.x;
         if (!facingLeft && xDistanceFromTarget > 0)
         {
             FacePlayer();

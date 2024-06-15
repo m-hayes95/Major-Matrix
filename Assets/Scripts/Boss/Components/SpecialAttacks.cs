@@ -16,7 +16,7 @@ public class SpecialAttacks : MonoBehaviour
     private Vector3 leftPositionHigh, rightPositionHigh;
     public UnityEvent OnAttackFinished;
     private List<GameObject> attacks;
-    private bool inSpecialAttack = false;
+    [SerializeField]private bool inSpecialAttack = false;
     private bool canAttack = true;
     private void OnEnable() { AttackCooldown.OnSpecialAttackReset += ResetAttackBool; }
     private void OnDisable() { AttackCooldown.OnSpecialAttackReset -= ResetAttackBool; }
@@ -48,8 +48,6 @@ public class SpecialAttacks : MonoBehaviour
             canAttack = false;
             inSpecialAttack = true;
             Mathf.Clamp(lowOrHigh, 0, 1);
-            if (lowOrHigh != 0 || lowOrHigh != 1)
-                Debug.LogWarning($"The current arguent: {lowOrHigh} is not valid. The attack for the call speical attack low or high method requies a 0 (low attack) or 1 (high attack).");
             StartCoroutine(ExecuteSpecialAttack(lowOrHigh));
         }
     }

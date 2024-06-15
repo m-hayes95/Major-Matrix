@@ -5,10 +5,9 @@ public class AttackCooldown : MonoBehaviour
 {
     public delegate void AttackReset();
     public static AttackReset OnNormalAttackReset, OnSpecialAttackReset;
-    private bool canNormalAttack, canSpecialAttack;
+    [SerializeField]private bool canNormalAttack, canSpecialAttack;
     public bool GetCanNormalAttack() { return canNormalAttack; }
     public bool GetCanSpecialAttack() { return canSpecialAttack; }
-
     private void Start()
     {
         canNormalAttack = true;
