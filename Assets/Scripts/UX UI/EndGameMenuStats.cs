@@ -5,10 +5,10 @@ using TMPro;
 
 public class EndGameMenuStats : MonoBehaviour
 {
-    [SerializeField] private PlayerHealth playerHealth;
-    [SerializeField] private GameManager gameManager;
-
-    [SerializeField] private TextMeshProUGUI deathCount, gameTimer;
+    [SerializeField] private TextMeshProUGUI deathCount_SM, timeCount_SM;
+    [SerializeField] private TextMeshProUGUI deathCount_BT, timeCount_BT;
+    [SerializeField] private GameObject creditsMenu;
+    [SerializeField] private GameObject quitButton, statsDisplay;
     private float savedTime, savedPlayerDeathCount;
     private bool timeStored = false;
 
@@ -16,24 +16,34 @@ public class EndGameMenuStats : MonoBehaviour
     {
         DisplayPlayerDeathCount();
         DisplayEncounterTime();
-    }
-
-    public void SaveEncounterTimer (float timer)
-    {
-        if (!timeStored)
-        {
-            timeStored = true;
-            savedTime = timer;
-        }
+        if (creditsMenu.activeInHierarchy)
+            CloseCreditsTab();
     }
 
     private void DisplayPlayerDeathCount()
     {
-        deathCount.text = playerHealth.GetPlayerDeaths().ToString();
+        deathCount_SM.text = SavedStats.Instance.GetCurrentPlayerDeathCountForSM().ToString();
+        deathCount_BT.text = SavedStats.Instance.GetCurrentPlayerDeathCountForBT().ToString();
     }
 
     private void DisplayEncounterTime()
     {
-        gameTimer.text = savedTime.ToString("00:00");
+        timeCount_SM.text = SavedStats.Instance.GetEncounterTimeForSM().ToString("00:00");
+        timeCount_BT.text = SavedStats.Instance.GetEncounterTimeForSM().ToString("00:00");
     }
+    private void CloseCreditsTab()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            creditsMenu.SetActive(false);
+            quitButton.SetActive(true);
+            statsDisplay.SetActive(true);
+        }
+    }
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
+    
 }

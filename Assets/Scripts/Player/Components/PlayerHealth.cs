@@ -29,7 +29,6 @@ public class PlayerHealth : MonoBehaviour
         if (OnDeath == null)
             OnDeath = new UnityEvent();
         OnDeath.AddListener(PlayerDead);
-        OnDeath.AddListener(SavedStats.Instance.StoreCurrentPlayerDeaths);
         isDead = false; 
         deathCount = 0;
         

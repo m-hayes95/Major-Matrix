@@ -26,6 +26,14 @@ public class GameManager : MonoBehaviour
         // Used with UI events on resume game click
         isGamePaused = !isGamePaused;
     }
+    public void StorePlayerDeathCountBTEncounter()
+    {
+        SavedStats.Instance.StoreCurrentPlayerDeathsBT();
+    }
+    public void StorePlayerDeathCountSMEncounter()
+    {
+        SavedStats.Instance.StoreCurrentPlayerDeathsSM();
+    }
 
     public bool GetIsGamePaused() { return isGamePaused; }
 }
