@@ -9,8 +9,6 @@ public class EndGameMenuStats : MonoBehaviour
     [SerializeField] private TextMeshProUGUI deathCount_BT, timeCount_BT;
     [SerializeField] private GameObject creditsMenu;
     [SerializeField] private GameObject quitButton, statsDisplay;
-    private float savedTime, savedPlayerDeathCount;
-    private bool timeStored = false;
 
     private void Update()
     {
@@ -29,7 +27,7 @@ public class EndGameMenuStats : MonoBehaviour
     private void DisplayEncounterTime()
     {
         timeCount_SM.text = SavedStats.Instance.GetEncounterTimeForSM().ToString("00:00");
-        timeCount_BT.text = SavedStats.Instance.GetEncounterTimeForSM().ToString("00:00");
+        timeCount_BT.text = SavedStats.Instance.GetEncounterTimeForBT().ToString("00:00");
     }
     private void CloseCreditsTab()
     {
@@ -44,6 +42,4 @@ public class EndGameMenuStats : MonoBehaviour
     {
         Application.Quit();
     }
-
-    
 }

@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/_Scenes/BossFight_BT_Scene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
+    path: Assets/_Scenes/MidwaySafeRoom_Scene.unity
+    guid: 8013a669fd7e0aa4abad0187a2223f22
+  - enabled: 1
     path: Assets/_Scenes/BossFight_FSM_Scene.unity
     guid: 0bd4829edc894644dbba2dcf65763832
   - enabled: 1

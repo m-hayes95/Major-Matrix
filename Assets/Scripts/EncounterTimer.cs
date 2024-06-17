@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class EncounterTimer : MonoBehaviour
 {
-    [SerializeField] private EndGameMenuStats endGameMenuStats;
     private float encounterTimer;
     private const string SCENE_BT_AI = "BossFight_BT_Scene";
     private const string SCENE_SM_AI = "BossFight_FSM_Scene";

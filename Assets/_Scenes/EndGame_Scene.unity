@@ -3037,7 +3037,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1849504575}
   m_Layer: 5
-  m_Name: Boss BT Stats (1)
+  m_Name: Boss SM Stats
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3075,7 +3075,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1972583761}
   m_Layer: 5
-  m_Name: Update Text
+  m_Name: Update Text BT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3112,7 +3112,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2066022075}
   m_Layer: 5
-  m_Name: Update Text
+  m_Name: Update Text SM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
