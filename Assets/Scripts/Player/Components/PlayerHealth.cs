@@ -8,7 +8,6 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private GameObject playerVisuals;
     [SerializeField] private ParticleSystem deathEffect;
     [SerializeField] private GameManager gameManager;
-    [SerializeField] private UIController uIController;
     [SerializeField] private PlayerHUD playerHUD;
     [SerializeField] private AudioSource hitSound, deathSound;
     private PlayerController playerController;
@@ -56,7 +55,6 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log("Players current HP reached 0, Player Died");
         DeathEffect();
         playerVisuals.SetActive(false);
-        StartCoroutine(uIController.DisplayEndGameMenu(3f));
     }
 
     private void DeathEffect()

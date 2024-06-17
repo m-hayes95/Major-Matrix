@@ -16,15 +16,16 @@ public class GameManager : MonoBehaviour
         OnPaused?.Invoke();
     }
 
-    public IEnumerator LoadSceneCoroutine(float seconds, int sceneIndex)
+    public IEnumerator LoadSceneCoroutine(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        SceneManager.LoadScene(sceneIndex);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void ManuallySetIsGamePaused()
     {
         // Used with UI events on resume game click
         isGamePaused = !isGamePaused;
     }
+
     public bool GetIsGamePaused() { return isGamePaused; }
 }

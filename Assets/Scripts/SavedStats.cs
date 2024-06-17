@@ -9,18 +9,15 @@ public class SavedStats : MonoBehaviour
     [SerializeField]private float savedEncouterTimeBT;
     [SerializeField]private float savedEncouterTimeSM;
     [SerializeField]private float playerDeathCount;
-    private void OnEnable()
-    {
-        
-    }
+
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(Instance);
+            DontDestroyOnLoad(gameObject);
         }
-        else Destroy(Instance);
+        else Destroy(gameObject);
         
     }
     public void StoreCurrentTimeBT(float currentTimeBT)

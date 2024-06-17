@@ -27,17 +27,20 @@ public class UIController : MonoBehaviour
         pauseMenu.SetActive(showPauseMenu);
         Debug.Log("Pause game event invoked");
     }
-
-    public IEnumerator DisplayEndGameMenu(float seconds)
+    public void DisplayGameOverMenu()
     {
-        yield return new WaitForSeconds(seconds);
+        StartCoroutine(ShowGameOverMenu());
+    }
+    private IEnumerator ShowGameOverMenu()
+    {
+        yield return new WaitForSeconds(2f);
         showEndGameMenu = !showEndGameMenu;
         endGameMenu.SetActive(showEndGameMenu);
     }
 
     public void ClickRestartGame()
     {
-        StartCoroutine(gameManager.LoadSceneCoroutine(0.1f, 0));
+        StartCoroutine(gameManager.LoadSceneCoroutine(0.1f));
         Debug.Log("player clicked restart game");
     }
 

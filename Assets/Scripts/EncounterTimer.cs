@@ -23,10 +23,10 @@ public class EncounterTimer : MonoBehaviour
     {
         // Check which scene we are in and save the correct encounter time
         // This method is called on the Boss OnDeath event through the inspector
-        Scene currentScene = SceneManager.GetActiveScene();
-        if (currentScene.name == SCENE_BT_AI)
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        if (currentSceneName == SCENE_BT_AI)
             SavedStats.Instance.StoreCurrentTimeBT(encounterTimer);
-        if (currentScene.name ==  SCENE_SM_AI)
+        if (currentSceneName ==  SCENE_SM_AI)
             SavedStats.Instance.StoreCurrentTimeSM(encounterTimer);
     }
 
