@@ -12,6 +12,7 @@ public class BossHealth : MonoBehaviour
     [SerializeField] private UIController uIController;
     [SerializeField] private PlayerHUD playerHUD;
     [SerializeField] private AudioSource hitSound, sheildHitSound, deathSound;
+
     private float currentHP;
     private BossStatsScriptableObject stats;
     private Shield shield;

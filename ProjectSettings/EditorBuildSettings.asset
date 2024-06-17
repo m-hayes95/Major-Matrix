@@ -6,15 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Scenes/StartSafeRoom.unity
+    path: Assets/_Scenes/StartSafeRoom_Scene.unity
     guid: 5144f3397175e65429623a38dc837d3e
   - enabled: 1
-    path: Assets/_Scenes/BossFight-BT.unity
+    path: Assets/_Scenes/BossFight_BT_Scene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/_Scenes/BossFight-FSM.unity
+    path: Assets/_Scenes/BossFight_FSM_Scene.unity
     guid: 0bd4829edc894644dbba2dcf65763832
   - enabled: 1
-    path: Assets/_Scenes/EndGameScene.unity
+    path: Assets/_Scenes/EndGame_Scene.unity
     guid: e99654628dce7704d954e38b46ab2359
   m_configObjects: {}

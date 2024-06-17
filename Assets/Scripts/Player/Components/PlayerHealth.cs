@@ -4,6 +4,7 @@ using UnityEngine.Events;
 
 public class PlayerHealth : MonoBehaviour
 {
+    public UnityEvent OnDeath;
     [SerializeField] private GameObject playerVisuals;
     [SerializeField] private ParticleSystem deathEffect;
     [SerializeField] private GameManager gameManager;
@@ -13,7 +14,6 @@ public class PlayerHealth : MonoBehaviour
     private PlayerController playerController;
     private float currentHP;
     [SerializeField]private int deathCount;
-    private UnityEvent OnDeath;
     private bool isDead;
     
 
@@ -30,6 +30,7 @@ public class PlayerHealth : MonoBehaviour
         if (OnDeath == null)
             OnDeath = new UnityEvent();
         OnDeath.AddListener(PlayerDead);
+        OnDeath.AddListener(SavedStats.Instance.StoreCurrentPlayerDeaths);
         isDead = false; 
         deathCount = 0;
         
