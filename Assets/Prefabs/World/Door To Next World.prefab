@@ -141,6 +141,7 @@ GameObject:
   - component: {fileID: 7308440911547619766}
   - component: {fileID: 8951581808926292837}
   - component: {fileID: 1305427410388651593}
+  - component: {fileID: 21232248012299824}
   - component: {fileID: 1950845078877939223}
   m_Layer: 0
   m_Name: Door To Next World
@@ -189,6 +190,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afa535650a3d6a0488227a12219d8558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &21232248012299824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3216371028813405044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd6b5ea74e941ea44b33e03647bdfe35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!61 &1950845078877939223

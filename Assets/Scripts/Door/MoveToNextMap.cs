@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,10 +10,6 @@ public class MoveToNextMap : MonoBehaviour
     private void Awake()
     {
         spinDoorVisuals = GetComponent<SpinDoorVisuals>();
-    }
-    public void OpenDoor()
-    {
-        gameObject.SetActive(true);
     }
     private void Update()
     {

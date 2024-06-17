@@ -2444,6 +2444,34 @@ PrefabInstance:
       propertyPath: sheildHitSound
       value: 
       objectReference: {fileID: 1023580629}
+    - target: {fileID: 6044379319514701181, guid: 7ff3c438540a27541994198c2f1927ed, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6044379319514701181, guid: 7ff3c438540a27541994198c2f1927ed, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6044379319514701181, guid: 7ff3c438540a27541994198c2f1927ed, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 123660877679960163}
+    - target: {fileID: 6044379319514701181, guid: 7ff3c438540a27541994198c2f1927ed, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6044379319514701181, guid: 7ff3c438540a27541994198c2f1927ed, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 6044379319514701181, guid: 7ff3c438540a27541994198c2f1927ed, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: OpenDoorToNextMap, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6044379319514701181, guid: 7ff3c438540a27541994198c2f1927ed, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6942945527797106869, guid: 7ff3c438540a27541994198c2f1927ed, type: 3}
       propertyPath: lowAttackSound
       value: 
@@ -14594,9 +14622,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door To Next World
       objectReference: {fileID: 0}
-    - target: {fileID: 3358440391505661711, guid: 14f27531f685a834195957e17c3bc7ae, type: 3}
-      propertyPath: m_SortingOrder
-      value: 2
+    - target: {fileID: 3216371028813405044, guid: 14f27531f685a834195957e17c3bc7ae, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7308440911547619766, guid: 14f27531f685a834195957e17c3bc7ae, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14643,6 +14671,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14f27531f685a834195957e17c3bc7ae, type: 3}
+--- !u!114 &123660877679960163 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 21232248012299824, guid: 14f27531f685a834195957e17c3bc7ae, type: 3}
+  m_PrefabInstance: {fileID: 123660877679960162}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd6b5ea74e941ea44b33e03647bdfe35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &123660877679960164 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8951581808926292837, guid: 14f27531f685a834195957e17c3bc7ae, type: 3}

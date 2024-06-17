@@ -7,7 +7,6 @@ public class BossFSM : MonoBehaviour
 
     [SerializeField] private StateMachine sM;
     [SerializeField] private GameObject target;
-    [SerializeField] private MoveToNextMap doorRef;
     // Type of Special Attacks
     private int lowAttackIndex = 0;
     private int highAttackIndex = 1;
@@ -120,7 +119,6 @@ public class BossFSM : MonoBehaviour
 
             case StateMachine.Dead:
                 Debug.Log("Boss died");
-                doorRef.OpenDoor();
                 break;
 
             default:

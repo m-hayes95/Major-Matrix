@@ -4,6 +4,8 @@ using UnityEngine.Events;
 [RequireComponent(typeof(BossStatsComponent), typeof(Shield))]
 public class BossHealth : MonoBehaviour
 {
+    public UnityEvent OnDeath;
+
     [SerializeField] private GameObject bossVisuals;
     [SerializeField] private ParticleSystem deathEffect;
     [SerializeField] private GameManager gameManager;
@@ -13,7 +15,6 @@ public class BossHealth : MonoBehaviour
     private float currentHP;
     private BossStatsScriptableObject stats;
     private Shield shield;
-    private UnityEvent OnDeath;
     private bool isDead;
 
     private void Awake()
@@ -61,7 +62,7 @@ public class BossHealth : MonoBehaviour
         Debug.Log("Boss Health: current HP reached 0, Boss Died");
         DeathEffect();
         bossVisuals.SetActive(false);
-        StartCoroutine(uIController.DisplayEndGameMenu(3f));
+        //StartCoroutine(uIController.DisplayEndGameMenu(3f));
     }
 
     private void DeathEffect()
