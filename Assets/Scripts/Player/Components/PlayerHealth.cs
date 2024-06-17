@@ -25,7 +25,8 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
         currentHP = playerController.stats.maxHP;
-        playerHUD.SetPlayerMaxHealthBar(currentHP);
+        if (playerHUD != null )
+            playerHUD.SetPlayerMaxHealthBar(currentHP);
         if (OnDeath == null)
             OnDeath = new UnityEvent();
         OnDeath.AddListener(PlayerDead);

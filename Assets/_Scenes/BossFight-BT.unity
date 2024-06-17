@@ -2383,6 +2383,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 287460909}
+  - {fileID: 741616054}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &498472823
@@ -3651,7 +3652,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 486309915}
     m_Modifications:
     - target: {fileID: 3216371028813405044, guid: 14f27531f685a834195957e17c3bc7ae, type: 3}
       propertyPath: m_Name
@@ -3659,7 +3660,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3216371028813405044, guid: 14f27531f685a834195957e17c3bc7ae, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7308440911547619766, guid: 14f27531f685a834195957e17c3bc7ae, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3703,7 +3704,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8951581808926292837, guid: 14f27531f685a834195957e17c3bc7ae, type: 3}
       propertyPath: nextScene
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9082168318882736086, guid: 14f27531f685a834195957e17c3bc7ae, type: 3}
       propertyPath: ShapeModule.angle
@@ -3766,6 +3767,22 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14f27531f685a834195957e17c3bc7ae, type: 3}
+--- !u!4 &741616054 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7308440911547619766, guid: 14f27531f685a834195957e17c3bc7ae, type: 3}
+  m_PrefabInstance: {fileID: 741616053}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &741616055 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 21232248012299824, guid: 14f27531f685a834195957e17c3bc7ae, type: 3}
+  m_PrefabInstance: {fileID: 741616053}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd6b5ea74e941ea44b33e03647bdfe35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &754134151
 GameObject:
   m_ObjectHideFlags: 0
@@ -5032,6 +5049,7 @@ GameObject:
   - component: {fileID: 1040634753}
   - component: {fileID: 1040634754}
   - component: {fileID: 1040634755}
+  - component: {fileID: 1040634756}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -5066,9 +5084,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 843d2ff7b11df2a418281429e48dcf63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealth: {fileID: 1241999175}
-  bossHealth: {fileID: 1694224511}
-  endGameMenuStats: {fileID: 1618361726}
   isGamePaused: 0
 --- !u!114 &1040634755
 MonoBehaviour:
@@ -5082,6 +5097,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2edffcd64827aa42ae294983075846e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1040634756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040634752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54d4bb333951c5d41babc43879ef1bbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHealth: {fileID: 1241999175}
+  bossHealth: {fileID: 1694224511}
+  endGameMenuStats: {fileID: 1618361726}
 --- !u!1 &1040911840
 GameObject:
   m_ObjectHideFlags: 0
@@ -7622,7 +7652,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 1040634754}
-  encounterTimer: {fileID: 1659320631}
+  encounterTimer: {fileID: 1040634756}
+  timeDisplay: {fileID: 1659320631}
   bossHP: {fileID: 1059361203}
   playerHP: {fileID: 241570394}
   playerHUD: {fileID: 503486278}
@@ -7916,6 +7947,34 @@ PrefabInstance:
       propertyPath: sheildHitSound
       value: 
       objectReference: {fileID: 910851931}
+    - target: {fileID: 5124180400556533231, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5124180400556533231, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5124180400556533231, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 741616055}
+    - target: {fileID: 5124180400556533231, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5124180400556533231, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 5124180400556533231, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: OpenDoorToNextMap, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5124180400556533231, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5865844379600711558, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
       propertyPath: m_Name
       value: Boss Varient BT
@@ -14858,7 +14917,6 @@ SceneRoots:
   - {fileID: 680761365}
   - {fileID: 1540244950}
   - {fileID: 486309915}
-  - {fileID: 741616053}
   - {fileID: 2029447336}
   - {fileID: 660876590}
   - {fileID: 1280796615}
