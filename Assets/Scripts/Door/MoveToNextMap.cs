@@ -3,8 +3,6 @@ using UnityEngine.SceneManagement;
 
 public class MoveToNextMap : MonoBehaviour
 {
-    [SerializeField, Tooltip("Choose the next scene (by index) that will be loaded when the player enters the door ")] 
-    private int nextScene;
     [SerializeField,Tooltip("Set the game object transform for the mid visuals of the door - these will spin on update")]
     private Transform visualsTransform;
     private SpinDoorVisuals spinDoorVisuals;
@@ -24,6 +22,6 @@ public class MoveToNextMap : MonoBehaviour
     }
     private void NextMap()
     {
-        SceneManager.LoadScene(nextScene);
+        SceneManager.LoadScene(SceneLoadOrder.Instance.LoadNextScene());
     }
 }
