@@ -11,8 +11,6 @@ public class PlayerInput : MonoBehaviour
     private PlayerController controller;
     private PlayerHealth hp;
     private Shoot shoot;
-    private bool jumpInputPressed;
-    private bool jumpInputHeld;
     private bool isGamePaused = false;
     private bool weaponPressed = false;
     private bool isFiring = false;
@@ -84,27 +82,14 @@ public class PlayerInput : MonoBehaviour
     {
         if (context.started)
         {
-            // Jump
-            Debug.Log("jump started");
+            controller.HandleJump();
         }
     }
     private void JumpInputCanceled(InputAction.CallbackContext context)
     {
         if (context.canceled){
-            // Cancel jump
-            Debug.Log("jump cancelled");
+            controller.CancelJump();
         }
-    }
-
-    public bool GetJumpInputPressed()
-    {
-        if (!isGamePaused) return jumpInputPressed = Input.GetButtonDown("Jump");
-        else return false;
-    }
-    public bool GetJumpInputHeld()
-    {
-        if (!isGamePaused) return jumpInputHeld = Input.GetButton("Jump");
-        else return false;
     }
 
     public Vector2 MovementInputNormalized()
