@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class BossFSM : MonoBehaviour
@@ -21,6 +22,7 @@ public class BossFSM : MonoBehaviour
     private SpecialAttacks specialAttacks;
     private DistanceToTargetY distanceToTargetY;
     private BossStatsScriptableObject stats;
+    private bool doOnce = true;
     
     private void Awake()
     {
@@ -62,15 +64,13 @@ public class BossFSM : MonoBehaviour
                 // Chase (when not currently in a special attack)
                 if (CheckCanChase() && CheckNotInSpecialAttack()) sM = StateMachine.ChasePlayer;
                 // Normal Attacks && CheckNotInSpecialAttack()
+                
                 if (CheckCanAttack() && CheckNotInSpecialAttack())
                 {
-                    if (CheckCanUseSpecialAttack()) // There is an issue with the boss not doing anything before using a special attack
+                    if (CheckCanUseSpecialAttack() && CheckChanceToUseSpecialAttack()) 
                     {
-                        if (CheckChanceToUseSpecialAttack())
-                        {
-                            if (UseSpecialLowAttack()) sM = StateMachine.SpecialLowAttack;
-                            else sM = StateMachine.SpecialHighAttack;
-                        }
+                        if (UseSpecialLowAttack()) sM = StateMachine.SpecialLowAttack;
+                        else sM = StateMachine.SpecialHighAttack;
                     }
                     else if (CheckInMeleeRange())
                     {
@@ -125,6 +125,7 @@ public class BossFSM : MonoBehaviour
                 break;
         }
     }
+
     private float DistanceToTarget()
     {
         float distance = Vector2.Distance(transform.position, target.transform.position);
@@ -185,10 +186,23 @@ public class BossFSM : MonoBehaviour
     }
     private bool CheckChanceToUseSpecialAttack() // Every second, a random number is generated. If its more than the threshold then we can special attack
     {
-        randomChance.ApplyRandomChanceOutOf100Percent(stats.percentIncrease);
-        float randomNumber = randomChance.GetRandomNumber();
-        if (randomNumber <= stats.chanceToUseSpecialAttack) return true;
+        if (doOnce)
+        {
+            doOnce = false;
+            StartCoroutine(ResetDoOnceBool());
+            Debug.Log("AHHHHHHHHHHHHHHHHHH");
+            randomChance.ApplyRandomChanceOutOf100Percent(stats.percentIncrease);
+            float randomNumber = randomChance.GetRandomNumber();
+            if (randomNumber <= stats.chanceToUseSpecialAttack) return true;
+            return false;
+        }
         return false;
+    }
+
+    private IEnumerator ResetDoOnceBool()
+    {
+        yield return new WaitForSeconds(1);
+        doOnce = true;
     }
     private bool UseSpecialLowAttack() // Check the height of the player, if the target is closer to the ground, use low attacks
     {
