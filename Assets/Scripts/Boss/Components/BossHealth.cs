@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 [RequireComponent(typeof(BossStatsComponent), typeof(Shield))]
@@ -62,8 +63,12 @@ public class BossHealth : MonoBehaviour
         isDead = true;
         Debug.Log("Boss Health: current HP reached 0, Boss Died");
         DeathEffect();
-        bossVisuals.SetActive(false);
-        //StartCoroutine(uIController.DisplayEndGameMenu(3f));
+        StartCoroutine(DestroyBoss());
+    }
+    private IEnumerator DestroyBoss()
+    {
+        yield return new WaitForSeconds(.1f);
+        gameObject.SetActive(false);
     }
 
     private void DeathEffect()
