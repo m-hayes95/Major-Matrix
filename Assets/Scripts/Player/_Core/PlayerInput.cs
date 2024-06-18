@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerInput : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
     [SerializeField] private UIController uIController;
+    private PlayerInputActions inputActions;
     private PlayerController controller;
     private PlayerHealth hp;
     private Shoot shoot;
@@ -13,9 +15,19 @@ public class PlayerInput : MonoBehaviour
     private bool jumpInputHeld;
     private bool isGamePaused = false;
     private bool weaponPressed = false;
+    private bool isFiring = false;
 
-    private void OnEnable() { GameManager.OnPaused += UpdateIsGamePaused; }
-    private void OnDisable() { GameManager.OnPaused -= UpdateIsGamePaused; }
+    private void OnEnable() { GameManager.OnPaused += UpdateIsGamePaused; inputActions.Player.Enable(); }
+    private void OnDisable() { GameManager.OnPaused -= UpdateIsGamePaused; inputActions.Player.Disable(); }
+    private void Awake()
+    {
+        inputActions = new PlayerInputActions();
+        inputActions.Player.Jump.started += JumpInputStarted;
+        inputActions.Player.Jump.canceled += JumpInputCanceled;
+        inputActions.Player.CloseMenu.performed += PauseInputPerformed;
+        inputActions.Player.Fire.performed += FireWeaponPerformed;
+        inputActions.Player.Fire.canceled += FireWeaponCanceled;
+    }
     private void Start()
     {
         controller = GetComponent<PlayerController>();
@@ -25,20 +37,23 @@ public class PlayerInput : MonoBehaviour
 
     private void Update()
     {
-        FireWeaponInput();
-        PauseInput();
-    }
-    private void FireWeaponInput()
-    { 
-        if (controller != null && !hp.GetIsDead() && !isGamePaused && !weaponPressed)
+        if (!gameManager.GetIsGamePaused() && !hp.GetIsDead() && 
+            !weaponPressed && isFiring)
         {
-            if (Input.GetMouseButton(0) || Input.GetKey(KeyCode.W))
-            {
-                weaponPressed = true;
-                shoot.FireWeaponPlayer(controller.stats.shotVelocity);
-                StartCoroutine(ShotDelay());
-            }
+            weaponPressed = true;
+            shoot.FireWeaponPlayer(controller.stats.shotVelocity);
+            StartCoroutine(ShotDelay());
         }
+    }
+    private void FireWeaponPerformed(InputAction.CallbackContext context)
+    { 
+        if (context.performed)
+            isFiring = true;
+    }
+    private void FireWeaponCanceled(InputAction.CallbackContext context) 
+    {
+        if (context.canceled)
+            isFiring = false;
     }
 
     private IEnumerator ShotDelay()
@@ -47,9 +62,9 @@ public class PlayerInput : MonoBehaviour
         weaponPressed = false;
     }
 
-    private void PauseInput()
+    private void PauseInputPerformed(InputAction.CallbackContext context)
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (context.performed)
         {
             if(!uIController.GetIsTabsOpen()) gameManager.PauseGame();
             else
@@ -65,6 +80,22 @@ public class PlayerInput : MonoBehaviour
         isGamePaused = !isGamePaused;
     }
 
+    private void JumpInputStarted(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            // Jump
+            Debug.Log("jump started");
+        }
+    }
+    private void JumpInputCanceled(InputAction.CallbackContext context)
+    {
+        if (context.canceled){
+            // Cancel jump
+            Debug.Log("jump cancelled");
+        }
+    }
+
     public bool GetJumpInputPressed()
     {
         if (!isGamePaused) return jumpInputPressed = Input.GetButtonDown("Jump");
@@ -78,14 +109,7 @@ public class PlayerInput : MonoBehaviour
 
     public Vector2 MovementInputNormalized()
     {
-        if (!isGamePaused)
-        {
-            Vector2 input = new Vector2(0, 0);
-            if (Input.GetKey(KeyCode.A)) input.x = -1;
-            if (Input.GetKey(KeyCode.D)) input.x = +1;
-            input = input.normalized;
-            return input;
-        }
-        else return Vector2.zero;
+        Vector2 inputVector = inputActions.Player.Move.ReadValue<Vector2>();
+        return inputVector;
     }
 }
