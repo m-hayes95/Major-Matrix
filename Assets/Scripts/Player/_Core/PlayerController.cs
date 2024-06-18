@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
         if (!hp.GetIsDead())
         {
             HandleMovement();
-            HandleJump();
+            HandleGravity();
             CollisionChecks();
         }
             
@@ -73,28 +73,30 @@ public class PlayerController : MonoBehaviour
         facingRight = !facingRight;
     }
 
-    private void HandleJump()
+    public void CancelJump()
     {
-        //bool apexJumpThresholdAchieved = Mathf.Abs(DistanceFromFloor()) >= stats.apexJumpThreshold;
-        // Variable jump height
-        HandleGravity();
-        // Check if jump ended early
-        if (!endedJumpEarly && !isGrounded && !input.GetJumpInputHeld() && rb.velocity.y > 0) 
-            endedJumpEarly = true;
+        endedJumpEarly = true;
+    }
+
+    public void HandleJump()
+    {
+        ExecuteJump();
         
-        // Jump input
-        if (input.GetJumpInputPressed() || input.GetJumpInputHeld() && canJump)
+        // Jump input called
+        if (canJump)
         {
+            if (coyoteTimeReady) // Coyote time jump - can jump a short time after falling off a platform
+            {
+                //Debug.Log("Coyote time jump executed");
+                coyoteTimeReady = false;
+                ExecuteJump();
+            }
+            //Debug.Log("Normal jump executed");
             ExecuteJump();
         }
 
-        // Coyote time jump - can jump a short time after falling off a platform
-        else if (input.GetJumpInputPressed() || input.GetJumpInputHeld() && coyoteTimeReady)
-        {
-            coyoteTimeReady = false;
-            //Debug.Log("Coyote time jump executed");
-            ExecuteJump();
-        }
+        
+        
 
         // Appex Jump - When the peak of the jump height is reached
         /*
@@ -107,6 +109,11 @@ public class PlayerController : MonoBehaviour
     }
     private void HandleGravity()
     {
+        //bool apexJumpThresholdAchieved = Mathf.Abs(DistanceFromFloor()) >= stats.apexJumpThreshold;
+        // Variable jump height
+        // Check if jump ended early
+        if (!endedJumpEarly && !isGrounded && rb.velocity.y > 0)
+            endedJumpEarly = true;
         // Increase player gravity when the jump button is released before landing, or when the hieght of the jump is reached
         if (DistanceFromFloor() >= stats.maxJumpThreshold)
             endedJumpEarly = true;
@@ -122,7 +129,7 @@ public class PlayerController : MonoBehaviour
     }
     private void ExecuteJump()
     {
-        rb.velocity = Vector2.up * stats.jumpPower;
+       rb.velocity = Vector2.up * stats.jumpPower;
     }
     private void JumpApexModifiers()
     {
@@ -176,7 +183,7 @@ public class PlayerController : MonoBehaviour
             isGrounded = true;
             isCeilingHit = false;
             stats.jumpPower = initialJumpPower;
-            //Debug.Log($"Ground hit: {groundHit} with {groundHit.collider.gameObject.name}");
+            Debug.Log($"Ground hit: {groundHit} with {groundHit.collider.gameObject.name}");
             endedJumpEarly = false;
             canJump = true;
             applyApexJumpBoost = false;

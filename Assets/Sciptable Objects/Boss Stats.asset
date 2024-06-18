@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 4.1
   maxHP: 100
-  normalAttackDamage: 0
-  specialAttackDamage: 0
+  normalAttackDamage: 10
+  specialAttackDamage: 20
   maxShields: 3
   shotFoce: 20
   bossFOV: 22
