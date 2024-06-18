@@ -4,16 +4,15 @@ using UnityEngine.Events;
 
 public class PlayerHealth : MonoBehaviour
 {
+    public UnityEvent OnDeath;
     [SerializeField] private GameObject playerVisuals;
     [SerializeField] private ParticleSystem deathEffect;
     [SerializeField] private GameManager gameManager;
-    [SerializeField] private UIController uIController;
     [SerializeField] private PlayerHUD playerHUD;
     [SerializeField] private AudioSource hitSound, deathSound;
     private PlayerController playerController;
     private float currentHP;
     [SerializeField]private int deathCount;
-    private UnityEvent OnDeath;
     private bool isDead;
     
 
@@ -25,7 +24,8 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
         currentHP = playerController.stats.maxHP;
-        playerHUD.SetPlayerMaxHealthBar(currentHP);
+        if (playerHUD != null )
+            playerHUD.SetPlayerMaxHealthBar(currentHP);
         if (OnDeath == null)
             OnDeath = new UnityEvent();
         OnDeath.AddListener(PlayerDead);
@@ -54,7 +54,6 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log("Players current HP reached 0, Player Died");
         DeathEffect();
         playerVisuals.SetActive(false);
-        StartCoroutine(uIController.DisplayEndGameMenu(3f));
     }
 
     private void DeathEffect()

@@ -110,7 +110,7 @@ Transform:
   m_GameObject: {fileID: 4319580588752114959}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.65, y: 0, z: 0}
+  m_LocalPosition: {x: 1.3, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -195,10 +195,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d7dd17b4f0ceb948bfc23ae18064bfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
   playerVisuals: {fileID: 22379552675021760}
   deathEffect: {fileID: 68392164622887000, guid: fb8df712d1f8602448fc3a906e4b043b, type: 3}
   gameManager: {fileID: 0}
-  uIController: {fileID: 0}
   playerHUD: {fileID: 0}
   hitSound: {fileID: 0}
   deathSound: {fileID: 0}
@@ -309,6 +311,7 @@ MonoBehaviour:
   bullet: {fileID: 1605956353778399567, guid: 6d2dd274b34304e40b4ebc11c48c0aac, type: 3}
   spawnPoint: {fileID: 3896052881331493140}
   bulletSound: {fileID: 0}
+  attackCooldown: {fileID: 0}
 --- !u!1 &8855047585894754301
 GameObject:
   m_ObjectHideFlags: 0

@@ -53,6 +53,8 @@ public class BossFSM : MonoBehaviour
                 break;
 
             case StateMachine.Combat:
+                // Dead
+                if (health.GetIsDead()) sM = StateMachine.Dead;
                 // Go back to idle
                 if (!CheckTargetWithinRange()) sM = StateMachine.Idle;
                 // Shield
@@ -82,37 +84,37 @@ public class BossFSM : MonoBehaviour
             case StateMachine.RangeAttack:
                 Debug.Log("Used ranged attack");
                 shoot.FireWeaponBoss(target.transform, stats.shotFoce, stats.resetNormalAttackTimer);
-                sM = StateMachine.Idle;
+                sM = StateMachine.Combat;
                 break;
 
             case StateMachine.MeleeAttack:
                 Debug.Log("Used ranged attack");
                 meleeAttack.UseMeleeAttack(stats.normalAttackDamage, stats.resetNormalAttackTimer);
-                sM = StateMachine.Idle;
+                sM = StateMachine.Combat;
                 break;
 
             case StateMachine.SpecialLowAttack:
                 Debug.Log("Used special low attack");
                 specialAttacks.CallSpecialAttackLowOrHigh(lowAttackIndex, transform);
-                sM = StateMachine.Idle;
+                sM = StateMachine.Combat;
                 break;
 
             case StateMachine.SpecialHighAttack:
                 Debug.Log("Used special high attack");
                 specialAttacks.CallSpecialAttackLowOrHigh(highAttackIndex, transform);
-                sM = StateMachine.Idle;
+                sM = StateMachine.Combat;
                 break;
 
             case StateMachine.Shield:
                 Debug.Log("Used shield");
                 shield.UseShield();
-                sM = StateMachine.Idle;
+                sM = StateMachine.Combat;
                 break;
 
             case StateMachine.ChasePlayer:
                 Debug.Log("Chase target");
                 chasePlayer.Chase(target.transform, transform, stats.moveSpeed);
-                sM = StateMachine.Idle;
+                sM = StateMachine.Combat;
                 break;
 
             case StateMachine.Dead:

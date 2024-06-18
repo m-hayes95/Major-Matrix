@@ -7,8 +7,9 @@ using TMPro;
 public class PlayerHUD : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private EncounterTimer encounterTimer;
 
-    [SerializeField] private TextMeshProUGUI encounterTimer;
+    [SerializeField] private TextMeshProUGUI timeDisplay;
 
     [SerializeField] private Slider bossHP, playerHP;
     [SerializeField] private GameObject playerHUD;
@@ -24,7 +25,7 @@ public class PlayerHUD : MonoBehaviour
 
     private void DisplayPlayEncounterTimer()
     {
-        encounterTimer.text = gameManager.GetEncounterTimer().ToString("00:00");
+        timeDisplay.text = encounterTimer.GetEncounterTimer().ToString("00:00");
     }
     public void SetPlayerHealthBar(float currentHealth)
     {
