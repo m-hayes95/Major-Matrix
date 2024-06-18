@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     // Jump
     private bool endedJumpEarly;
     private bool canJump;
+    private int jumpCount;
     // Apex Jump
     private bool applyApexJumpBoost = false;
     private float apexJumpTimer;
@@ -79,18 +80,19 @@ public class PlayerController : MonoBehaviour
     }
 
     public void HandleJump()
-    {
-        ExecuteJump();
-        
+    {   
         // Jump input called
-        if (canJump)
+        if (canJump && jumpCount < 1)
         {
+            jumpCount++;
+            
             if (coyoteTimeReady) // Coyote time jump - can jump a short time after falling off a platform
             {
                 //Debug.Log("Coyote time jump executed");
                 coyoteTimeReady = false;
                 ExecuteJump();
             }
+            
             //Debug.Log("Normal jump executed");
             ExecuteJump();
         }
@@ -180,14 +182,7 @@ public class PlayerController : MonoBehaviour
             );
         if (groundHit)
         {
-            isGrounded = true;
-            isCeilingHit = false;
-            stats.jumpPower = initialJumpPower;
-            Debug.Log($"Ground hit: {groundHit} with {groundHit.collider.gameObject.name}");
-            endedJumpEarly = false;
-            canJump = true;
-            applyApexJumpBoost = false;
-            coyoteTimeReady = true;
+            JumpReset();
         }
         else
         {
@@ -203,12 +198,33 @@ public class PlayerController : MonoBehaviour
             //Debug.Log($"Ceiling hit: {ceilingHit} with {ceilingHit.collider.gameObject.name}");
         }
     }
-   
+    private void JumpReset()
+    {
+        isGrounded = true;
+        isCeilingHit = false;
+        stats.jumpPower = initialJumpPower;
+        Debug.Log($"Ground hit: {groundHit} with {groundHit.collider.gameObject.name}");
+        endedJumpEarly = false;
+        canJump = true;
+        applyApexJumpBoost = false;
+        coyoteTimeReady = true;
+        jumpCount = 0;
+    }
     private IEnumerator CoyoteTimeTimer()
     {
         yield return new WaitForSeconds(stats.coyoteTimeThreshold);
         //Debug.Log($"Coyote time is ready: {coyoteTimeReady}, Time taken {stats.coyoteTimeThreshold}s");
         if (!isGrounded) coyoteTimeReady = false;
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.GetComponent<GroundTag>())
+        {
+            // Does not work if placed under collision - Maybe change to an event called when bool changes
+            //Debug.Log($"Coyote time timer started");
+            Debug.Log("ddddd");
+            
+        }
     }
     private void OnCollisionExit2D(Collision2D collision)
     {

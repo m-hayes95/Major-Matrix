@@ -8,7 +8,7 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] private GameManager gameManager;
     [SerializeField] private UIController uIController;
     private PlayerInputActions inputActions;
-    private PlayerController controller;
+    private NewPlayerController controller;
     private PlayerHealth hp;
     private Shoot shoot;
     private bool isGamePaused = false;
@@ -20,7 +20,7 @@ public class PlayerInput : MonoBehaviour
     private void Awake()
     {
         inputActions = new PlayerInputActions();
-        inputActions.Player.Jump.started += JumpInputStarted;
+        inputActions.Player.Jump.performed += JumpInputPerformed;
         inputActions.Player.Jump.canceled += JumpInputCanceled;
         inputActions.Player.CloseMenu.performed += PauseInputPerformed;
         inputActions.Player.Fire.performed += FireWeaponPerformed;
@@ -28,7 +28,7 @@ public class PlayerInput : MonoBehaviour
     }
     private void Start()
     {
-        controller = GetComponent<PlayerController>();
+        controller = GetComponent<NewPlayerController>();
         hp = GetComponent<PlayerHealth>();
         shoot = GetComponent<Shoot>();  
     }
@@ -78,11 +78,11 @@ public class PlayerInput : MonoBehaviour
         isGamePaused = !isGamePaused;
     }
 
-    private void JumpInputStarted(InputAction.CallbackContext context)
+    private void JumpInputPerformed(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.performed)
         {
-            controller.HandleJump();
+            controller.Jump();
         }
     }
     private void JumpInputCanceled(InputAction.CallbackContext context)

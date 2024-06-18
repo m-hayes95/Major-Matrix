@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.2251691, g: 0.5614324, b: 0.8679245, a: 1}
+  m_Color: {r: 0.37824848, g: 0.9433962, b: 0.50483996, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 3068787862488524606}
   - component: {fileID: 2237995295786375966}
   - component: {fileID: 3194291627596963576}
+  - component: {fileID: 6906100019957416507}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -163,7 +164,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4652640799575470342}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fcf5103f995ad264cb6f2461b536e886, type: 3}
   m_Name: 
@@ -197,7 +198,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnDeath:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+        m_MethodName: DisplayGameOverMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   playerVisuals: {fileID: 22379552675021760}
   deathEffect: {fileID: 68392164622887000, guid: fb8df712d1f8602448fc3a906e4b043b, type: 3}
   gameManager: {fileID: 0}
@@ -284,7 +297,7 @@ Rigidbody2D:
   m_Mass: 2
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 2
+  m_GravityScale: 5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -312,6 +325,21 @@ MonoBehaviour:
   spawnPoint: {fileID: 3896052881331493140}
   bulletSound: {fileID: 0}
   attackCooldown: {fileID: 0}
+--- !u!114 &6906100019957416507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4652640799575470342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a603f62894462e4ba021b09976ea0b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: 1bd368416c63f5e4a873982e7d65e6f0, type: 2}
+  isGrounded: 0
+  jumpCount: 0
 --- !u!1 &8855047585894754301
 GameObject:
   m_ObjectHideFlags: 0

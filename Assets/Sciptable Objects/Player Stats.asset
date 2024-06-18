@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 100
   moveSpeed: 6.18
-  jumpPower: 23
-  weaponPower: 2
+  jumpPower: 21.4
+  weaponPower: 5
   shotVelocity: 8
   maxJumpThreshold: 4.1
-  maxFallGravityScale: 24.9
-  fallGravityScaleMultiplier: 28.4
-  coyoteTimeThreshold: 0.37
+  maxFallGravityScale: 10
+  fallGravityScaleMultiplier: 1.8
+  coyoteTimeThreshold: 0.15
   apexJumpThreshold: 3.5
   apexJumpBoostDuration: 0.1
   apexJumpGravityScale: 0
