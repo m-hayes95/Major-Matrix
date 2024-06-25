@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class NewPlayerController : MonoBehaviour
@@ -19,12 +21,14 @@ public class NewPlayerController : MonoBehaviour
     [SerializeField]private int jumpCount;
     // Gravity
     private float saveGravityScale;
+    [SerializeField] private bool isFalling = false;
     //Collisions
     private RaycastHit2D groundHit;
     private RaycastHit2D ceilingHit;
     private bool isCeilingHit = false;
+    [SerializeField]private float acceptanceDistanceRadius;
     // CoyoteTime - Add coyote time
-    //private bool coyoteTimeReady;
+    [SerializeField]private bool coyoteTimeReady = false;
 
     private void Awake()
     {
@@ -37,11 +41,16 @@ public class NewPlayerController : MonoBehaviour
     {
         saveGravityScale = rb.gravityScale;
     }
+    private void Update()
+    {
+        Debug.Log($"Jumping {jumpCount}");
+    }
     private void FixedUpdate()
     {
         HandleMovement();
         CollisionChecks();
         FasterFallingOverTime();
+        CheckIfFalling();
     }
     private void HandleMovement()
     {
@@ -58,14 +67,30 @@ public class NewPlayerController : MonoBehaviour
     }
     public void Jump()
     {
-        if (jumpCount < 1 && isGrounded)
+        if (jumpCount == 0 && isGrounded || coyoteTimeReady)
         {
-            jumpCount++;
             ExecuteJump();
         }
     }
+    private void CheckIfFalling()
+    {
+        if (rb.velocity.y < 0)
+        {
+            isFalling = true;
+            if (jumpCount < 1)
+                StartCoroutine(coyoteTimer());
+        }
+
+    }
+    private IEnumerator coyoteTimer()
+    {
+        coyoteTimeReady = true;
+        yield return new WaitForSeconds(.2f);
+        coyoteTimeReady = false;
+    }
     private void ExecuteJump()
     {
+        jumpCount++;
         rb.velocity = Vector2.up * stats.jumpPower;
     }
     public void CancelJump()
@@ -95,16 +120,16 @@ public class NewPlayerController : MonoBehaviour
     {
         //Debug.Log($"Is player grounded: {isGrounded}");
         float angle = 0;
-        float distance = .2f;
+        //float distance = 0.6f;
         groundHit = Physics2D.BoxCast(
-            collider.bounds.center, collider.size, angle, Vector2.down, distance, stats.groundLayerMask
+            collider.bounds.center, collider.size, angle, Vector2.down, acceptanceDistanceRadius, stats.groundLayerMask
             );
         ceilingHit = Physics2D.BoxCast(
-            collider.bounds.center, collider.size, angle, Vector2.up, distance, stats.groundLayerMask
+            collider.bounds.center, collider.size, angle, Vector2.up, acceptanceDistanceRadius, stats.groundLayerMask
             );
         if (groundHit)
         {
-            JumpReset();
+            if (isFalling) JumpReset();
         }
         else
         {
@@ -138,5 +163,14 @@ public class NewPlayerController : MonoBehaviour
         jumpCount = 0;
         rb.gravityScale = saveGravityScale;
         isCeilingHit = false;
+        isFalling = false;
+        coyoteTimeReady = false;
+        StopAllCoroutines();
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(new Vector3 (collider.bounds.center.x, collider.bounds.center.y - acceptanceDistanceRadius), collider.size);
     }
 }

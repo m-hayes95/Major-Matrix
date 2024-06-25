@@ -41,7 +41,7 @@ public class BossBT : BTree
     protected override BTNode SetupTree()
     {
         // Look at the player
-        CheckTargetsSide();
+        //CheckTargetsSide();
 
         BTNode root = new BTSelector(new List<BTNode>
         {
@@ -123,6 +123,7 @@ public class BossBT : BTree
         }) ;
         return root;
     }
+    /*
     private void CheckTargetsSide()
     {
         // Check which side the player is on
@@ -143,7 +144,7 @@ public class BossBT : BTree
         transform.Rotate(0f, -180f, 0f);
         Debug.Log("Boss Flipped");
     }
-
+    */
 }
 
 

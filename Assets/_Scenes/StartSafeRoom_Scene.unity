@@ -9057,6 +9057,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6906100019957416507, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
+      propertyPath: acceptanceDistanceRadius
+      value: 0.03
+      objectReference: {fileID: 0}
     - target: {fileID: 7058368484342321748, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.6
