@@ -26,7 +26,7 @@ public class NewPlayerController : MonoBehaviour
     private RaycastHit2D groundHit;
     private RaycastHit2D ceilingHit;
     private bool isCeilingHit = false;
-    [SerializeField]private float acceptanceDistanceRadius;
+    private float acceptanceDistanceRadius = 0.1f;
     // CoyoteTime - Add coyote time
     [SerializeField]private bool coyoteTimeReady = false;
 
