@@ -26,8 +26,8 @@ Transform:
   m_GameObject: {fileID: 273513859034379347}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalPosition: {x: 0, y: 0.42, z: 0}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5045312288116761990}
@@ -248,7 +248,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.5913435}
+  m_Offset: {x: -0.12434554, y: 0.5913435}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -259,7 +259,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.4899626, y: 3.0335681}
+  m_Size: {x: 2.1977754, y: 3.0335681}
   m_EdgeRadius: 0
 --- !u!114 &5374508136914483885
 MonoBehaviour:
@@ -309,6 +309,7 @@ MonoBehaviour:
   hitSound: {fileID: 0}
   sheildHitSound: {fileID: 0}
   deathSound: {fileID: 0}
+  enemyDeathState: {fileID: 0}
 --- !u!114 &5167563716821035803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -552,7 +553,7 @@ Transform:
   m_GameObject: {fileID: 8534123200898894193}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.85, y: -0.01, z: 0}
+  m_LocalPosition: {x: 2.52, y: 0.43, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -18,6 +18,7 @@ public class SpecialAttacks : MonoBehaviour
     private List<GameObject> attacks;
     [SerializeField]private bool inSpecialAttack = false;
     private bool canAttack = true;
+    private Animator animator;
     private void OnEnable() { AttackCooldown.OnSpecialAttackReset += ResetAttackBool; }
     private void OnDisable() { AttackCooldown.OnSpecialAttackReset -= ResetAttackBool; }
 
@@ -25,6 +26,7 @@ public class SpecialAttacks : MonoBehaviour
     {
         stats = GetComponent<BossStatsComponent>().bossStats;
         attackCooldown = GetComponent<AttackCooldown>();    
+        animator = GetComponent<Animator>();
     }
     public bool GetIsInSpecialAttack() {  return inSpecialAttack; }
 
@@ -48,6 +50,8 @@ public class SpecialAttacks : MonoBehaviour
             canAttack = false;
             inSpecialAttack = true;
             Mathf.Clamp(lowOrHigh, 0, 1);
+            if (lowOrHigh == 0) animator.SetTrigger("BossUsedSpecialAttack_LOW");
+            if (lowOrHigh == 1) animator.SetTrigger("BossUsedSpecialAttack_HIGH");
             StartCoroutine(ExecuteSpecialAttack(lowOrHigh));
         }
     }
