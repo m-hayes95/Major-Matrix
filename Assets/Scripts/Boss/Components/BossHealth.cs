@@ -13,6 +13,7 @@ public class BossHealth : MonoBehaviour
     [SerializeField] private UIController uIController;
     [SerializeField] private PlayerHUD playerHUD;
     [SerializeField] private AudioSource hitSound, sheildHitSound, deathSound;
+    [SerializeField] private GameObject enemyDeathState;
 
     private float currentHP;
     private BossStatsScriptableObject stats;
@@ -62,7 +63,7 @@ public class BossHealth : MonoBehaviour
 
     private void BossDead()
     {
-        animator.SetTrigger("BossDied");
+        Instantiate(enemyDeathState, transform.position, transform.rotation);
         deathSound.Play();
         isDead = true;
         Debug.Log("Boss Health: current HP reached 0, Boss Died");
@@ -71,7 +72,7 @@ public class BossHealth : MonoBehaviour
     }
     private IEnumerator DestroyBoss()
     {
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(.01f);
         gameObject.SetActive(false);
     }
 
