@@ -17,12 +17,14 @@ public class BossHealth : MonoBehaviour
     private float currentHP;
     private BossStatsScriptableObject stats;
     private Shield shield;
+    private Animator animator;
     private bool isDead;
 
     private void Awake()
     {
         stats = GetComponent<BossStatsComponent>().bossStats;
         shield = GetComponent<Shield>();    
+        animator = GetComponent<Animator>();
     }
     private void Start()
     {
@@ -44,6 +46,7 @@ public class BossHealth : MonoBehaviour
         if (!shield.GetShieldStatus() && currentHP > 0)
         {
             //Debug.Log($"Boss Health: took {damageAmount} - damage, current HP: {currentHP}");
+            animator.SetTrigger("BossTookDamage");
             currentHP -= damageAmount;
             hitSound.Play();
             playerHUD.SetBossHealthBar(currentHP);
@@ -59,6 +62,7 @@ public class BossHealth : MonoBehaviour
 
     private void BossDead()
     {
+        animator.SetTrigger("BossDied");
         deathSound.Play();
         isDead = true;
         Debug.Log("Boss Health: current HP reached 0, Boss Died");

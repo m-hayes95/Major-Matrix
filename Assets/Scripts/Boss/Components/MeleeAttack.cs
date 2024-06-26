@@ -26,7 +26,7 @@ public class MeleeAttack : MonoBehaviour
         // Attack the player if they get too close
         if (canAttack && playerHP && !playerHP.GetIsDead())
         {
-            animator.SetBool("IsUsingMeleeAttack", true);
+            animator.SetTrigger("BossUsedMeleeAttack");
             meleeAttackSound.Play();
             canAttack = false;
             playerHP.DamagePlayer(damageAmount);
@@ -36,6 +36,5 @@ public class MeleeAttack : MonoBehaviour
     private void ResetAttackValues()
     {
         canAttack = true;
-        animator.SetBool("IsUsingMeleeAttack", false);
     }
 }

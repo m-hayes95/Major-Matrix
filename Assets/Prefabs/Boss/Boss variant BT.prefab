@@ -63,22 +63,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 3840645956435967475}
   m_SourcePrefab: {fileID: 100100000, guid: 51936a5e048ced64887b88e46fd06264, type: 3}
---- !u!4 &2400908464340835788 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5045312288116761990, guid: 51936a5e048ced64887b88e46fd06264, type: 3}
-  m_PrefabInstance: {fileID: 7445911763047905354}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4926138177142674149 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2524296036211174063, guid: 51936a5e048ced64887b88e46fd06264, type: 3}
-  m_PrefabInstance: {fileID: 7445911763047905354}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5865844379600711558}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 538f2e9179629c245848003626330d52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5865844379600711558 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3905354449166342092, guid: 51936a5e048ced64887b88e46fd06264, type: 3}
@@ -108,15 +92,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27ed1eb48a9d43445a8bfbc175abfcc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  distanceThreshold: 5
-  shotForce: 5
-  player: {fileID: 0}
   target: {fileID: 0}
-  bossPos: {fileID: 2400908464340835788}
-  shoot: {fileID: 4926138177142674149}
-  chasePlayer: {fileID: 2413821031876384162}
-  bossFOV: 15
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 128
