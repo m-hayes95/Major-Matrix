@@ -10,31 +10,35 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 650150534198489183, guid: 105d244bc4d92d7489b112fcadf32af5, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.1674
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 650150534198489183, guid: 105d244bc4d92d7489b112fcadf32af5, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.7264485
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 650150534198489183, guid: 105d244bc4d92d7489b112fcadf32af5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.177
       objectReference: {fileID: 0}
     - target: {fileID: 3809319137858192812, guid: 105d244bc4d92d7489b112fcadf32af5, type: 3}
       propertyPath: m_Size.x
-      value: 1.1744237
+      value: 1.1224266
       objectReference: {fileID: 0}
     - target: {fileID: 3809319137858192812, guid: 105d244bc4d92d7489b112fcadf32af5, type: 3}
       propertyPath: m_Size.y
-      value: 0.7792503
+      value: 0.34140545
       objectReference: {fileID: 0}
     - target: {fileID: 3809319137858192812, guid: 105d244bc4d92d7489b112fcadf32af5, type: 3}
       propertyPath: m_Offset.x
-      value: -0.002602458
+      value: -0.02860099
       objectReference: {fileID: 0}
     - target: {fileID: 3809319137858192812, guid: 105d244bc4d92d7489b112fcadf32af5, type: 3}
       propertyPath: m_Offset.y
-      value: 0.0014535487
+      value: -0.00568828
       objectReference: {fileID: 0}
     - target: {fileID: 5379510509899357765, guid: 105d244bc4d92d7489b112fcadf32af5, type: 3}
       propertyPath: m_Name
-      value: ProjectileVarient-Player
+      value: Projectile variants - Player
       objectReference: {fileID: 0}
     - target: {fileID: 6084023620475807262, guid: 105d244bc4d92d7489b112fcadf32af5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -134,8 +138,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.46079564, g: 0.8919627, b: 0.8962264, a: 1}
+  m_Sprite: {fileID: -382562194, guid: fa1a6fbfea1794a48855412e2b3d45d0, type: 3}
+  m_Color: {r: 0.04360973, g: 0.990566, b: 0.37047696, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

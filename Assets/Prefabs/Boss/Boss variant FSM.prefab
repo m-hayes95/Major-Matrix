@@ -8,9 +8,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1703586865063552241, guid: 51936a5e048ced64887b88e46fd06264, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1703586865063552241, guid: 51936a5e048ced64887b88e46fd06264, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1703586865063552241, guid: 51936a5e048ced64887b88e46fd06264, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3905354449166342092, guid: 51936a5e048ced64887b88e46fd06264, type: 3}
       propertyPath: m_Name
-      value: Boss Varient FSM
+      value: Boss variant FSM
       objectReference: {fileID: 0}
     - target: {fileID: 5045312288116761990, guid: 51936a5e048ced64887b88e46fd06264, type: 3}
       propertyPath: m_LocalPosition.x
@@ -77,6 +89,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f1fbf11b4296e6498de1f23a320fc6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canAttack: 1
   sM: 0
-  closeRangeAttackSound: {fileID: 0}
+  target: {fileID: 0}
