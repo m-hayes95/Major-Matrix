@@ -1,4 +1,5 @@
 
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -11,6 +12,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private PlayerHUD playerHUD;
     [SerializeField] private AudioSource hitSound, deathSound;
     private PlayerController playerController;
+    private Animator animator;
     private float currentHP;
     [SerializeField]private int deathCount;
     private bool isDead;
@@ -19,6 +21,7 @@ public class PlayerHealth : MonoBehaviour
     private void Awake()
     {
         playerController = GetComponent<PlayerController>();
+        animator = GetComponent<Animator>();
     }
 
     private void Start()
@@ -38,6 +41,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (currentHP > 0)
         {
+            animator.SetTrigger("PlayerHurt");
             currentHP -= damageAmount;
             hitSound.Play();
             playerHUD.SetPlayerHealthBar(currentHP);
@@ -48,12 +52,12 @@ public class PlayerHealth : MonoBehaviour
 
     private void PlayerDead()
     {
+        animator.SetTrigger("PlayerDied");
         deathCount++;
         deathSound.Play();
         isDead = true;
         Debug.Log("Players current HP reached 0, Player Died");
         DeathEffect();
-        playerVisuals.SetActive(false);
     }
 
     private void DeathEffect()

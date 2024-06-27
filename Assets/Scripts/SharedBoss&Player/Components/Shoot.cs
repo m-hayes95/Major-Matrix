@@ -42,6 +42,7 @@ public class Shoot : MonoBehaviour
     
     public void FireWeaponPlayer(float velocity)
     {
+        animator.SetTrigger("PlayerFired");
         InstantiateNewBullet();
         SetVelocityAndDir(velocity);
     }

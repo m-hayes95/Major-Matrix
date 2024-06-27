@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private new BoxCollider2D collider;
     private PlayerHealth hp;
     private PlayerInput input;
+    private Animator animator;
     // Movemet
     private Vector3 moveDir;
     bool facingRight = true;
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour
         collider = GetComponent<BoxCollider2D>();
         hp = GetComponent<PlayerHealth>();
         input = GetComponent<PlayerInput>();
+        animator = GetComponent<Animator>();
     }
     private void Start()
     {
