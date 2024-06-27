@@ -1523,6 +1523,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1023580629}
     - target: {fileID: 6044379319514701181, guid: 7ff3c438540a27541994198c2f1927ed, type: 3}
+      propertyPath: enemyDeathState
+      value: 
+      objectReference: {fileID: 178222751247952054, guid: 9985e6129542d1241af24cf5afec808f, type: 3}
+    - target: {fileID: 6044379319514701181, guid: 7ff3c438540a27541994198c2f1927ed, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.size
       value: 2
       objectReference: {fileID: 0}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 68392164622887000}
   - component: {fileID: 1412687155708008803}
   m_Layer: 0
-  m_Name: DeathEffectBoss
+  m_Name: ParticleEffectBossDead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -12,6 +12,12 @@ public class Shoot : MonoBehaviour
     private Transform newTarget;
     private GameObject newBullet;
     private bool canShoot = true;
+    private Animator animator;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
     private void OnEnable()
     {
         AttackCooldown.OnNormalAttackReset += ResetCanAttackBool;
@@ -25,6 +31,7 @@ public class Shoot : MonoBehaviour
     {
         if (canShoot)
         {
+            animator.SetTrigger("BossUsedRangedAttack");
             canShoot = false;
             InstantiateNewBullet();
             newTarget = target;

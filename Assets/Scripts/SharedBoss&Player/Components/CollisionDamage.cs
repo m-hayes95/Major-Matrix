@@ -28,7 +28,7 @@ public class CollisionDamage : MonoBehaviour
     {
         if (collision != null && collision.gameObject.GetComponent<PlayerHealth>())
             PlayerCollisions(collision);
-        if (collision != null && collision.gameObject.GetComponent<BossHealth>())
+        if (collision != null && collision.gameObject.GetComponent<BossHealth>() && !isSpecialAttack)
             BossCollisions(collision);
         if (collision != null && collision.gameObject.GetComponent<PlatformTag>())
             PlatformCollisions();
