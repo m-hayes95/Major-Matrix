@@ -365,7 +365,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7190a18b5ec1cd24897b14dc5b3a6555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttackGameObject: {fileID: 6375700386247670218, guid: 7bcfd5b3cd418284281db8337cd286d7, type: 3}
+  specialAttackGameObjectLow: {fileID: 5121876943077619085, guid: 6a20dd592fea1ad4fbcc4b4de546fa30, type: 3}
+  specialAttackGameObjectHigh: {fileID: 6287157360366337363, guid: f745dc1504972f240aadba3f1d1d4814, type: 3}
   lowAttackSound: {fileID: 0}
   highAttackSound: {fileID: 0}
   OnAttackFinished:

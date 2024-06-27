@@ -7,7 +7,7 @@ using UnityEngine.Events;
 [RequireComponent(typeof(AttackCooldown))]
 public class SpecialAttacks : MonoBehaviour
 {
-    [SerializeField] private GameObject specialAttackGameObject;
+    [SerializeField] private GameObject specialAttackGameObjectLow, specialAttackGameObjectHigh;
     //[SerializeField] Transform highAttackPosistion
     [SerializeField] private AudioSource lowAttackSound, highAttackSound;
     private AttackCooldown attackCooldown;
@@ -35,7 +35,6 @@ public class SpecialAttacks : MonoBehaviour
         if (OnAttackFinished == null)
             OnAttackFinished = new UnityEvent();
         OnAttackFinished.AddListener(AttackFinished);
-        
     }
     
     private void ResetAttackBool() // can attack gets reset after cooldown
@@ -73,13 +72,14 @@ public class SpecialAttacks : MonoBehaviour
             SpawnRight(lowOrHigh);
             yield return new WaitForSeconds(stats.timeBetweenAttacks);
         }
+        // Wait extra time for the last attacks to finish
+        yield return new WaitForSeconds(0.8f);
         OnAttackFinished.Invoke();
     }
 
     private void SpawnLeft(int lowOrHigh)
     {
         Vector3 spawnPosition = Vector3.zero;
-        Vector3 scale = new Vector3(1, 1, 1);
         if (lowOrHigh == 0) // Low Special Attack
         {
             spawnPosition = leftPositionLow += new Vector3(-stats.spacingX, stats.offsetY, 0);
@@ -88,17 +88,15 @@ public class SpecialAttacks : MonoBehaviour
         else if (lowOrHigh == 1) // High Special Attack
         { 
             spawnPosition = leftPositionHigh += new Vector3(-stats.spacingX, stats.offsetY, 0);
-            scale = new Vector3(1, -1, 1);
             highAttackSound.Play();
         }
 
-        InstatiateNewAttack(spawnPosition, scale, lowOrHigh);
+        InstatiateNewAttack(spawnPosition, lowOrHigh);
     }
 
     private void SpawnRight(int lowOrHigh)
     {
         Vector3 spawnPosition = Vector3.zero;
-        Vector3 scale = new Vector3(1, 1, 1); // Set to default
         if (lowOrHigh == 0) // Low Special Attack
         {
             spawnPosition = rightPositionLow += new Vector3(stats.spacingX, stats.offsetY, 0);
@@ -107,21 +105,30 @@ public class SpecialAttacks : MonoBehaviour
         else if (lowOrHigh == 1) // High Special Attack
         {
             spawnPosition = rightPositionHigh += new Vector3(stats.spacingX, stats.offsetY, 0);
-            scale = new Vector3(1, -1, 1);
             highAttackSound.Play(); 
         };
 
-        InstatiateNewAttack(spawnPosition, scale, lowOrHigh);
+        InstatiateNewAttack(spawnPosition, lowOrHigh);
     }
 
-    private void InstatiateNewAttack(Vector3 spawnVector, Vector3 scaleVector, int lowOrHigh)
+    private void InstatiateNewAttack(Vector3 spawnVector, int lowOrHigh)
     {
-        GameObject newAttack = Instantiate(
-            specialAttackGameObject, spawnVector, Quaternion.identity
-            );
-        newAttack.transform.localScale = scaleVector;
-        attacks.Add(newAttack);
-        if (lowOrHigh == 1) DropHighAttacks(newAttack);
+        GameObject newAttack;
+        if (lowOrHigh == 0) // Spawn low attack game objects 
+        {
+            newAttack = Instantiate(
+                specialAttackGameObjectLow, spawnVector, Quaternion.identity
+                );
+            attacks.Add(newAttack);
+        }
+        if (lowOrHigh == 1) // Spawn high attack game objects 
+        {
+            newAttack = Instantiate(
+                specialAttackGameObjectHigh, spawnVector, Quaternion.identity
+                );
+            attacks.Add(newAttack);
+            DropHighAttacks(newAttack);
+        }
     }
 
     private void DropHighAttacks(GameObject gameObject)
