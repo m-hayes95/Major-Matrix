@@ -13,6 +13,7 @@ public class NewPlayerController : MonoBehaviour
     private new BoxCollider2D collider;
     private PlayerHealth hp;
     private PlayerInput input;
+    private Animator animator;
     // Movemet
     private Vector3 moveDir;
     private bool facingRight = true;
@@ -36,6 +37,7 @@ public class NewPlayerController : MonoBehaviour
         collider = GetComponent<BoxCollider2D>();
         hp = GetComponent<PlayerHealth>();
         input = GetComponent<PlayerInput>();
+        animator = GetComponent<Animator>();
     }
     private void Start()
     {
@@ -54,9 +56,13 @@ public class NewPlayerController : MonoBehaviour
     }
     private void HandleMovement()
     {
-        // Apply movement using input
+        // Apply movement using input script
         moveDir = new Vector3(input.MovementInputNormalized().x, 0, 0);
+        if (hp.GetIsDead()) return; // Dont allow movement if dead
         transform.position += moveDir * stats.moveSpeed * Time.deltaTime;
+        if (moveDir != Vector3.zero) animator.SetBool("IsPlayerMoving", true);
+        else animator.SetBool("IsPlayerMoving", false);
+        // Change which way player is facing
         if (!facingRight && moveDir.x > 0) TurnPlayer();
         if (facingRight && moveDir.x < 0) TurnPlayer();
     }
@@ -90,6 +96,7 @@ public class NewPlayerController : MonoBehaviour
     }
     private void ExecuteJump()
     {
+        animator.SetTrigger("PlayerJump");
         jumpCount++;
         rb.velocity = Vector2.up * stats.jumpPower;
     }
