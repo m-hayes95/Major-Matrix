@@ -2040,9 +2040,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 136880431}
     m_Modifications:
-    - target: {fileID: 2429537531425241668, guid: 151ca5c7147d0e145a1b827315781385, type: 3}
-      propertyPath: m_IsActive
-      value: 0
+    - target: {fileID: 1923064969279739458, guid: 151ca5c7147d0e145a1b827315781385, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 196.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1923064969279739458, guid: 151ca5c7147d0e145a1b827315781385, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -71.1
       objectReference: {fileID: 0}
     - target: {fileID: 3555038507221145469, guid: 151ca5c7147d0e145a1b827315781385, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2050,23 +2054,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3555038507221145469, guid: 151ca5c7147d0e145a1b827315781385, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4350709200441856393, guid: 151ca5c7147d0e145a1b827315781385, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4437053510433594903, guid: 151ca5c7147d0e145a1b827315781385, type: 3}
       propertyPath: m_Name
       value: -PlayerHUD-
-      objectReference: {fileID: 0}
-    - target: {fileID: 8167468219782263156, guid: 151ca5c7147d0e145a1b827315781385, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8167468219782263156, guid: 151ca5c7147d0e145a1b827315781385, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9134749713891885547, guid: 151ca5c7147d0e145a1b827315781385, type: 3}
       propertyPath: m_Pivot.x
