@@ -9742,6 +9742,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1004041534}
     m_Modifications:
+    - target: {fileID: 2342972733000749340, guid: d00a3ab33e1a2f04aa0e15bd1148a018, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3779275643008995249, guid: d00a3ab33e1a2f04aa0e15bd1148a018, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3988943574651328995, guid: d00a3ab33e1a2f04aa0e15bd1148a018, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -9825,6 +9833,10 @@ PrefabInstance:
     - target: {fileID: 4965917232772178200, guid: d00a3ab33e1a2f04aa0e15bd1148a018, type: 3}
       propertyPath: m_Name
       value: -Settings menu-
+      objectReference: {fileID: 0}
+    - target: {fileID: 4965917232772178200, guid: d00a3ab33e1a2f04aa0e15bd1148a018, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16787,6 +16799,10 @@ PrefabInstance:
     - target: {fileID: 8201460649245612491, guid: 6df424377b2c01648945b2373c238f3a, type: 3}
       propertyPath: m_Name
       value: GameOverMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 8201460649245612491, guid: 6df424377b2c01648945b2373c238f3a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8456143196819023878, guid: 6df424377b2c01648945b2373c238f3a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
