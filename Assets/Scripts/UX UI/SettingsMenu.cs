@@ -1,22 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Audio;
 using TMPro;
 
 public class SettingsMenu : MonoBehaviour
 {
-    [SerializeField] private AudioMixer audioMixer;
-    [SerializeField] private TMP_Dropdown resolutionDropdown;
+    [SerializeField, Tooltip("Set the games master audio mixer.")] private AudioMixer audioMixer;
+    [SerializeField, Tooltip ("Select the resolution dropdoown menu located in the canvas > Settings Menu gameobject.")]
+    private TMP_Dropdown resolutionDropdown;
     private const string VOLUME = "Volume";
     private Resolution[] resolutions;
     
     private void Start()
     {
-        PopulateResolutionSettings();
+        PopulateResolutionSettingsMenu();
     }
-    private void PopulateResolutionSettings()
+    private void PopulateResolutionSettingsMenu()
     {
         resolutions = Screen.resolutions;
         resolutionDropdown.ClearOptions();
