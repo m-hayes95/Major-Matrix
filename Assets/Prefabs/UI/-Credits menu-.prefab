@@ -526,11 +526,11 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\nVisual Assets (From Itch.io)\n---------------------------------\n\nPlayer
     Sprite >> CursedCode\n\nBoss Sprite >> Vivicat\n\nSpecialEffects >> BDragon1727\n\nUI
-    Keyboard icons >> beamedeighth\n\nGamepad Icon >> lightUP\n\nSound Assets\n---------------------------------\n\nSFX
-    : Michael Hayes\n\nMusic :  jhaeka \n\nCode Assets\n---------------------------------\n\nHealth
-    Bars >> Brackeys\n\nSettings Menu >> Brackeys\n\nUnity New Player Input >> Code
-    Monkey\n\nBehaviour Tree Root and Nodes >> \nMina Pecheux\n\nCharacter Controller
-    >> \nTarodev & Dave Tech"
+    Keyboard icons >> beamedeighth\n\nGamepad Icons >> lightUP & Kenney\n\nSound
+    Assets\n---------------------------------\n\nSFX : Michael Hayes\n\nMusic : 
+    jhaeka \n\nCode Assets\n---------------------------------\n\nHealth Bars >> Brackeys\n\nSettings
+    Menu >> Brackeys\n\nUnity New Player Input >> Code Monkey\n\nBehaviour Tree Root
+    and Nodes >> \nMina Pecheux\n\nCharacter Controller >> \nTarodev & Dave Tech"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4daec8dd096ccc94aae8b3562e58e07e, type: 2}
   m_sharedMaterial: {fileID: 510035095834147919, guid: 4daec8dd096ccc94aae8b3562e58e07e, type: 2}
