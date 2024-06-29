@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class UIController : MonoBehaviour
 {
+    // Main Menu Refs
     [SerializeField] GameObject pauseMenu, endGameMenu;
     [SerializeField] GameObject settingsTab, controlsTab, creditsTab;
     [SerializeField] GameManager gameManager;
+
     private bool showPauseMenu, showEndGameMenu;
     private bool isTabsOpen;
     private void OnEnable()

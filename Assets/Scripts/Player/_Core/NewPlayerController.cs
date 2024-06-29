@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class NewPlayerController : MonoBehaviour
@@ -174,10 +172,11 @@ public class NewPlayerController : MonoBehaviour
         coyoteTimeReady = false;
         StopAllCoroutines();
     }
-
+    /*
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(new Vector3 (collider.bounds.center.x, collider.bounds.center.y - acceptanceDistanceRadius), collider.size);
     }
+    */
 }
