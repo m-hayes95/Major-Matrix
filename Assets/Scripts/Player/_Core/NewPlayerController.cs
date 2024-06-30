@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class NewPlayerController : MonoBehaviour
@@ -94,9 +93,12 @@ public class NewPlayerController : MonoBehaviour
     }
     private void ExecuteJump()
     {
-        animator.SetTrigger("PlayerJump");
-        jumpCount++;
-        rb.velocity = Vector2.up * stats.jumpPower;
+        if (!hp.GetIsDead())
+        {
+            animator.SetTrigger("PlayerJump");
+            jumpCount++;
+            rb.velocity = Vector2.up * stats.jumpPower;
+        }
     }
     public void CancelJump()
     {

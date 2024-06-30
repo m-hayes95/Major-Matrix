@@ -1,7 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class EndGameMenuStats : MonoBehaviour
 {
@@ -9,13 +9,21 @@ public class EndGameMenuStats : MonoBehaviour
     [SerializeField] private TextMeshProUGUI deathCount_BT, timeCount_BT;
     [SerializeField] private GameObject creditsMenu;
     [SerializeField] private GameObject quitButton, statsDisplay;
+    [SerializeField] private GameObject creditsButton;
+    [SerializeField] private PlayerInputActions inputActions;
 
+    private void OnEnable() { inputActions.Player.Enable(); }
+    private void OnDisable() {  inputActions.Player.Disable(); }
+
+    private void Awake()
+    {
+        inputActions = new PlayerInputActions();
+        inputActions.Player.CloseMenu.performed += CloseCreditsTab;
+    }
     private void Update()
     {
         DisplayPlayerDeathCount();
         DisplayEncounterTime();
-        if (creditsMenu.activeInHierarchy)
-            CloseCreditsTab();
     }
 
     private void DisplayPlayerDeathCount()
@@ -29,17 +37,22 @@ public class EndGameMenuStats : MonoBehaviour
         timeCount_SM.text = SavedStats.Instance.GetEncounterTimeForSM().ToString("00:00");
         timeCount_BT.text = SavedStats.Instance.GetEncounterTimeForBT().ToString("00:00");
     }
-    private void CloseCreditsTab()
+    private void CloseCreditsTab(InputAction.CallbackContext context)
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (context.performed && creditsMenu.activeInHierarchy)
         {
             creditsMenu.SetActive(false);
             quitButton.SetActive(true);
             statsDisplay.SetActive(true);
+            SelectCreditsMenuButton();
         }
     }
     public void Quit()
     {
         Application.Quit();
+    }
+    private void SelectCreditsMenuButton()
+    {
+        EventSystem.current.SetSelectedGameObject(creditsButton);
     }
 }

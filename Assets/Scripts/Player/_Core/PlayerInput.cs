@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -26,6 +24,7 @@ public class PlayerInput : MonoBehaviour
         inputActions.Player.CloseMenu.performed += PauseInputPerformed;
         inputActions.Player.Fire.performed += FireWeaponPerformed;
         inputActions.Player.Fire.canceled += FireWeaponCanceled;
+        inputActions.Player.LoadNextScene.performed += ForceLoadNextScene;
     }
     private void Start()
     {
@@ -60,7 +59,7 @@ public class PlayerInput : MonoBehaviour
 
     private IEnumerator ShotDelay()
     {
-        yield return new WaitForSeconds(.3f);
+        yield return new WaitForSeconds(controller.stats.shotDelay);
         weaponPressed = false;
     }
 
@@ -68,11 +67,16 @@ public class PlayerInput : MonoBehaviour
     {
         if (context.performed)
         {
-            if(!uIController.GetIsTabsOpen()) gameManager.PauseGame();
+            if (!uIController.GetIsTabsOpen())
+            {
+                gameManager.PauseGame();
+                return;
+            }
             else
             {
                 uIController.DisplayPauseMenu();
                 uIController.CloseOpenTabs();
+                return;
             }
         }
     }
@@ -94,7 +98,11 @@ public class PlayerInput : MonoBehaviour
         if (context.canceled)
             controller.CancelJump();
     }
-
+    private void ForceLoadNextScene(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            SceneLoadOrder.Instance.LoadNextScene();
+    }
     public Vector2 MovementInputNormalized()
     {
         Vector2 inputVector = inputActions.Player.Move.ReadValue<Vector2>();

@@ -1,5 +1,3 @@
-
-using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,7 +12,7 @@ public class PlayerHealth : MonoBehaviour
     private PlayerController playerController;
     private Animator animator;
     private float currentHP;
-    [SerializeField]private int deathCount;
+    private int deathCount;
     private bool isDead;
     
 

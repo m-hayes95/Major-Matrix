@@ -16,10 +16,12 @@ public class BossStatsScriptableObject : ScriptableObject
     public float specialAttackDamage;
     [Range(0, 10), Tooltip("How many shields the boss will start with. Once shields reach 0, the boss cannot shield again.")]
     public int maxShields;
-    [Range(0f, 20f), Tooltip("How much force should be applied to the bullets when shot.")]
+    [Range(0f, 40f), Tooltip("How much force should be applied to the bullets when shot.")]
     public float shotFoce;
-    [Range(0f, 50f), Tooltip("How far the boss can see the target.")]
-    public float bossFOV;
+    [Range(0f, 50f), Tooltip("How far the BT boss can see the target.")]
+    public float bossFOV_BT;
+    [Range(0f, 50f), Tooltip("How far the FSM boss can see the target.")]
+    public float bossFOV_FSM;
     [Tooltip("Set the target of the boss through Game object Layers.")]
     public LayerMask targetLayerMask;
 

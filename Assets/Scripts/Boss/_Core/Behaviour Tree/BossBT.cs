@@ -16,7 +16,6 @@ public class BossBT : BTree
     private DistanceToTargetY distanceToTargetY;
     private BossStatsScriptableObject stats;
     [SerializeField]private GameObject target;
-    private bool facingLeft = true;
 
     private void Awake()
     {
@@ -40,16 +39,15 @@ public class BossBT : BTree
     // Behaviour Tree
     protected override BTNode SetupTree()
     {
-        // Look at the player
-        //CheckTargetsSide();
-
         BTNode root = new BTSelector(new List<BTNode>
         {
             // Combat or Idle
             new BTSequence(new List<BTNode>
             {
                 // If has target, move down the tree
-                new CheckHasTarget(transform, stats.bossFOV, stats.targetLayerMask),
+                new CheckHasTarget(
+                    transform, stats.bossFOV_BT, stats.targetLayerMask, health
+                    ),
                 new BTSelector(new List<BTNode>
                 {
                     // Defend with shield
@@ -123,28 +121,6 @@ public class BossBT : BTree
         }) ;
         return root;
     }
-    /*
-    private void CheckTargetsSide()
-    {
-        // Check which side the player is on
-        float xDistanceFromTarget = transform.position.x - target.transform.position.x;
-        if (!facingLeft && xDistanceFromTarget > 0)
-        {
-            FacePlayer();
-        }
-        if (facingLeft && xDistanceFromTarget < 0)
-        {
-            FacePlayer();
-        }
-    }
-    private void FacePlayer()
-    {
-        // Look towards the player depending on X pos
-        facingLeft = !facingLeft;
-        transform.Rotate(0f, -180f, 0f);
-        Debug.Log("Boss Flipped");
-    }
-    */
 }
 
 
