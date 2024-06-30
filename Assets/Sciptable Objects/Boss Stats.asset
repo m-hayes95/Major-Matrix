@@ -31,7 +31,7 @@ MonoBehaviour:
   chanceToUseSpecialAttack: 20
   percentIncrease: 0
   chanceToShield: 0.13
-  resetNormalAttackTimer: 1
+  resetNormalAttackTimer: 0.7
   resetSpecialAttackTimer: 3.4
   shieldTimer: 3
   shieldCooldownTime: 9.6
@@ -39,7 +39,7 @@ MonoBehaviour:
   chaseCooldown: 3
   numberOfAttacks: 5
   offsetY: 0
-  spacingX: 4
+  spacingX: 3.8
   timeBetweenAttacks: 0.5
   highSpecialAttackGravityScale: 5
   spawnHeight: 12.6
