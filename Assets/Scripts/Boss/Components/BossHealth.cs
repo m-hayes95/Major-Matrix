@@ -78,7 +78,7 @@ public class BossHealth : MonoBehaviour
 
     private void DeathEffect()
     {
-        ParticleSystem newEffect = Instantiate(deathEffect, transform.position, Quaternion.identity);
+        ParticleSystem newEffect = Instantiate(deathEffect, transform.position - Vector3.up, Quaternion.identity);
     }
 
     public bool GetIsDead()

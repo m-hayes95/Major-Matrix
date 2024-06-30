@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +18,7 @@ public class SpecialAttacks : MonoBehaviour
     [SerializeField]private bool inSpecialAttack = false;
     private bool canAttack = true;
     private Animator animator;
+    private BossHealth health;
     private void OnEnable() { AttackCooldown.OnSpecialAttackReset += ResetAttackBool; }
     private void OnDisable() { AttackCooldown.OnSpecialAttackReset -= ResetAttackBool; }
 
@@ -27,6 +27,7 @@ public class SpecialAttacks : MonoBehaviour
         stats = GetComponent<BossStatsComponent>().bossStats;
         attackCooldown = GetComponent<AttackCooldown>();    
         animator = GetComponent<Animator>();
+        health = GetComponent<BossHealth>();
     }
     public bool GetIsInSpecialAttack() {  return inSpecialAttack; }
 
@@ -36,7 +37,15 @@ public class SpecialAttacks : MonoBehaviour
             OnAttackFinished = new UnityEvent();
         OnAttackFinished.AddListener(AttackFinished);
     }
-    
+
+    private void Update()
+    {
+        if (health.GetIsDead())
+        {
+            RemoveOnScreenAttacks();
+        }
+    }
+
     private void ResetAttackBool() // can attack gets reset after cooldown
     {
         canAttack = true; 
@@ -143,10 +152,14 @@ public class SpecialAttacks : MonoBehaviour
         attackCooldown.ResetSpecialAttack(stats.resetSpecialAttackTimer);
         Debug.Log("Special Attack Finished");
         // Remove new gameobjects from scene
+        RemoveOnScreenAttacks();
+        Debug.Log("Special Attack List Cleared");
+    }
+    private void RemoveOnScreenAttacks()
+    {
         for (int x = 0; x < attacks.Count; ++x)
         {
             attacks[x].SetActive(false);
         }
-        Debug.Log("Special Attack List Cleared");
     }
 }
