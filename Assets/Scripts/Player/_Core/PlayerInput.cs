@@ -67,11 +67,16 @@ public class PlayerInput : MonoBehaviour
     {
         if (context.performed)
         {
-            if(!uIController.GetIsTabsOpen()) gameManager.PauseGame();
+            if (!uIController.GetIsTabsOpen())
+            {
+                gameManager.PauseGame();
+                return;
+            }
             else
             {
                 uIController.DisplayPauseMenu();
                 uIController.CloseOpenTabs();
+                return;
             }
         }
     }
