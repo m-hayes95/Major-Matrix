@@ -16,6 +16,8 @@ public class PlayerStatsScriptableObject : ScriptableObject
     public float weaponPower;
     [Range(1f, 20f), Tooltip("How much velocity each shot has.")]
     public float shotVelocity;
+    [Range(0f, 2f), Tooltip("Time between each shot of weapon.")]
+    public float shotDelay;
 
     [Header("Gravity Stats")]
     [Range(1f, 40f), Tooltip("How far the player can jump before gravity modifers take place (Adjust, depending on Jump Power stat).")]

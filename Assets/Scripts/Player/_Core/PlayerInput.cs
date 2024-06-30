@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -61,7 +59,7 @@ public class PlayerInput : MonoBehaviour
 
     private IEnumerator ShotDelay()
     {
-        yield return new WaitForSeconds(.3f);
+        yield return new WaitForSeconds(controller.stats.shotDelay);
         weaponPressed = false;
     }
 

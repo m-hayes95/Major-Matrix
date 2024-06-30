@@ -17,6 +17,7 @@ MonoBehaviour:
   jumpPower: 23
   weaponPower: 6
   shotVelocity: 8
+  shotDelay: 0.5
   maxJumpThreshold: 4.1
   maxFallGravityScale: 10
   fallGravityScaleMultiplier: 1.8

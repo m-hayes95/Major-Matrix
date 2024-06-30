@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 3518272519150992504}
   - component: {fileID: 6153647838330829352}
   - component: {fileID: 3397519912736011132}
-  m_Layer: 9
+  - component: {fileID: 1052457679626261469}
+  m_Layer: 0
   m_Name: Invisable Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,6 +131,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1052457679626261469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1467566838963320481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c5ab59ad6b2a5d4dbe576783a36e132, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3358380714050066533
 GameObject:
   m_ObjectHideFlags: 0
@@ -141,7 +154,8 @@ GameObject:
   - component: {fileID: 7062747893093412890}
   - component: {fileID: 2160664279942734429}
   - component: {fileID: 8790002467961588713}
-  m_Layer: 9
+  - component: {fileID: 2744671426525358266}
+  m_Layer: 0
   m_Name: Invisable Wall (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,6 +274,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &2744671426525358266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3358380714050066533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c5ab59ad6b2a5d4dbe576783a36e132, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8604152039548344569
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,7 +310,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8604152039548344569}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -305,7 +331,8 @@ GameObject:
   - component: {fileID: 2164909563326293161}
   - component: {fileID: 8040263936315158167}
   - component: {fileID: 3806650181413078964}
-  m_Layer: 9
+  - component: {fileID: 2690928954226728155}
+  m_Layer: 0
   m_Name: Invisable Wall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -424,3 +451,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &2690928954226728155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9169496961418765149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c5ab59ad6b2a5d4dbe576783a36e132, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
