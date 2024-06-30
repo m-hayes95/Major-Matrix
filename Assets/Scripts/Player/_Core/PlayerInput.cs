@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -30,7 +31,7 @@ public class PlayerInput : MonoBehaviour
     {
         controller = GetComponent<NewPlayerController>();
         hp = GetComponent<PlayerHealth>();
-        shoot = GetComponent<Shoot>();  
+        shoot = GetComponent<Shoot>();
     }
 
     private void Update()
@@ -46,7 +47,10 @@ public class PlayerInput : MonoBehaviour
     private void FireWeaponPerformed(InputAction.CallbackContext context)
     { 
         if (context.performed)
+        {
             isFiring = true;
+        }
+            
     }
     private void FireWeaponCanceled(InputAction.CallbackContext context) 
     {
@@ -87,9 +91,8 @@ public class PlayerInput : MonoBehaviour
     }
     private void JumpInputCanceled(InputAction.CallbackContext context)
     {
-        if (context.canceled){
+        if (context.canceled)
             controller.CancelJump();
-        }
     }
 
     public Vector2 MovementInputNormalized()
