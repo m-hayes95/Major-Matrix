@@ -38,7 +38,7 @@ MonoBehaviour:
   chaseCooldown: 3
   numberOfAttacks: 4
   offsetY: 0
-  spacingX: 3.5
-  timeBetweenAttacks: 0.5
+  spacingX: 4
+  timeBetweenAttacks: 0.55
   highSpecialAttackGravityScale: 5
-  spawnHeight: 20
+  spawnHeight: 13.8
