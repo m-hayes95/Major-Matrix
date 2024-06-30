@@ -7,7 +7,8 @@ public class BossFSM : MonoBehaviour
     { Idle, Combat, RangeAttack, MeleeAttack, SpecialLowAttack, SpecialHighAttack, Shield, ChasePlayer, Dead };
 
     [SerializeField] private StateMachine sM;
-    [SerializeField] private GameObject target;
+    [SerializeField] LayerMask targetLayer;
+    private Transform target;
     // Type of Special Attacks
     private int lowAttackIndex = 0;
     private int highAttackIndex = 1;
@@ -51,7 +52,8 @@ public class BossFSM : MonoBehaviour
             case StateMachine.Idle:
                 // Dead
                 if (health.GetIsDead()) sM = StateMachine.Dead;
-                if (CheckTargetWithinRange()) sM = StateMachine.Combat;
+                if (CheckHasTarget() || health.GetBossCurrentHP() < stats.maxHP) 
+                    sM = StateMachine.Combat;
                 break;
 
             case StateMachine.Combat:
@@ -133,8 +135,23 @@ public class BossFSM : MonoBehaviour
     }
     private bool CheckTargetWithinRange() // Check to see if the target is within the enemies field of view
     {
-        if (DistanceToTarget() <= stats.bossFOV) 
+        if (DistanceToTarget() <= stats.bossFOV_FSM) 
             return true;
+        return false;
+    }
+    private bool CheckHasTarget()
+    {
+        if (target == null)
+        {
+            Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(
+                transform.position, new Vector2(stats.bossFOV_BT, stats.bossFOV_BT / 3), 0, targetLayer
+                );
+            if (collider2Ds.Length > 0)
+            {
+                target = collider2Ds[0].transform;
+                return true;
+            }
+        }
         return false;
     }
     private bool CheckCanShield() // If we have low enough health, have shields available and are not currently shield, then allow shielding

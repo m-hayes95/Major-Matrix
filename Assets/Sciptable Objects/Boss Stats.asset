@@ -17,12 +17,13 @@ MonoBehaviour:
   normalAttackDamage: 10
   specialAttackDamage: 20
   maxShields: 3
-  shotFoce: 20
-  bossFOV: 22
+  shotFoce: 27.7
+  bossFOV_BT: 48
+  bossFOV_FSM: 48
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  chaseDistanceThreshold: 10
+  chaseDistanceThreshold: 14
   meleeAttackRange: 3
   longRangeAttackThreshold: 8
   specialHighAttackMinY: 3.1
@@ -39,6 +40,6 @@ MonoBehaviour:
   numberOfAttacks: 4
   offsetY: 0
   spacingX: 4
-  timeBetweenAttacks: 0.55
+  timeBetweenAttacks: 0.5
   highSpecialAttackGravityScale: 5
-  spawnHeight: 13.8
+  spawnHeight: 12.6

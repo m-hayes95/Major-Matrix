@@ -15,8 +15,8 @@ public class BossHealth : MonoBehaviour
     [SerializeField] private AudioSource hitSound, sheildHitSound, deathSound;
     [SerializeField] private GameObject enemyDeathState;
 
-    private float currentHP;
-    private BossStatsScriptableObject stats;
+    [SerializeField]private float currentHP;
+    public BossStatsScriptableObject stats;
     private Shield shield;
     private Animator animator;
     private bool isDead;
