@@ -22,6 +22,6 @@ public class MoveToNextMap : MonoBehaviour
     }
     private void NextMap()
     {
-        SceneManager.LoadScene(SceneLoadOrder.Instance.LoadNextScene());
+        SceneLoadOrder.Instance.LoadNextScene();
     }
 }

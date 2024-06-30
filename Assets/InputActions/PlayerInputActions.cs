@@ -62,6 +62,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""LoadNextScene"",
+                    ""type"": ""Button"",
+                    ""id"": ""a9ba7bd9-aa98-47c3-b6db-2685e096c4f3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -196,6 +205,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Fire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3336c65a-9dea-4a38-8888-079769a2f6a8"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LoadNextScene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -208,6 +228,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_CloseMenu = m_Player.FindAction("CloseMenu", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
+        m_Player_LoadNextScene = m_Player.FindAction("LoadNextScene", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -273,6 +294,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_CloseMenu;
     private readonly InputAction m_Player_Fire;
+    private readonly InputAction m_Player_LoadNextScene;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -281,6 +303,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @CloseMenu => m_Wrapper.m_Player_CloseMenu;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
+        public InputAction @LoadNextScene => m_Wrapper.m_Player_LoadNextScene;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -302,6 +325,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Fire.started += instance.OnFire;
             @Fire.performed += instance.OnFire;
             @Fire.canceled += instance.OnFire;
+            @LoadNextScene.started += instance.OnLoadNextScene;
+            @LoadNextScene.performed += instance.OnLoadNextScene;
+            @LoadNextScene.canceled += instance.OnLoadNextScene;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -318,6 +344,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Fire.started -= instance.OnFire;
             @Fire.performed -= instance.OnFire;
             @Fire.canceled -= instance.OnFire;
+            @LoadNextScene.started -= instance.OnLoadNextScene;
+            @LoadNextScene.performed -= instance.OnLoadNextScene;
+            @LoadNextScene.canceled -= instance.OnLoadNextScene;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -341,5 +370,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnCloseMenu(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
+        void OnLoadNextScene(InputAction.CallbackContext context);
     }
 }

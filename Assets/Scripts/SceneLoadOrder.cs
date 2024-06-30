@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneLoadOrder : MonoBehaviour
 {
@@ -56,10 +57,10 @@ public class SceneLoadOrder : MonoBehaviour
         return false;
     }
 
-    public int LoadNextScene()
+    public void LoadNextScene()
     {
         int nextScene = sceneIndexOrder[sceneCount];
+        SceneManager.LoadScene(nextScene);
         sceneCount++;
-        return nextScene;
     }
 }

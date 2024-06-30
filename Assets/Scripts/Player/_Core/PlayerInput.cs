@@ -26,6 +26,7 @@ public class PlayerInput : MonoBehaviour
         inputActions.Player.CloseMenu.performed += PauseInputPerformed;
         inputActions.Player.Fire.performed += FireWeaponPerformed;
         inputActions.Player.Fire.canceled += FireWeaponCanceled;
+        inputActions.Player.LoadNextScene.performed += ForceLoadNextScene;
     }
     private void Start()
     {
@@ -94,7 +95,11 @@ public class PlayerInput : MonoBehaviour
         if (context.canceled)
             controller.CancelJump();
     }
-
+    private void ForceLoadNextScene(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            SceneLoadOrder.Instance.LoadNextScene();
+    }
     public Vector2 MovementInputNormalized()
     {
         Vector2 inputVector = inputActions.Player.Move.ReadValue<Vector2>();
