@@ -9314,7 +9314,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 80a79bd53bba3044c9f2b497d8734ff2, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 2b8ba27f2468c90418be23667cb0fd87, type: 3}
+  m_audioClip: {fileID: 8300000, guid: fe8a9694845ff0e448a0ffd5a5739c3e, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.2
   m_Pitch: 1
@@ -10789,6 +10789,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: -Credits menu-
       objectReference: {fileID: 0}
+    - target: {fileID: 244622914815282628, guid: 36f2cfbdf793d8547b5dd6d3e502eb8d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 574583947538743243, guid: 36f2cfbdf793d8547b5dd6d3e502eb8d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -10867,6 +10871,82 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 574583947538743243, guid: 36f2cfbdf793d8547b5dd6d3e502eb8d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1026169025890351790, guid: 36f2cfbdf793d8547b5dd6d3e502eb8d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1026169025890351790, guid: 36f2cfbdf793d8547b5dd6d3e502eb8d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1026169025890351790, guid: 36f2cfbdf793d8547b5dd6d3e502eb8d, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.75974214
+      objectReference: {fileID: 0}
+    - target: {fileID: 1539767191269784580, guid: 36f2cfbdf793d8547b5dd6d3e502eb8d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1539767191269784580, guid: 36f2cfbdf793d8547b5dd6d3e502eb8d, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985336399533453451, guid: 36f2cfbdf793d8547b5dd6d3e502eb8d, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1754
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985336399533453451, guid: 36f2cfbdf793d8547b5dd6d3e502eb8d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.0036010742
+      objectReference: {fileID: 0}
+    - target: {fileID: 4079224701461631053, guid: 36f2cfbdf793d8547b5dd6d3e502eb8d, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1753.9744
+      objectReference: {fileID: 0}
+    - target: {fileID: 5226971249150907226, guid: 36f2cfbdf793d8547b5dd6d3e502eb8d, type: 3}
+      propertyPath: m_text
+      value: "Thanks to these amazing people!\n\n\nVisual Assets (From Itch.io)\n---------------------------------\n\nPlayer
+        Sprite >> CursedCode\n\nBoss Sprite >> Vivicat\n\nSpecialEffects >> BDragon1727\n\nUI
+        Keyboard icons >> beamedeighth\n\nGamepad Icons >> lightUP & Kenney\n\nSound
+        Assets\n---------------------------------\n\nSFX : Michael Hayes (Me)\n\nMusic
+        : Diablo Luna\nSNES BGM Pack, Vol 1\nOutside enviroment - Track 00\nBoss
+        Fight - Track 03\nEnd Game Scene - Track 04\n\nCode Assets\n---------------------------------\n\nHealth
+        Bars >> Brackeys\n\nSettings Menu >> Brackeys\n\nUnity New Player Input >>
+        Code Monkey\n\nBehaviour Tree Root and Nodes >> \nMina Pecheux\n\nCharacter
+        Controller >> \nTarodev & Dave Tech"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5321848526398360216, guid: 36f2cfbdf793d8547b5dd6d3e502eb8d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5321848526398360216, guid: 36f2cfbdf793d8547b5dd6d3e502eb8d, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7498860276136070049, guid: 36f2cfbdf793d8547b5dd6d3e502eb8d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7498860276136070049, guid: 36f2cfbdf793d8547b5dd6d3e502eb8d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7498860276136070049, guid: 36f2cfbdf793d8547b5dd6d3e502eb8d, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7498860276136070049, guid: 36f2cfbdf793d8547b5dd6d3e502eb8d, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8759098468563211346, guid: 36f2cfbdf793d8547b5dd6d3e502eb8d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8759098468563211346, guid: 36f2cfbdf793d8547b5dd6d3e502eb8d, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
