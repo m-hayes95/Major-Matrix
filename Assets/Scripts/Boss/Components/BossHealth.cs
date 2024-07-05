@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -19,6 +18,7 @@ public class BossHealth : MonoBehaviour
     public BossStatsScriptableObject stats;
     private Shield shield;
     private Animator animator;
+    private BossType bossType;
     private bool isDead;
 
     private void Awake()
@@ -26,6 +26,7 @@ public class BossHealth : MonoBehaviour
         stats = GetComponent<BossStatsComponent>().bossStats;
         shield = GetComponent<Shield>();    
         animator = GetComponent<Animator>();
+        bossType = GetComponent<BossType>();    
     }
     private void Start()
     {
@@ -63,6 +64,7 @@ public class BossHealth : MonoBehaviour
 
     private void BossDead()
     {
+        // Call all boss death logic
         Instantiate(enemyDeathState, transform.position, transform.rotation);
         deathSound.Play();
         isDead = true;

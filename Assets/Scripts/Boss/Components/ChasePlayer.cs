@@ -2,9 +2,16 @@ using UnityEngine;
 
 public class ChasePlayer : MonoBehaviour
 {
+    private BossType bossType;
+    private void Awake()
+    {
+        bossType = GetComponent<BossType>();
+    }
     public void Chase(Transform target, Transform currentLocation, float moveSpeed)
     {
         MoveToPlayer(target, currentLocation, moveSpeed);
+        if (bossType.CheckIfBossHasBT()) SavedStats.Instance.StoreTimeSpentUsingChaseBT();
+        else SavedStats.Instance.StoreTimeSpentUsingChaseSM();
     }
     private void MoveToPlayer(Transform target, Transform currentLocation, float moveSpeed)
     {

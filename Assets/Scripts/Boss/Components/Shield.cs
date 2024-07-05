@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Shield : MonoBehaviour
 {
@@ -10,10 +11,12 @@ public class Shield : MonoBehaviour
     private bool isShielded = false;
     private bool canShield = true;
     private int currentShields;
+    private BossType bossType;
 
     private void Awake()
     {
         stats = GetComponent<BossStatsComponent>().bossStats;
+        bossType = GetComponent<BossType>();
     }
 
     private void Start()
@@ -30,6 +33,8 @@ public class Shield : MonoBehaviour
         // Make the boss resistant to player damage
         if (currentShields > 0 && canShield)
         {
+            if (bossType.CheckIfBossHasBT()) SavedStats.Instance.StoreTimesUsedShieldBT();
+            else SavedStats.Instance.StoreTimesUsedShieldSM();
             canShield = false;
             isShielded = true;
             currentShields--;

@@ -88,7 +88,7 @@ public class PlayerInput : MonoBehaviour
 
     private void JumpInputPerformed(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !gameManager.GetIsGamePaused())
         {
             controller.Jump();
         }

@@ -837,7 +837,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 80a79bd53bba3044c9f2b497d8734ff2, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 2b8ba27f2468c90418be23667cb0fd87, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 612adf1836a00cf40a3c42b623a42021, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.2
   m_Pitch: 1
@@ -1725,7 +1725,7 @@ Transform:
   m_GameObject: {fileID: 202943575}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.17, y: 9.47, z: 0}
+  m_LocalPosition: {x: 19.57, y: 11.98, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -5638,7 +5638,7 @@ Transform:
   m_GameObject: {fileID: 805713163}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.91, y: 7.03, z: 0}
+  m_LocalPosition: {x: -10.03, y: 7.77, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -8572,7 +8572,7 @@ Transform:
   m_GameObject: {fileID: 1175153552}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.4, y: 6.54, z: 0}
+  m_LocalPosition: {x: -0.74, y: 6.35, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -13554,6 +13554,10 @@ PrefabInstance:
       propertyPath: specialAttackPercentThresold
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 4839253430747860819, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
+      propertyPath: hasBT
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4926138177142674149, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
       propertyPath: bulletSound
       value: 
@@ -13592,7 +13596,7 @@ PrefabInstance:
       objectReference: {fileID: 178222751247952054, guid: 9985e6129542d1241af24cf5afec808f, type: 3}
     - target: {fileID: 5124180400556533231, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5124180400556533231, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -13600,6 +13604,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5124180400556533231, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5124180400556533231, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5124180400556533231, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
@@ -13611,11 +13619,19 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1040634756}
     - target: {fileID: 5124180400556533231, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1241999175}
+    - target: {fileID: 5124180400556533231, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5124180400556533231, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5124180400556533231, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5124180400556533231, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
@@ -13627,6 +13643,10 @@ PrefabInstance:
       value: SaveEncounterTime
       objectReference: {fileID: 0}
     - target: {fileID: 5124180400556533231, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: OnEnemyDeath
+      objectReference: {fileID: 0}
+    - target: {fileID: 5124180400556533231, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: OpenDoorToNextMap, Assembly-CSharp
       objectReference: {fileID: 0}
@@ -13635,11 +13655,19 @@ PrefabInstance:
       value: EncounterTimer, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5124180400556533231, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: PlayerHealth, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5124180400556533231, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5124180400556533231, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5124180400556533231, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5865844379600711558, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
@@ -15866,7 +15894,7 @@ Transform:
   m_GameObject: {fileID: 1962007618}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.42, y: 0.69, z: 0}
+  m_LocalPosition: {x: -14.08, y: -0.85, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
