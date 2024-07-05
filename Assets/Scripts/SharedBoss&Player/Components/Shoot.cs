@@ -13,10 +13,12 @@ public class Shoot : MonoBehaviour
     private GameObject newBullet;
     private bool canShoot = true;
     private Animator animator;
+    private BossType bossType;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        bossType = GetComponent<BossType>();    
     }
     private void OnEnable()
     {
@@ -31,6 +33,8 @@ public class Shoot : MonoBehaviour
     {
         if (canShoot)
         {
+            if (bossType.CheckIfBossHasBT()) SavedStats.Instance.StoreTimesUsedShootBT();
+            else SavedStats.Instance.StoreTimesUsedShootSM();
             animator.SetTrigger("BossUsedRangedAttack");
             canShoot = false;
             InstantiateNewBullet();

@@ -13554,6 +13554,10 @@ PrefabInstance:
       propertyPath: specialAttackPercentThresold
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 4839253430747860819, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
+      propertyPath: hasBT
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4926138177142674149, guid: 6d593142b3fc7df4b95725da45997468, type: 3}
       propertyPath: bulletSound
       value: 

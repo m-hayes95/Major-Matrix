@@ -190,6 +190,7 @@ GameObject:
   - component: {fileID: 6346187429867278522}
   - component: {fileID: 4221417097767430099}
   - component: {fileID: 8154915044111628165}
+  - component: {fileID: 2629339222054434585}
   m_Layer: 10
   m_Name: Boss Base
   m_TagString: Untagged
@@ -447,6 +448,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTransform: {fileID: 0}
+--- !u!114 &2629339222054434585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3905354449166342092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38e6674d84fb5714eaf7af32a7bdef94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasBT: 0
 --- !u!1 &8534123200898894193
 GameObject:
   m_ObjectHideFlags: 0

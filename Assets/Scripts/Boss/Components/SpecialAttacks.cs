@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering;
 
 [RequireComponent(typeof(AttackCooldown))]
 public class SpecialAttacks : MonoBehaviour
@@ -19,6 +20,7 @@ public class SpecialAttacks : MonoBehaviour
     private bool canAttack = true;
     private Animator animator;
     private BossHealth health;
+    private BossType bossType;
     private void OnEnable() { AttackCooldown.OnSpecialAttackReset += ResetAttackBool; }
     private void OnDisable() { AttackCooldown.OnSpecialAttackReset -= ResetAttackBool; }
 
@@ -28,6 +30,7 @@ public class SpecialAttacks : MonoBehaviour
         attackCooldown = GetComponent<AttackCooldown>();    
         animator = GetComponent<Animator>();
         health = GetComponent<BossHealth>();
+        bossType = GetComponent<BossType>();
     }
     public bool GetIsInSpecialAttack() {  return inSpecialAttack; }
 
@@ -54,6 +57,8 @@ public class SpecialAttacks : MonoBehaviour
     {
         if (!inSpecialAttack && canAttack)
         {
+            if (bossType.CheckIfBossHasBT()) SavedStats.Instance.StoreTimesUsedSpecialAttackBT();
+            else SavedStats.Instance.StoreTimesUsedSpecialAttackSM();
             SetStartPositions(currentPosition);
             canAttack = false;
             inSpecialAttack = true;
