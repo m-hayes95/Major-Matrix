@@ -7,6 +7,7 @@ public class SavedStats : MonoBehaviour
     // Behaviour Tree
     [SerializeField] private float savedEncouterTimeBT;
     [SerializeField] private float playerDeathCountBT;
+    [SerializeField] private float damageDealtToPlayerBT;
     [SerializeField] private float timeSpentUsingChaseBT;
     [SerializeField] private int timesUsedShootBT;
     [SerializeField] private int timesUsedMeleeBT;
@@ -15,6 +16,7 @@ public class SavedStats : MonoBehaviour
     // State Machine
     [SerializeField] private float savedEncouterTimeSM;
     [SerializeField] private float playerDeathCountSM;
+    [SerializeField] private float damageDealtToPlayerSM;
     [SerializeField] private float timeSpentUsingChaseSM;
     [SerializeField] private int timesUsedShootSM;
     [SerializeField] private int timesUsedMeleeSM;
@@ -35,6 +37,7 @@ public class SavedStats : MonoBehaviour
     // Behaviour Tree Setters
     public void StoreCurrentPlayerDeathsBT() => playerDeathCountBT++;
     public void StoreCurrentTimeBT(float currentTimeBT) => savedEncouterTimeBT = currentTimeBT;
+    public void StoreCurrentDamageDealtBT(float damageDealt) => damageDealtToPlayerBT = damageDealt;
     public void StoreTimeSpentUsingChaseBT() => timeSpentUsingChaseBT += Time.deltaTime;
     public void StoreTimesUsedShootBT() => timesUsedShootBT++;
     public void StoreTimesUsedMeleeBT() => timesUsedMeleeBT++;
@@ -44,6 +47,7 @@ public class SavedStats : MonoBehaviour
     // Behaviour Tree Getters
     public float GetEncounterTimeForBT() { return savedEncouterTimeBT; }
     public float GetCurrentPlayerDeathCountForBT() { return playerDeathCountBT; }
+    public float GetCurrentDamageDealtBT() { return damageDealtToPlayerBT; }
     public float GetTimeSpentUsingChaseBT() { return timeSpentUsingChaseBT; }
     public float GetTimesUsedShootBT() { return timesUsedShootBT; }
     public float GetTimesUsedMeleeBT() { return timesUsedMeleeBT; }
@@ -53,6 +57,7 @@ public class SavedStats : MonoBehaviour
     // Finate State Machine Setters
     public void StoreCurrentTimeSM(float currentTimeSM) => savedEncouterTimeSM = currentTimeSM;
     public void StoreCurrentPlayerDeathsSM() => playerDeathCountSM++;
+    public void StoreCurrentDamageDealtSM(float damageDealt) => damageDealtToPlayerSM = damageDealt;
     public void StoreTimeSpentUsingChaseSM() => timeSpentUsingChaseSM += Time.deltaTime;
     public void StoreTimesUsedShootSM() => timesUsedShootSM++;
     public void StoreTimesUsedMeleeSM() => timesUsedMeleeSM++;
@@ -62,6 +67,7 @@ public class SavedStats : MonoBehaviour
     // Finate State Machine Getters
     public float GetEncounterTimeForSM() { return savedEncouterTimeSM; }
     public float GetCurrentPlayerDeathCountForSM() { return playerDeathCountSM; }
+    public float GetCurrentDamageDealtSM() { return damageDealtToPlayerSM; }
     public float GetTimeSpentUsingChaseSM() { return timeSpentUsingChaseSM; }
     public float GetTimesUsedShootSM() { return timesUsedShootSM; }
     public float GetTimesUsedMeleeSM() { return timesUsedMeleeSM; }
