@@ -5205,7 +5205,7 @@ PrefabInstance:
       objectReference: {fileID: 178222751247952054, guid: 9985e6129542d1241af24cf5afec808f, type: 3}
     - target: {fileID: 6044379319514701181, guid: 7ff3c438540a27541994198c2f1927ed, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6044379319514701181, guid: 7ff3c438540a27541994198c2f1927ed, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -5213,6 +5213,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6044379319514701181, guid: 7ff3c438540a27541994198c2f1927ed, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6044379319514701181, guid: 7ff3c438540a27541994198c2f1927ed, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6044379319514701181, guid: 7ff3c438540a27541994198c2f1927ed, type: 3}
@@ -5224,11 +5228,19 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1600802222}
     - target: {fileID: 6044379319514701181, guid: 7ff3c438540a27541994198c2f1927ed, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1912152819}
+    - target: {fileID: 6044379319514701181, guid: 7ff3c438540a27541994198c2f1927ed, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6044379319514701181, guid: 7ff3c438540a27541994198c2f1927ed, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6044379319514701181, guid: 7ff3c438540a27541994198c2f1927ed, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6044379319514701181, guid: 7ff3c438540a27541994198c2f1927ed, type: 3}
@@ -5240,6 +5252,10 @@ PrefabInstance:
       value: SaveEncounterTime
       objectReference: {fileID: 0}
     - target: {fileID: 6044379319514701181, guid: 7ff3c438540a27541994198c2f1927ed, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: OnEnemyDeath
+      objectReference: {fileID: 0}
+    - target: {fileID: 6044379319514701181, guid: 7ff3c438540a27541994198c2f1927ed, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: OpenDoorToNextMap, Assembly-CSharp
       objectReference: {fileID: 0}
@@ -5248,11 +5264,19 @@ PrefabInstance:
       value: EncounterTimer, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6044379319514701181, guid: 7ff3c438540a27541994198c2f1927ed, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: PlayerHealth, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6044379319514701181, guid: 7ff3c438540a27541994198c2f1927ed, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6044379319514701181, guid: 7ff3c438540a27541994198c2f1927ed, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6044379319514701181, guid: 7ff3c438540a27541994198c2f1927ed, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6942945527797106869, guid: 7ff3c438540a27541994198c2f1927ed, type: 3}

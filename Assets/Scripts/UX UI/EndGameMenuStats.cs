@@ -31,6 +31,7 @@ public class EndGameMenuStats : MonoBehaviour
         DisplayMeleeCount();
         DisplaySpecialCount();
         DisplayShieldCount();
+        DisplayTimeSpentChasing();
     }
 
     private void DisplayPlayerDeathCount()
@@ -70,6 +71,12 @@ public class EndGameMenuStats : MonoBehaviour
         shieldCount_SM.text = SavedStats.Instance.GetTimesUsedShieldSM().ToString();
         shieldCount_BT.text = SavedStats.Instance.GetTimesUsedShieldBT().ToString();
     
+    }
+
+    private void DisplayTimeSpentChasing()
+    {
+        timeSpentChasingCount_SM.text = SavedStats.Instance.GetTimeSpentUsingChaseSM().ToString("00:00");
+        timeSpentChasingCount_BT.text = SavedStats.Instance.GetTimeSpentUsingChaseBT().ToString("00:00");
     }
     private void CloseCreditsTab(InputAction.CallbackContext context)
     {

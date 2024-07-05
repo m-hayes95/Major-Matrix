@@ -14,7 +14,11 @@ public class PlayerHealth : MonoBehaviour
     private float currentHP;
     private int deathCount;
     private bool isDead;
-    
+    private bool bossIsDead;
+    private const string DEATH_ANIMATION = "PlayerDied";
+    private const string HURT_ANIMATION = "PlayerHurt";
+
+
 
     private void Awake()
     {
@@ -37,9 +41,9 @@ public class PlayerHealth : MonoBehaviour
 
     public void DamagePlayer(float damageAmount)
     {
-        if (currentHP > 0)
+        if (currentHP > 0 && !bossIsDead)
         {
-            animator.SetTrigger("PlayerHurt");
+            animator.SetTrigger(HURT_ANIMATION);
             currentHP -= damageAmount;
             hitSound.Play();
             playerHUD.SetPlayerHealthBar(currentHP);
@@ -47,15 +51,39 @@ public class PlayerHealth : MonoBehaviour
                 OnDeath.Invoke();
         }
     }
+    public void OnEnemyDeath() // Called on boss death event
+    {
+        UpdateDamageDealtSavedStats();
+        UpdateBossStatus();
+    }
 
+    private void UpdateDamageDealtSavedStats()
+    { 
+        bool bossHasBT = FindFirstObjectByType<BossType>().CheckIfBossHasBT();
+        float remainingHP = playerController.stats.maxHP - currentHP;
+        if (bossHasBT) SavedStats.Instance.StoreCurrentDamageDealtBT(remainingHP);
+        else SavedStats.Instance.StoreCurrentDamageDealtSM(remainingHP);
+    }
+    private void UpdateBossStatus() 
+    {
+        bossIsDead = true;
+    }
+    
     private void PlayerDead()
     {
-        animator.SetTrigger("PlayerDied");
+        ResetSavedStats();
+        animator.SetTrigger(DEATH_ANIMATION);
         deathCount++;
         deathSound.Play();
         isDead = true;
         Debug.Log("Players current HP reached 0, Player Died");
         DeathEffect();
+    }
+    private void ResetSavedStats()
+    {
+        bool bossHasBT = FindFirstObjectByType<BossType>().CheckIfBossHasBT();
+        if (bossHasBT) SavedStats.Instance.ResetBTCountStats();
+        else SavedStats.Instance.ResetSMCountStats();
     }
 
     private void DeathEffect()

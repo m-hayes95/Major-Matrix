@@ -33,7 +33,22 @@ public class SavedStats : MonoBehaviour
         else Destroy(gameObject);
         
     }
-    
+    public void ResetBTCountStats()
+    {
+        timeSpentUsingChaseBT = 0;
+        timesUsedShootBT = 0;
+        timesUsedMeleeBT = 0;
+        timesUsedSpecialAttackBT = 0;   
+        timesUsedShieldBT = 0;
+    }
+    public void ResetSMCountStats()
+    {
+        timeSpentUsingChaseSM = 0;
+        timesUsedShootSM = 0;
+        timesUsedMeleeSM = 0;
+        timesUsedSpecialAttackSM = 0;
+        timesUsedShieldSM = 0;
+    }
     // Behaviour Tree Setters
     public void StoreCurrentPlayerDeathsBT() => playerDeathCountBT++;
     public void StoreCurrentTimeBT(float currentTimeBT) => savedEncouterTimeBT = currentTimeBT;
