@@ -10,7 +10,7 @@ public class ScreenShake : MonoBehaviour
 
     private void Awake()
     {
-        // Singleton pattern used to call screen shake from other scripts (Shoot, 
+        // Singleton pattern used to call screen shake from other scripts (Shoot, Special Attack)
         if (Instance == null)   
             Instance = this;
         else

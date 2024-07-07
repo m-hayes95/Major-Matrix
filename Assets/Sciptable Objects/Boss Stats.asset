@@ -43,3 +43,5 @@ MonoBehaviour:
   timeBetweenAttacks: 0.5
   highSpecialAttackGravityScale: 5
   spawnHeight: 12.6
+  specialAttackScreenShakeIntensity: 1
+  specialAttackScreenShakeTimer: 1
