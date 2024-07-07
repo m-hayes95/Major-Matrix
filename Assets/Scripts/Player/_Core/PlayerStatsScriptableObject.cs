@@ -46,4 +46,10 @@ public class PlayerStatsScriptableObject : ScriptableObject
     public LayerMask groundLayerMask;
     [Range(0f, 0.5f), Tooltip("How far from the ground of ceiling the player will be to activate collisions (for grounded and ceiling checks).")]
     public float collisionDistanceAcceptanceRadius;
+
+    [Header("Screen Shake Stats")]
+    [Range(0f,2f), Tooltip("Set how much the screen will shake when the player fires their weapon")]
+    public float weaponFireScreenShakeIntensity;
+    [Range(0f, 1f), Tooltip("Set how long the screen will shake for, when the player fires their weapon")]
+    public float weaponFireScreenShakeTime;
 }
