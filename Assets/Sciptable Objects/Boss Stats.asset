@@ -45,3 +45,5 @@ MonoBehaviour:
   spawnHeight: 12.6
   specialAttackScreenShakeIntensity: 1
   specialAttackScreenShakeTimer: 1
+  meleeAttackScreenShakeIntensity: 0.5
+  meleeAttackScreenShakeTimer: 0.1
