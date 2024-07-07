@@ -76,5 +76,15 @@ public class BossStatsScriptableObject : ScriptableObject
     public float highSpecialAttackGravityScale;
     [Range(0f, 20f), Tooltip("How high up the high special attack will spawn.")]
     public float spawnHeight;
+
+    [Header("Screen Shake Stats")]
+    [Range(0f, 2f), Tooltip("Set how much the screen will shake when the boss calls their special attack")]
+    public float specialAttackScreenShakeIntensity;
+    [Range(0f, 1f), Tooltip("Set how long the screen will shake for, when the boss calls their special attack")]
+    public float specialAttackScreenShakeTimer;
+    [Range(0f, 2f), Tooltip("Set how much the screen will shake when the boss uses melee attacks")]
+    public float meleeAttackScreenShakeIntensity;
+    [Range(0f, 1f), Tooltip("Set how long the screen will shake for, when the boss uses melee attacks")]
+    public float meleeAttackScreenShakeTimer;
 }
 

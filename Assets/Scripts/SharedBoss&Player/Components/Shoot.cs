@@ -14,11 +14,14 @@ public class Shoot : MonoBehaviour
     private bool canShoot = true;
     private Animator animator;
     private BossType bossType;
+    private NewPlayerController playerRef;
+    
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        bossType = GetComponent<BossType>();    
+        bossType = GetComponent<BossType>(); 
+        playerRef = GetComponent<NewPlayerController>();
     }
     private void OnEnable()
     {
@@ -46,9 +49,15 @@ public class Shoot : MonoBehaviour
     
     public void FireWeaponPlayer(float velocity)
     {
-        animator.SetTrigger("PlayerFired");
-        InstantiateNewBullet();
-        SetVelocityAndDir(velocity);
+        if (playerRef != null)
+        {
+            ScreenShake.Instance.ShakeCamera(
+            playerRef.stats.weaponFireScreenShakeIntensity, playerRef.stats.weaponFireScreenShakeTime
+            );
+            animator.SetTrigger("PlayerFired");
+            InstantiateNewBullet();
+            SetVelocityAndDir(velocity);
+        }
     }
     private void ResetCanAttackBool()
     {

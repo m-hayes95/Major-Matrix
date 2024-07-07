@@ -57,6 +57,9 @@ public class SpecialAttacks : MonoBehaviour
     {
         if (!inSpecialAttack && canAttack)
         {
+            ScreenShake.Instance.ShakeCamera(
+                stats.specialAttackScreenShakeIntensity, stats.specialAttackScreenShakeTimer
+                );
             if (bossType.CheckIfBossHasBT()) SavedStats.Instance.StoreTimesUsedSpecialAttackBT();
             else SavedStats.Instance.StoreTimesUsedSpecialAttackSM();
             SetStartPositions(currentPosition);
