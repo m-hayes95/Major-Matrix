@@ -36,6 +36,10 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: 0.0028664172
       objectReference: {fileID: 0}
+    - target: {fileID: 3809319137858192812, guid: 105d244bc4d92d7489b112fcadf32af5, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
     - target: {fileID: 5379510509899357765, guid: 105d244bc4d92d7489b112fcadf32af5, type: 3}
       propertyPath: m_Name
       value: Projectile variants - Boss
