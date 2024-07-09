@@ -28,10 +28,10 @@ MonoBehaviour:
   longRangeAttackThreshold: 8
   specialHighAttackMinY: 3.1
   dangerThreshold: 68
-  chanceToUseSpecialAttack: 20
+  chanceToUseSpecialAttack: 21
   percentIncrease: 0
   chanceToShield: 0.13
-  resetNormalAttackTimer: 0.7
+  resetNormalAttackTimer: 0.9
   resetSpecialAttackTimer: 3.4
   shieldTimer: 3
   shieldCooldownTime: 9.6
