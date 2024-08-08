@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public class PlayerHealth : MonoBehaviour
 {
-    // Events
+    // Events (Add in inspector)
     public UnityEvent OnDeath;
     // Referencs
     [SerializeField, Tooltip("Add reference for the player viusals to this field")] 
@@ -16,7 +16,7 @@ public class PlayerHealth : MonoBehaviour
     private PlayerHUD playerHUD;
     [SerializeField, Tooltip("Add reference for the corrosponding audio source under the Sounds gameoject (In scene), to this field")] 
     private AudioSource hitSound, deathSound;
-    private PlayerController playerController;
+    private NewPlayerController playerController;
     private Animator animator;
     // Counts
     private float currentHP;
@@ -30,7 +30,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Awake()
     {
-        playerController = GetComponent<PlayerController>();
+        playerController = GetComponent<NewPlayerController>();
         animator = GetComponent<Animator>();
     }
 

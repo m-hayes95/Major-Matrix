@@ -22,7 +22,7 @@ public class ScreenShake : MonoBehaviour
     public void ShakeCamera(float intensity, float time)
     {
         camPerlinNoise.m_AmplitudeGain = intensity;
-        Debug.Log("Shakey shakey");
+        //Debug.Log("Camera shake applied");
         StartCoroutine(ShakeTimer(time));
     }
     private IEnumerator ShakeTimer(float seconds)

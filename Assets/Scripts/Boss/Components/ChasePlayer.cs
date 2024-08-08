@@ -7,13 +7,14 @@ public class ChasePlayer : MonoBehaviour
     {
         bossType = GetComponent<BossType>();
     }
-    public void Chase(Transform target, Transform currentLocation, float moveSpeed)
+    public void Chase(Transform target, Transform currentLocation, float moveSpeed) // Called from FSM or BT
     {
         MoveToPlayer(target, currentLocation, moveSpeed);
+        // Save time spent chasing stats
         if (bossType.CheckIfBossHasBT()) SavedStats.Instance.StoreTimeSpentUsingChaseBT();
         else SavedStats.Instance.StoreTimeSpentUsingChaseSM();
     }
-    private void MoveToPlayer(Transform target, Transform currentLocation, float moveSpeed)
+    private void MoveToPlayer(Transform target, Transform currentLocation, float moveSpeed) // Chase the player target
     {
         Vector2 targetXPos = new Vector2(target.transform.position.x, currentLocation.position.y);
         currentLocation.position =

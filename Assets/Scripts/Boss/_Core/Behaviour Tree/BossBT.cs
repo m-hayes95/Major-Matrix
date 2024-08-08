@@ -4,7 +4,7 @@ using System.Collections.Generic;
 [RequireComponent(typeof(BossStatsComponent))]
 public class BossBT : BTree
 {
-    // Script Components
+    // Components References
     private Shoot shoot;
     private ChasePlayer chasePlayer;
     private BossHealth health;
@@ -15,7 +15,6 @@ public class BossBT : BTree
     private SpecialAttacks specialAttacks;
     private DistanceToTargetY distanceToTargetY;
     private BossStatsScriptableObject stats;
-    [SerializeField]private GameObject target;
 
     private void Awake()
     {

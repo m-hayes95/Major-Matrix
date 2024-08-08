@@ -1,13 +1,13 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class Shield : MonoBehaviour
 {
     //Refs
     private BossStatsScriptableObject stats;
-    [SerializeField] private GameObject shieldVisual;
-    // Check if shield is up
+    [SerializeField, Tooltip("Add a reference to the shield visuals here (Attached to actor)")] 
+    private GameObject shieldVisual;
+    // Checks
     private bool isShielded = false;
     private bool canShield = true;
     private int currentShields;

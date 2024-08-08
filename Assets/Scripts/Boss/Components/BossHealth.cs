@@ -4,21 +4,30 @@ using UnityEngine.Events;
 [RequireComponent(typeof(BossStatsComponent), typeof(Shield))]
 public class BossHealth : MonoBehaviour
 {
+    // Events (Add in inspector)
     public UnityEvent OnDeath;
+    // Referenecs
+    [SerializeField, Tooltip("Add reference for the boss viusals to this field")] 
+    private GameObject bossVisuals;
+    [SerializeField, Tooltip("Add reference for the particle system that plays on boss death, to this field")] 
+    private ParticleSystem deathEffect;
+    [SerializeField, Tooltip("Add reference for the game manager (in scene) to this field")] 
+    private GameManager gameManager;
+    [SerializeField, Tooltip("Add reference for the player hud (in scene) to this field")] 
+    private UIController uIController;
+    [SerializeField, Tooltip("Add reference for the player hud (in scene) to this field")] 
+    private PlayerHUD playerHUD;
+    [SerializeField, Tooltip("Add reference for the corrosponding audio source under the Sounds gameoject (In scene), to this field")] 
+    private AudioSource hitSound, sheildHitSound, deathSound;
+    [SerializeField, Tooltip("Add a reference to the dead enemy game object that spawns when the boss dies, to this field")] 
+    private GameObject enemyDeathState;
 
-    [SerializeField] private GameObject bossVisuals;
-    [SerializeField] private ParticleSystem deathEffect;
-    [SerializeField] private GameManager gameManager;
-    [SerializeField] private UIController uIController;
-    [SerializeField] private PlayerHUD playerHUD;
-    [SerializeField] private AudioSource hitSound, sheildHitSound, deathSound;
-    [SerializeField] private GameObject enemyDeathState;
-
-    [SerializeField]private float currentHP;
     public BossStatsScriptableObject stats;
     private Shield shield;
     private Animator animator;
     private BossType bossType;
+
+    private float currentHP;
     private bool isDead;
 
     private void Awake()

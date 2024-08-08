@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class LookAtTarget : MonoBehaviour
 {
-    [SerializeField] private Transform targetTransform;
+    [SerializeField, Tooltip("Add a reference to the target transform pos in scene, here")] private Transform targetTransform;
     private bool facingLeft = true;
     // This class is used with the statemachine boss as a component only
     // When the state machine ai class calls this script in update, it does not work

@@ -1,4 +1,3 @@
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 [RequireComponent(
@@ -8,12 +7,16 @@ using UnityEngine;
 )]
 public class MeleeAttack : MonoBehaviour
 {
-    [SerializeField] private PlayerHealth playerHP;
-    [SerializeField] private AudioSource meleeAttackSound;
+    // References
+    [SerializeField, Tooltip("Add reference to player HP here")] 
+    private PlayerHealth playerHP;
+    [SerializeField, Tooltip("Add the SFX sound for melee attacks here (located under sound heading in scene)")] 
+    private AudioSource meleeAttackSound;
     private AttackCooldown attackCooldown;
     private Animator animator;
     private BossType bossType;
     private BossStatsScriptableObject stats;
+    // Checks
     private bool canAttack;
 
     private void Awake()

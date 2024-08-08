@@ -43,7 +43,7 @@ public class NewPlayerController : MonoBehaviour
     }
     private void Update()
     {
-        Debug.Log($"Jumping {jumpCount}");
+        //Debug.Log($"Jumping {jumpCount}");
     }
     private void FixedUpdate()
     {

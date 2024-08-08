@@ -2,25 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Rendering;
 
-[RequireComponent(typeof(AttackCooldown))]
+[RequireComponent(
+    typeof(Animator),
+    typeof(BossStatsComponent),
+    typeof(AttackCooldown)
+)]
 public class SpecialAttacks : MonoBehaviour
 {
-    [SerializeField] private GameObject specialAttackGameObjectLow, specialAttackGameObjectHigh;
-    //[SerializeField] Transform highAttackPosistion
-    [SerializeField] private AudioSource lowAttackSound, highAttackSound;
+    // Instiated Game Objects for attack
+    [SerializeField, Tooltip("Add prefabs for special attacks here")] 
+    private GameObject specialAttackGameObjectLow, specialAttackGameObjectHigh;
+    // References
+    [SerializeField, Tooltip("Add SFX sounds under sound heading here")] 
+    private AudioSource lowAttackSound, highAttackSound;
     private AttackCooldown attackCooldown;
     private BossStatsScriptableObject stats;
-    private Vector3 leftPositionLow, rightPositionLow;
-    private Vector3 leftPositionHigh, rightPositionHigh;
-    public UnityEvent OnAttackFinished;
-    private List<GameObject> attacks;
-    [SerializeField]private bool inSpecialAttack = false;
-    private bool canAttack = true;
     private Animator animator;
     private BossHealth health;
     private BossType bossType;
+    // Spawn Positions for attacks
+    private Vector3 leftPositionLow, rightPositionLow;
+    private Vector3 leftPositionHigh, rightPositionHigh;
+    // Events
+    public UnityEvent OnAttackFinished;
+    // Current Attacks
+    private List<GameObject> attacks;
+    // Checks
+    private bool inSpecialAttack = false;
+    private bool canAttack = true;
+    
     private void OnEnable() { AttackCooldown.OnSpecialAttackReset += ResetAttackBool; }
     private void OnDisable() { AttackCooldown.OnSpecialAttackReset -= ResetAttackBool; }
 
@@ -53,18 +64,23 @@ public class SpecialAttacks : MonoBehaviour
     {
         canAttack = true; 
     }
-    public void CallSpecialAttackLowOrHigh(int lowOrHigh, Transform currentPosition)
+    public void CallSpecialAttackLowOrHigh(int lowOrHigh, Transform currentPosition) 
+    // Called by BT or FSM AI (0 = Low attack, 1 = high attack)
     {
         if (!inSpecialAttack && canAttack)
         {
+            // Call screen shake
             ScreenShake.Instance.ShakeCamera(
                 stats.specialAttackScreenShakeIntensity, stats.specialAttackScreenShakeTimer
                 );
+            // Store stats
             if (bossType.CheckIfBossHasBT()) SavedStats.Instance.StoreTimesUsedSpecialAttackBT();
             else SavedStats.Instance.StoreTimesUsedSpecialAttackSM();
+            // Set start position and boolean checks
             SetStartPositions(currentPosition);
             canAttack = false;
             inSpecialAttack = true;
+            // Choose high or low attack
             Mathf.Clamp(lowOrHigh, 0, 1);
             if (lowOrHigh == 0) animator.SetTrigger("BossUsedSpecialAttack_LOW");
             if (lowOrHigh == 1) animator.SetTrigger("BossUsedSpecialAttack_HIGH");
@@ -82,6 +98,7 @@ public class SpecialAttacks : MonoBehaviour
     }
     private  IEnumerator ExecuteSpecialAttack(int lowOrHigh)
     {
+        // Spawn in attacks with a delay for each set
         attacks = new List<GameObject>();
         for (int i = 0; i < stats.numberOfAttacks; ++i)
         {
@@ -94,7 +111,7 @@ public class SpecialAttacks : MonoBehaviour
         OnAttackFinished.Invoke();
     }
 
-    private void SpawnLeft(int lowOrHigh)
+    private void SpawnLeft(int lowOrHigh) // Find position on the left side of boss 
     {
         Vector3 spawnPosition = Vector3.zero;
         if (lowOrHigh == 0) // Low Special Attack
@@ -111,7 +128,7 @@ public class SpecialAttacks : MonoBehaviour
         InstatiateNewAttack(spawnPosition, lowOrHigh);
     }
 
-    private void SpawnRight(int lowOrHigh)
+    private void SpawnRight(int lowOrHigh) // Find position on the right side of boss 
     {
         Vector3 spawnPosition = Vector3.zero;
         if (lowOrHigh == 0) // Low Special Attack
@@ -128,7 +145,7 @@ public class SpecialAttacks : MonoBehaviour
         InstatiateNewAttack(spawnPosition, lowOrHigh);
     }
 
-    private void InstatiateNewAttack(Vector3 spawnVector, int lowOrHigh)
+    private void InstatiateNewAttack(Vector3 spawnVector, int lowOrHigh) // Spawn the special attack
     {
         GameObject newAttack;
         if (lowOrHigh == 0) // Spawn low attack game objects 
@@ -154,7 +171,7 @@ public class SpecialAttacks : MonoBehaviour
             stats.highSpecialAttackGravityScale;
     }
 
-    private void AttackFinished()
+    private void AttackFinished() 
     {
         inSpecialAttack = false;
         attackCooldown.ResetSpecialAttack(stats.resetSpecialAttackTimer);

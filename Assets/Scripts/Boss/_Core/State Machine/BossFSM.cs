@@ -1,15 +1,15 @@
 using System.Collections;
 using UnityEngine;
-
+[RequireComponent(typeof(BossStatsComponent))]
 public class BossFSM : MonoBehaviour
 {
+    // State machine
     private enum StateMachine 
     { Idle, Combat, RangeAttack, MeleeAttack, SpecialLowAttack, SpecialHighAttack, Shield, ChasePlayer, Dead };
-
-    [SerializeField] private StateMachine sM;
-    [SerializeField] LayerMask targetLayer;
+    private StateMachine sM;
+    // References
     private Transform target;
-    // Type of Special Attacks
+    // Index Type of Special Attacks
     private int lowAttackIndex = 0;
     private int highAttackIndex = 1;
     // Components
@@ -67,60 +67,60 @@ public class BossFSM : MonoBehaviour
                 if (CheckCanChase() && CheckNotInSpecialAttack()) sM = StateMachine.ChasePlayer;
                 // Normal Attacks && CheckNotInSpecialAttack()
                 
-                if (CheckCanAttack() && CheckNotInSpecialAttack())
+                if (CheckCanAttack() && CheckNotInSpecialAttack()) // Attack
                 {
-                    if (CheckCanUseSpecialAttack() && CheckChanceToUseSpecialAttack()) 
+                    if (CheckCanUseSpecialAttack() && CheckChanceToUseSpecialAttack()) // Use Special Attack
                     {
                         if (UseSpecialLowAttack()) sM = StateMachine.SpecialLowAttack;
                         else sM = StateMachine.SpecialHighAttack;
                     }
-                    else if (CheckInMeleeRange())
+                    else if (CheckInMeleeRange()) // Use melee Attack
                     {
                         sM = StateMachine.MeleeAttack;
                     }
-                    else sM = StateMachine.RangeAttack;
+                    else sM = StateMachine.RangeAttack; // Use shoot Attack
                 }
 
                 break;
 
             case StateMachine.RangeAttack:
-                Debug.Log("Used ranged attack");
+                //Debug.Log("Used ranged attack");
                 shoot.FireWeaponBoss(target.transform, stats.shotFoce, stats.resetNormalAttackTimer);
                 sM = StateMachine.Combat;
                 break;
 
             case StateMachine.MeleeAttack:
-                Debug.Log("Used ranged attack");
+                //Debug.Log("Used ranged attack");
                 meleeAttack.UseMeleeAttack(stats.normalAttackDamage, stats.resetNormalAttackTimer);
                 sM = StateMachine.Combat;
                 break;
 
             case StateMachine.SpecialLowAttack:
-                Debug.Log("Used special low attack");
+                //Debug.Log("Used special low attack");
                 specialAttacks.CallSpecialAttackLowOrHigh(lowAttackIndex, transform);
                 sM = StateMachine.Combat;
                 break;
 
             case StateMachine.SpecialHighAttack:
-                Debug.Log("Used special high attack");
+                //Debug.Log("Used special high attack");
                 specialAttacks.CallSpecialAttackLowOrHigh(highAttackIndex, transform);
                 sM = StateMachine.Combat;
                 break;
 
             case StateMachine.Shield:
-                Debug.Log("Used shield");
+                //Debug.Log("Used shield");
                 shield.UseShield();
                 sM = StateMachine.Combat;
                 break;
 
             case StateMachine.ChasePlayer:
-                Debug.Log("Chase target");
+                //Debug.Log("Chase target");
                 chasePlayer.Chase(target.transform, transform, stats.moveSpeed);
                 sM = StateMachine.Combat;
                 break;
 
             case StateMachine.Dead:
-                Debug.Log("Boss died");
+                //Debug.Log("Boss died");
                 break;
 
             default:
@@ -128,7 +128,7 @@ public class BossFSM : MonoBehaviour
         }
     }
 
-    private float DistanceToTarget()
+    private float DistanceToTarget() // Check how far away the target is
     {
         float distance = Vector2.Distance(transform.position, target.transform.position);
         return distance;
@@ -139,12 +139,12 @@ public class BossFSM : MonoBehaviour
             return true;
         return false;
     }
-    private bool CheckHasTarget()
+    private bool CheckHasTarget() // Find a target that matches the layer mask collider
     {
         if (target == null)
         {
             Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(
-                transform.position, new Vector2(stats.bossFOV_BT, stats.bossFOV_BT / 3), 0, targetLayer
+                transform.position, new Vector2(stats.bossFOV_BT, stats.bossFOV_BT / 3), 0, stats.targetLayerMask
                 );
             if (collider2Ds.Length > 0)
             {
@@ -207,7 +207,7 @@ public class BossFSM : MonoBehaviour
         {
             doOnce = false;
             StartCoroutine(ResetDoOnceBool());
-            Debug.Log("AHHHHHHHHHHHHHHHHHH");
+            //Debug.Log("Check for use special attack called ");
             randomChance.ApplyRandomChanceOutOf100Percent(stats.percentIncrease);
             float randomNumber = randomChance.GetRandomNumber();
             if (randomNumber <= stats.chanceToUseSpecialAttack) return true;

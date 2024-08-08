@@ -3,9 +3,11 @@ using UnityEngine;
 
 public class AttackCooldown : MonoBehaviour
 {
+    // Attack cooldown after an attack occurs
     public delegate void AttackReset();
     public static AttackReset OnNormalAttackReset, OnSpecialAttackReset;
-    [SerializeField]private bool canNormalAttack, canSpecialAttack;
+    private bool canNormalAttack, canSpecialAttack;
+    // Getters
     public bool GetCanNormalAttack() { return canNormalAttack; }
     public bool GetCanSpecialAttack() { return canSpecialAttack; }
     private void Start()
@@ -13,7 +15,7 @@ public class AttackCooldown : MonoBehaviour
         canNormalAttack = true;
         canSpecialAttack = true;
     }
-    // Normal range and melee attacks
+    // Reset Normal range and melee attacks
     public void ResetNormalAttack(float cooldownTimer)
     {
         canNormalAttack = false;
@@ -26,7 +28,7 @@ public class AttackCooldown : MonoBehaviour
         canNormalAttack = true;
         OnNormalAttackReset?.Invoke();
     }
-    // Special attacks
+    // Reset Special attacks
     public void ResetSpecialAttack(float cooldownTimer)
     {
         canSpecialAttack = false;

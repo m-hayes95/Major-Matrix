@@ -3,6 +3,8 @@ using UnityEngine;
 public class Shoot : MonoBehaviour
 {
     // This script is used by both the player and boss AI
+
+    // References
     [SerializeField, Tooltip("Add the bullet prefab to this field.")] 
     private GameObject bullet;
     [SerializeField, Tooltip("Add the spawn point transform, where the bullet will spawn from, to this field")] 
@@ -16,8 +18,8 @@ public class Shoot : MonoBehaviour
     private Animator animator;
     private BossType bossType;
     private NewPlayerController playerRef;
+    // Checks
     private bool canShoot = true;
-
 
     private void Awake()
     {

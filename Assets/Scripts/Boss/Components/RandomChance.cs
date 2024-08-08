@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class RandomChance : MonoBehaviour
 {
+    // Used for random chance to call a special attack over normal attack
     private float randomNumber = 0;
     private bool generateNew = true;
     // Get a random chance out of 100 and increase by percentage for more control over outcome occuring
