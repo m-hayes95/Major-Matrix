@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -16,7 +15,7 @@ public class SettingsMenu : MonoBehaviour
     {
         PopulateResolutionSettingsMenu();
     }
-    private void PopulateResolutionSettingsMenu()
+    private void PopulateResolutionSettingsMenu() // Add available resolutions to options
     {
         resolutions = Screen.resolutions;
         resolutionDropdown.ClearOptions();

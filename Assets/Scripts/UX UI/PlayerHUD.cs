@@ -1,18 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 public class PlayerHUD : MonoBehaviour
 {
-    [SerializeField] private GameManager gameManager;
-    [SerializeField] private EncounterTimer encounterTimer;
+    [SerializeField, Tooltip("Add reference for the game manager to this field")] 
+    private GameManager gameManager;
+    [SerializeField, Tooltip("Add reference for the encounter timer to this field")] 
+    private EncounterTimer encounterTimer;
 
-    [SerializeField] private TextMeshProUGUI timeDisplay;
+    [SerializeField, Tooltip("Add reference for the time display update text to this field")] 
+    private TextMeshProUGUI timeDisplay;
 
-    [SerializeField] private Slider bossHP, playerHP;
-    [SerializeField] private GameObject playerHUD;
+    [SerializeField, Tooltip("Add reference for the health display update text to this field")] 
+    private Slider bossHP, playerHP;
+    [SerializeField, Tooltip("Add reference for the player hud display gameobject to this field")] 
+    private GameObject playerHUD;
 
     private bool isPlayerHUDOn = true;
 
@@ -22,7 +25,7 @@ public class PlayerHUD : MonoBehaviour
     {
         DisplayPlayEncounterTimer();
     }
-
+    // Update player HUD infomation
     private void DisplayPlayEncounterTimer()
     {
         timeDisplay.text = encounterTimer.GetEncounterTimer().ToString("00:00");
@@ -46,7 +49,7 @@ public class PlayerHUD : MonoBehaviour
         bossHP.maxValue = maxHealth;    
         bossHP.value = maxHealth;
     }
-    private void DisplayPlayerHUD()
+    private void DisplayPlayerHUD() // Hide HUD when the game is paused
     {
         isPlayerHUDOn = !isPlayerHUDOn;
         playerHUD.SetActive(isPlayerHUDOn);

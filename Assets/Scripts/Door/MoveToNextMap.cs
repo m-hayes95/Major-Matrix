@@ -7,7 +7,7 @@ public class MoveToNextMap : MonoBehaviour
         if (other.gameObject.GetComponent<PlayerController>()) // When the other game object is a Player, move to the next map
             NextMap();
     }
-    private void NextMap()
+    private void NextMap() // Load the next map using the load order sequence
     {
         SceneLoadOrder.Instance.LoadNextScene();
     }

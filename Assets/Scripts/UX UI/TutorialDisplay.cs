@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-
+// This script controls the games tutoral on the start scene, values changed through inspector
 public class TutorialDisplay : MonoBehaviour
 {
     [SerializeField, Tooltip("Add the tutorial pannel gameobject here.")] 
@@ -14,7 +14,7 @@ public class TutorialDisplay : MonoBehaviour
     {
         StartCoroutine(GoThroughTutorialInput());
     }
-    private IEnumerator GoThroughTutorialInput()
+    private IEnumerator GoThroughTutorialInput() // After time intervals transition to next tutroial display tip
     {
         for (int i = 0; i < tutorialDispaly.Length; ++i)
         {

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ChangeTimeScale : MonoBehaviour
@@ -14,7 +12,7 @@ public class ChangeTimeScale : MonoBehaviour
         if (isGamePaused) Time.timeScale = 0;
         if (!isGamePaused) Time.timeScale = 1;  
     }
-
+    // Set pause status changing time scale from 0 to 1 (Need to refactor, so we are not using timescale)
     private void ToggleIsGamePaused() { isGamePaused = !isGamePaused; }
     
 }

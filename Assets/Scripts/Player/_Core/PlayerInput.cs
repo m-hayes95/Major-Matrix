@@ -1,15 +1,19 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+// This class reads the input values and calls for code to be executed within the player controller
 public class PlayerInput : MonoBehaviour
 {
-    [SerializeField] private GameManager gameManager;
-    [SerializeField] private UIController uIController;
+    // References
+    [SerializeField, Tooltip("Add reference for the game manager to this field")] 
+    private GameManager gameManager;
+    [SerializeField, Tooltip("Add reference for the UI controller to this field")] 
+    private UIController uIController;
     private PlayerInputActions inputActions;
     private NewPlayerController controller;
     private PlayerHealth hp;
     private Shoot shoot;
+    // Checks
     private bool isGamePaused = false;
     private bool weaponPressed = false;
     private bool isFiring = false;
@@ -18,6 +22,7 @@ public class PlayerInput : MonoBehaviour
     private void OnDisable() { GameManager.OnPaused -= UpdateIsGamePaused; inputActions.Player.Disable(); }
     private void Awake()
     {
+        // Subscribe to the player actions for new input system
         inputActions = new PlayerInputActions();
         inputActions.Player.Jump.performed += JumpInputPerformed;
         inputActions.Player.Jump.canceled += JumpInputCanceled;
@@ -35,6 +40,7 @@ public class PlayerInput : MonoBehaviour
 
     private void Update()
     {
+        // Fire weapon on update, so player can hold shoot button down
         if (!gameManager.GetIsGamePaused() && !hp.GetIsDead() && 
             !weaponPressed && isFiring)
         {
@@ -45,7 +51,7 @@ public class PlayerInput : MonoBehaviour
     }
     private void FireWeaponPerformed(InputAction.CallbackContext context)
     { 
-        if (context.performed)
+        if (context.performed) // Start firing on update
         {
             isFiring = true;
         }
@@ -53,7 +59,7 @@ public class PlayerInput : MonoBehaviour
     }
     private void FireWeaponCanceled(InputAction.CallbackContext context) 
     {
-        if (context.canceled)
+        if (context.canceled) // Stop firing on update
             isFiring = false;
     }
 
@@ -67,15 +73,15 @@ public class PlayerInput : MonoBehaviour
     {
         if (context.performed)
         {
-            if (!uIController.GetIsTabsOpen())
+            if (!uIController.GetIsTabsOpen()) // Open pause menu
             {
                 gameManager.PauseGame();
                 return;
             }
-            else
+            else // Close current menu tabs
             {
                 uIController.DisplayPauseMenu();
-                uIController.CloseOpenTabs();
+                uIController.CloseOpenTabs(); 
                 return;
             }
         }
@@ -100,10 +106,10 @@ public class PlayerInput : MonoBehaviour
     }
     private void ForceLoadNextScene(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed) // Used to skip current boss fight if too difficult
             SceneLoadOrder.Instance.LoadNextScene();
     }
-    public Vector2 MovementInputNormalized()
+    public Vector2 MovementInputNormalized() // Read input vector 2 values
     {
         Vector2 inputVector = inputActions.Player.Move.ReadValue<Vector2>();
         return inputVector;

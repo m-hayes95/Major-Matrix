@@ -1,16 +1,21 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UIController : MonoBehaviour
 {
     // Main Menu Refs
-    [SerializeField] GameObject pauseMenu, endGameMenu;
-    [SerializeField] GameObject settingsTab, controlsTab, creditsTab;
-    [SerializeField] GameManager gameManager;
+    [SerializeField, Tooltip("Add reference for the pause menu to this field")]
+    private GameObject pauseMenu;
+    [SerializeField, Tooltip("Add reference for the game over menu to this field")]
+    private GameObject endGameMenu;
+    [SerializeField, Tooltip("Add reference for the pause sub menus to these fields")] 
+    private GameObject settingsTab, controlsTab, creditsTab;
+    [SerializeField, Tooltip("Add reference for the game manager to this field")] 
+    private GameManager gameManager;
 
     private bool showPauseMenu, showEndGameMenu;
     private bool isTabsOpen;
+
     private void OnEnable()
     {
         GameManager.OnPaused += DisplayPauseMenu;
@@ -23,17 +28,17 @@ public class UIController : MonoBehaviour
     {
         ResetAllMenus();
     }
-    public void DisplayPauseMenu()
+    public void DisplayPauseMenu() // On pause game
     {
         showPauseMenu = !showPauseMenu;
         pauseMenu.SetActive(showPauseMenu);
         Debug.Log("Pause game event invoked");
     }
-    public void DisplayGameOverMenu()
+    public void DisplayGameOverMenu() // When player dies
     {
         StartCoroutine(ShowGameOverMenu());
     }
-    private IEnumerator ShowGameOverMenu()
+    private IEnumerator ShowGameOverMenu() 
     {
         yield return new WaitForSeconds(2f);
         showEndGameMenu = !showEndGameMenu;
@@ -42,7 +47,7 @@ public class UIController : MonoBehaviour
 
     public void ClickRestartGame()
     {
-        StartCoroutine(gameManager.LoadSceneCoroutine(0.1f));
+        StartCoroutine(gameManager.ReloadCurrentScene(0.1f));
         Debug.Log("player clicked restart game");
     }
 
@@ -72,7 +77,7 @@ public class UIController : MonoBehaviour
         controlsTab.SetActive(false);
         creditsTab.SetActive(false);
     }
-    public void SetIsTabsOpen(bool b) { isTabsOpen = b; }
-    public bool GetIsTabsOpen() { return isTabsOpen; }
+    public void SetIsTabsOpen(bool b) { isTabsOpen = b; } // Allow other scripts to force set if the tab is open
+    public bool GetIsTabsOpen() { return isTabsOpen; } // Let other scripts check if tabs are open 
     
 }

@@ -124,10 +124,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7058368484342321748}
-  - component: {fileID: 4044608225088862476}
   - component: {fileID: 7336017434965981285}
   - component: {fileID: 7924061139656264347}
-  - component: {fileID: 4772955547729562835}
   - component: {fileID: 3068787862488524606}
   - component: {fileID: 2237995295786375966}
   - component: {fileID: 3194291627596963576}
@@ -157,19 +155,6 @@ Transform:
   - {fileID: 8419428631596493673}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4044608225088862476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4652640799575470342}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcf5103f995ad264cb6f2461b536e886, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: 1bd368416c63f5e4a873982e7d65e6f0, type: 2}
 --- !u!114 &7336017434965981285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,25 +202,6 @@ MonoBehaviour:
   playerHUD: {fileID: 0}
   hitSound: {fileID: 0}
   deathSound: {fileID: 0}
---- !u!114 &4772955547729562835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4652640799575470342}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0da7a4413bacfa41b5d509c50d739ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  initialJumpForce: 7
-  isGrounded: 0
-  canJump: 0
-  groundLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!61 &3068787862488524606
 BoxCollider2D:
   m_ObjectHideFlags: 0

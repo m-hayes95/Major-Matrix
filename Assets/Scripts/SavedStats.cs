@@ -4,7 +4,7 @@ public class SavedStats : MonoBehaviour
 {
     // Signleton used to store times for each boss encounter, which will be displayed at the end of the game
     public static SavedStats Instance { get; private set; }
-    // Behaviour Tree
+    // Behaviour Tree stats
     [SerializeField] private float savedEncouterTimeBT;
     [SerializeField] private float playerDeathCountBT;
     [SerializeField] private float damageDealtToPlayerBT;
@@ -13,7 +13,7 @@ public class SavedStats : MonoBehaviour
     [SerializeField] private int timesUsedMeleeBT;
     [SerializeField] private int timesUsedSpecialAttackBT;
     [SerializeField] private int timesUsedShieldBT;
-    // State Machine
+    // State Machine stats
     [SerializeField] private float savedEncouterTimeSM;
     [SerializeField] private float playerDeathCountSM;
     [SerializeField] private float damageDealtToPlayerSM;
@@ -33,6 +33,7 @@ public class SavedStats : MonoBehaviour
         else Destroy(gameObject);
         
     }
+    // Reset stats when the player dies on an encounter
     public void ResetBTCountStats()
     {
         timeSpentUsingChaseBT = 0;

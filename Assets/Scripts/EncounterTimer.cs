@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,7 +12,7 @@ public class EncounterTimer : MonoBehaviour
     {
         IncreaseTime();
     }
-    private void IncreaseTime()
+    private void IncreaseTime() // Time displayed in top middle of boss fight
     {
         encounterTimer += Time.deltaTime;
     }

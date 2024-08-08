@@ -9178,17 +9178,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6029305755987145960, guid: 9865555f68eeb4c4f83aabaf0b50bce0, type: 3}
   m_PrefabInstance: {fileID: 6903354878534593405}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &985876458 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7662117486974895444, guid: 9865555f68eeb4c4f83aabaf0b50bce0, type: 3}
-  m_PrefabInstance: {fileID: 6903354878534593405}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d6149c67887b564cab3c80d91b3b5a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1013913266 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8393145489263410512, guid: 6df424377b2c01648945b2373c238f3a, type: 3}
@@ -9206,17 +9195,9 @@ PrefabInstance:
       propertyPath: bulletSound
       value: 
       objectReference: {fileID: 2109496022}
-    - target: {fileID: 3194291627596963576, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
-      propertyPath: screenShake
-      value: 
-      objectReference: {fileID: 985876458}
     - target: {fileID: 4652640799575470342, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 6906100019957416507, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
-      propertyPath: acceptanceDistanceRadius
-      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7058368484342321748, guid: 38abbd8e8562f2f408f6125965862d6d, type: 3}
       propertyPath: m_LocalPosition.x

@@ -4,6 +4,7 @@ using UnityEngine;
 public class NewPlayerController : MonoBehaviour
 {
     // Stats
+    [Tooltip ("Place the scriptable object for player stats here")]
     public PlayerStatsScriptableObject stats;
     // Game object components
     private Rigidbody2D rb;
@@ -15,18 +16,18 @@ public class NewPlayerController : MonoBehaviour
     private Vector3 moveDir;
     private bool facingRight = true;
     // Jump
-    [SerializeField]private bool isGrounded;
-    [SerializeField]private int jumpCount;
+    private bool isGrounded;
+    private int jumpCount;
     // Gravity
     private float saveGravityScale;
-    [SerializeField] private bool isFalling = false;
+    private bool isFalling = false;
     //Collisions
     private RaycastHit2D groundHit;
     private RaycastHit2D ceilingHit;
     private bool isCeilingHit = false;
     private float acceptanceDistanceRadius = 0.1f;
     // CoyoteTime - Add coyote time
-    [SerializeField]private bool coyoteTimeReady = false;
+    private bool coyoteTimeReady = false;
 
     private void Awake()
     {
@@ -38,7 +39,7 @@ public class NewPlayerController : MonoBehaviour
     }
     private void Start()
     {
-        saveGravityScale = rb.gravityScale;
+        saveGravityScale = rb.gravityScale; // Store the original gravity scale
     }
     private void Update()
     {
@@ -85,7 +86,7 @@ public class NewPlayerController : MonoBehaviour
         }
 
     }
-    private IEnumerator coyoteTimer()
+    private IEnumerator coyoteTimer() // Allow player to jump for a set time after falling off a ledge
     {
         coyoteTimeReady = true;
         yield return new WaitForSeconds(.2f);
@@ -100,7 +101,7 @@ public class NewPlayerController : MonoBehaviour
             rb.velocity = Vector2.up * stats.jumpPower;
         }
     }
-    public void CancelJump()
+    public void CancelJump() // Allow for short jumps (long press for higher jump)
     {
         if (rb.velocity.y > 0)
         {
@@ -108,12 +109,12 @@ public class NewPlayerController : MonoBehaviour
             IncreaseGravityScale();
         }
     }
-    private void IncreaseGravityScale()
+    private void IncreaseGravityScale() // Start falling
     {
         rb.gravityScale *= 2;
     }
 
-    private void FasterFallingOverTime()
+    private void FasterFallingOverTime() // Increase falling speed over time
     {
         if (DistanceFromFloor() >= stats.maxJumpThreshold)
         {
@@ -125,9 +126,9 @@ public class NewPlayerController : MonoBehaviour
     }
     private void CollisionChecks()
     {
-        //Debug.Log($"Is player grounded: {isGrounded}");
+        // Check if grounded
+        // Debug.Log($"Is player grounded: {isGrounded}");
         float angle = 0;
-        //float distance = 0.6f;
         groundHit = Physics2D.BoxCast(
             collider.bounds.center, collider.size, angle, Vector2.down, acceptanceDistanceRadius, stats.groundLayerMask
             );
@@ -143,7 +144,7 @@ public class NewPlayerController : MonoBehaviour
             isGrounded = false;
         }
 
-        // check ceiling hit
+        // check if ceiling hit
         if (ceilingHit && !isCeilingHit)
         {
             isCeilingHit = true;

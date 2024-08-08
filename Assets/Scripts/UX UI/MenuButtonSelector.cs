@@ -1,17 +1,24 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-
+// For controllers support, this script selects the first option when a new menu is opened
 public class MenuButtonSelector : MonoBehaviour
 {
     // Select Button First
-    [SerializeField] private GameObject settingsMenuFirstButton;
-    [SerializeField] private GameObject controlsMenuFirstButton;
-    [SerializeField] private GameObject creditsMenuFirstButton;
-    [SerializeField] private GameObject pauseMenuFirstButton;
-    [SerializeField] private GameObject gameOverMenuFirstButton;
+    [SerializeField, Tooltip("Choose the first button for the settings menu")] 
+    private GameObject settingsMenuFirstButton;
+    [SerializeField, Tooltip("Choose the first button for the controls menu")] 
+    private GameObject controlsMenuFirstButton;
+    [SerializeField, Tooltip("Choose the first button for the credits menu")] 
+    private GameObject creditsMenuFirstButton;
+    [SerializeField, Tooltip("Choose the first button for the pause menu")] 
+    private GameObject pauseMenuFirstButton;
+    [SerializeField, Tooltip("Choose the first button for the game over menu")] 
+    private GameObject gameOverMenuFirstButton;
     // Menus
-    [SerializeField] private GameObject pauseMenu;
-    [SerializeField] private GameObject gameOverMenu;
+    [SerializeField, Tooltip("Add a reference to the pause menu to this field")] 
+    private GameObject pauseMenu;
+    [SerializeField, Tooltip("Add a reference to the game over menu to this field")] 
+    private GameObject gameOverMenu;
     // Do once 
     private bool selectPauseMenuOnce;
     private bool selectGameOverMenuOnce;

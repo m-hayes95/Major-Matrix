@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class SceneLoadOrder : MonoBehaviour
 {
     // Signleton class used to store data on the scene load order and what scene we are currently on
-    // This is used with the MoveToNextMap class to randomise the boss fight order
+    // This is used with the MoveToNextMap class to randomise the boss fight order for testing
     public static SceneLoadOrder Instance { get; private set; }
     private int[] sceneIndexOrder;
     private int bossFight_BT = 1;
@@ -34,7 +34,7 @@ public class SceneLoadOrder : MonoBehaviour
         else
             InitialiseLoadOrder_SM_First();
     }
-    private void InitialiseLoadOrder_BT_First()
+    private void InitialiseLoadOrder_BT_First() // Face BT first
     {
         sceneIndexOrder[0] = bossFight_BT;
         sceneIndexOrder[1] = safeRoom;
@@ -42,7 +42,7 @@ public class SceneLoadOrder : MonoBehaviour
         sceneIndexOrder[3] = endScene;
     }
 
-    private void InitialiseLoadOrder_SM_First()
+    private void InitialiseLoadOrder_SM_First() // Face FSM first
     {
         sceneIndexOrder[0] = bossFight_SM;
         sceneIndexOrder[1] = safeRoom;
