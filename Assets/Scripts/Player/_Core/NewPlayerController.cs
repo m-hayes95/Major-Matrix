@@ -152,7 +152,7 @@ public class NewPlayerController : MonoBehaviour
             //Debug.Log($"Ceiling hit: {ceilingHit} with {ceilingHit.collider.gameObject.name}");
         }
     }
-    private float DistanceFromFloor()
+    private float DistanceFromFloor() // Used to check if we passed max jump height
     {
         float angle = 0f;
         float maxDistance = 50f;

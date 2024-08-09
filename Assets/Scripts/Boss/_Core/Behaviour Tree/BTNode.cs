@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Diagnostics;
 namespace BehaviourTree
 {
     // Possible states for each node of the BT
